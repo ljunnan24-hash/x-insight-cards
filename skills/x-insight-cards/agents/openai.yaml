@@ -1,4 +1,4 @@
 interface:
   display_name: "X Insight Cards"
-  short_description: "Curate verified X insights into polished bilingual cards"
-  default_prompt: "Use $x-insight-cards to create today’s top five verified bilingual insight cards."
+  short_description: "Turn verified X posts into bilingual insight cards"
+  default_prompt: "Use $x-insight-cards to find today’s best X posts and create up to five verified bilingual cards with concise Chinese captions."

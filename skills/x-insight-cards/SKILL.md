@@ -1,11 +1,11 @@
 ---
 name: x-insight-cards
-description: Curate recent high-signal X posts into verified bilingual English-Chinese insight cards and concise social captions. Use when Codex needs to discover, verify, score, deduplicate, translate, render, or quality-check knowledge posts about wealth, life, goals, habits, attention, freedom, or long-term thinking for creator review, without automatic publishing or credential extraction.
+description: Find, verify, rank, deduplicate, translate, render, and quality-check recent X posts as English-Chinese insight cards with concise Chinese captions. Use for daily creator curation about wealth, life, goals, habits, attention, freedom, or long-term thinking when outputs must be source-auditable, typography-aware, ready for human review, and never auto-published or credential-backed.
 ---
 
 # X Insight Cards
 
-Turn public X posts into a small, auditable set of bilingual creator assets. Optimize for signal, source integrity, readable Chinese typography, and human review—not volume.
+Turn public X posts into a small, source-auditable set of bilingual cards and copy-ready captions. Optimize for insight quality, faithful attribution, natural Chinese typography, and human review—not volume.
 
 ## Workflow
 
