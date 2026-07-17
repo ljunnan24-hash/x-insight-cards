@@ -44,15 +44,31 @@ The workflow has already been used to make posts for real creator accounts. Resu
 
 | Platform | Documented results |
 | --- | --- |
-| **Douyin** | One post reached **9,545 plays, 358 likes, and 42 saves**, plus a platform notice for **5,990 bonus views** |
-| **Xiaohongshu** | Five visible posts reached **6,536, 4,271, 1,775, 1,584, and 665 views**; visible likes include **153, 131, and 105** |
-| **Xiaohongshu account** | **1,511 total likes and saves** |
+| **Douyin account** | **12 posts** and **1,591 total likes** |
+| **Douyin visible posts** | **11K, 9,635, 1,148, 1,063, 703, and 676 plays** |
+| **Xiaohongshu account** | **1,589 total likes and saves** |
+| **Xiaohongshu visible posts** | **7,113 views / 547 likes**, **1,595 / 131**, **1,179 / 105**, and **1,041 / 153** |
 
 Public Douyin ID: `51536643904`.
 
-**中文说明：**由本工作流生成素材的抖音单条作品获得 **9,545 播放、358 赞、42 收藏**，并收到 **5,990 额外浏览量奖励**；小红书多条作品获得数百至数千浏览，账号累计 **1,511 获赞与收藏**。
+<table>
+  <tr>
+    <td width="70%" valign="top">
+      <a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="Douyin creator profile and visible post results" width="100%" /></a>
+    </td>
+    <td width="30%" valign="top">
+      <a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Douyin creator results</strong> · 抖音账号与作品表现</td>
+    <td><strong>Xiaohongshu creator results</strong> · 小红书账号与作品表现</td>
+  </tr>
+</table>
 
-These figures demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
+**中文说明：**抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**；小红书主页显示累计 **1,589 获赞与收藏**，其中可见作品包括 **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153**。
+
+These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter. Click either image to inspect the original resolution.
 
 ## Quick start
 
@@ -139,7 +155,7 @@ The demo author and post are fictional. No third-party avatar or post is bundled
 - No cookies, passwords, tokens, or session exports.
 - No CAPTCHA, login-wall, rate-limit, or platform-control bypasses.
 - No automatic draft creation, upload, or publishing.
-- No bundled X posts, author avatars, platform screenshots, or system fonts.
+- The two creator-authorized result screenshots in `assets/proof/` are documentation evidence; no credentials, private account data, or system fonts are bundled.
 - Rearranged cards are identified as rearranged renders, never native screenshots.
 
 Publishing is always a separate, explicit human decision.
@@ -158,6 +174,7 @@ skills/x-insight-cards/
 ```
 
 Only `skills/x-insight-cards/` is installed into the Codex skills directory.
+The screenshots in `assets/proof/` are documentation-only and are not installed with the Skill.
 
 ## Contributing
 

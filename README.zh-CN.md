@@ -44,15 +44,31 @@
 
 | 平台 | 实测数据 |
 | --- | --- |
-| **抖音** | 单条作品获得 **9,545 播放、358 赞、42 收藏**，并收到平台的 **5,990 额外浏览量奖励** |
-| **小红书** | 五条可见作品分别获得 **6,536、4,271、1,775、1,584、665 浏览**；可见点赞包括 **153、131、105 赞** |
-| **小红书账号** | 累计 **1,511 获赞与收藏** |
+| **抖音账号** | **12 条作品**，累计 **1,591 获赞** |
+| **抖音可见作品** | **1.1 万、9,635、1,148、1,063、703、676 播放** |
+| **小红书账号** | 累计 **1,589 获赞与收藏** |
+| **小红书可见作品** | **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153** |
 
 公开抖音号：`51536643904`。
 
-**English summary:** One Douyin post reached **9,545 plays, 358 likes, and 42 saves**. Xiaohongshu examples reached hundreds to thousands of views, with **1,511 total account likes and saves**.
+<table>
+  <tr>
+    <td width="70%" valign="top">
+      <a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
+    </td>
+    <td width="30%" valign="top">
+      <a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>抖音账号与作品表现</strong> · Douyin creator results</td>
+    <td><strong>小红书账号与作品表现</strong> · Xiaohongshu creator results</td>
+  </tr>
+</table>
 
-这些数据证明工作流产出的素材已经过真实账号使用，但不代表未来作品一定获得相同流量。选题、账号基础、发布时间和平台分发仍然会影响结果。
+**English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **1,589 total likes and saves**, including a visible post with **7,113 views and 547 likes**.
+
+这两张截图已获创作者授权公开，用于证明工作流产出的素材经过真实账号使用，但不代表未来作品一定获得相同流量。点击图片可查看原始分辨率；选题、账号基础、发布时间和平台分发仍然会影响结果。
 
 ## 快速开始
 
@@ -136,7 +152,7 @@ python skills/x-insight-cards/scripts/render_card.py \
 - 不读取、导出或保存 Cookie、密码、Token 和会话数据。
 - 不绕过登录墙、验证码、风控、速率限制或平台权限。
 - 不自动打开发布页、创建草稿、上传或发布。
-- 不附带真实 X 原帖、作者头像、平台截图或系统字体。
+- `assets/proof/` 中两张创作者授权的结果截图仅用于项目说明；仓库不包含账号凭据、私密账号数据或系统字体。
 - 重排卡片必须标记为“重排渲染”，不得冒充原生截图。
 
 发布永远是独立、明确、由用户决定的下一步。
