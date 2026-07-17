@@ -33,11 +33,11 @@
       <rect x="360" y="0" width="336" height="84" rx="16" fill="#132a46" stroke="#38bdf8"/>
       <rect x="720" y="0" width="336" height="84" rx="16" fill="#123c3b" stroke="#22c55e"/>
     </g>
-    <text x="168" y="35" text-anchor="middle" font-size="25" font-weight="700">9,545 plays</text>
+    <text x="168" y="35" text-anchor="middle" font-size="25" font-weight="700">9,635 plays</text>
     <text x="168" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#bae6fd">抖音单条播放</text>
-    <text x="528" y="35" text-anchor="middle" font-size="23" font-weight="700">358 likes · 42 saves</text>
-    <text x="528" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#bae6fd">抖音单条互动</text>
-    <text x="888" y="35" text-anchor="middle" font-size="23" font-weight="700" fill="#86efac">1,511 likes + saves</text>
+    <text x="528" y="35" text-anchor="middle" font-size="23" font-weight="700">1,591 total likes</text>
+    <text x="528" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#bae6fd">抖音账号累计</text>
+    <text x="888" y="35" text-anchor="middle" font-size="23" font-weight="700" fill="#86efac">1,589 likes + saves</text>
     <text x="888" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#86efac">小红书账号累计</text>
   </g>
 </svg>

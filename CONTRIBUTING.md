@@ -13,7 +13,7 @@ Thanks for helping make high-signal creator workflows safer and easier to reuse.
 
 ## Pull requests
 
-1. Keep third-party posts, avatars, screenshots, credentials, and personal paths out of the repository.
+1. Keep third-party posts, avatars, screenshots, credentials, and personal paths out of the repository. The only exception is project-owner-approved result evidence placed in `assets/proof/` and documented in `NOTICE.md`.
 2. Use synthetic content in fixtures and examples.
 3. Run `make check`.
 4. Explain the user benefit and any behavior change.
