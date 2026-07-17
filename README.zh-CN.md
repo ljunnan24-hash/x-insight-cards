@@ -53,15 +53,15 @@
 
 ### 抖音账号与作品表现 · Douyin creator results
 
-<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
+<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results-preview.webp" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
 
-抖音号：`51536643904` · 点击图片可查看原始分辨率。
+抖音号：`51536643904` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
 
 ### 小红书账号与作品表现 · Xiaohongshu creator results
 
-<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
+<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results-preview.webp" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
 
-小红书号：`3876991164` · 点击图片可查看原始分辨率。
+小红书号：`3876991164` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
 
 **English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **1,589 total likes and saves**, including a visible post with **7,113 views and 547 likes**.
 
