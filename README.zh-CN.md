@@ -49,22 +49,19 @@
 | **小红书账号** | 累计 **1,589 获赞与收藏** |
 | **小红书可见作品** | **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153** |
 
-公开抖音号：`51536643904`。
+公开账号：抖音号 `51536643904` · 小红书号 `3876991164`。
 
-<table>
-  <tr>
-    <td width="70%" valign="top">
-      <a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
-    </td>
-    <td width="30%" valign="top">
-      <a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>抖音账号与作品表现</strong> · Douyin creator results</td>
-    <td><strong>小红书账号与作品表现</strong> · Xiaohongshu creator results</td>
-  </tr>
-</table>
+### 抖音账号与作品表现 · Douyin creator results
+
+<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
+
+抖音号：`51536643904` · 点击图片可查看原始分辨率。
+
+### 小红书账号与作品表现 · Xiaohongshu creator results
+
+<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
+
+小红书号：`3876991164` · 点击图片可查看原始分辨率。
 
 **English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **1,589 total likes and saves**, including a visible post with **7,113 views and 547 likes**.
 
