@@ -1,0 +1,32 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+.pytest_cache/
+.coverage
+
+# Private run data and generated creator assets
+history.jsonl
+state-log.jsonl
+output/
+runs/
+daily/
+private/
+*.mp4
+*.mov
+*.m4a
+*.mp3
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.cookie
+cookies.json
+secrets.*
+
+# Never vendor system or third-party fonts
+*.ttf
+*.ttc
+*.otf

@@ -1,0 +1,4 @@
+interface:
+  display_name: "X Insight Cards"
+  short_description: "Curate verified X insights into polished bilingual cards"
+  default_prompt: "Use $x-insight-cards to create today’s top five verified bilingual insight cards."

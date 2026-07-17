@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a reproducible scoring, rendering, or Skill issue
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not attach real cookies, tokens, private posts, or personal paths.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the behavior and the expected result.
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      placeholder: macOS 26, Ubuntu 24.04, Windows 11
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal synthetic reproduction
+      description: Use fictional content only.
+    validations:
+      required: true

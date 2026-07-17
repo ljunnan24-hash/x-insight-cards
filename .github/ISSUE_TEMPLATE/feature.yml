@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest a creator-focused improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: creator_problem
+    attributes:
+      label: Creator problem
+      description: What repetitive or risky step should become easier?
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the smallest useful behavior.
+    validations:
+      required: true
