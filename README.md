@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>Automatically turn high-quality X posts into image-and-caption content packs for Douyin and Xiaohongshu.</strong><br />
-  <strong>自动筛选 X 上的优质内容，生成适合抖音、小红书的双语图片与配文素材。</strong>
+  <strong>A one-command Codex Skill that turns high-quality X posts into Douyin and Xiaohongshu image-and-caption packs.</strong><br />
+  <strong>一条命令安装的 Codex Skill：把 X 优质原帖自动变成抖音、小红书双语图片与配文素材。</strong>
 </p>
 
 <p align="center">
@@ -20,6 +20,25 @@
   <img alt="Privacy first" src="https://img.shields.io/badge/privacy-no%20cookies-16A34A" />
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
+
+<a id="quick-start"></a>
+
+## Install once. Ask once. · 安装一次，一句话开始
+
+**This is an installable Codex Skill—not a script kit you have to assemble.** Copy one command:
+
+```bash
+npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
+```
+
+Start a new Codex task and say:
+
+```text
+Use $x-insight-cards to find today's best X posts and create up to five
+review-ready bilingual image-and-caption packs for Douyin and Xiaohongshu.
+```
+
+**That is the whole setup.** Install it once, then invoke `$x-insight-cards` from any Codex task. No API key, Cookie export, prompt assembly, or platform login is required. The Skill handles discovery through visual QA and stops before publishing.
 
 ## What it does
 
@@ -66,24 +85,6 @@ Xiaohongshu ID: `3876991164` · The README loads an optimized WebP preview; clic
 **中文说明：**抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**；小红书主页显示累计 **1,589 获赞与收藏**，其中可见作品包括 **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153**。
 
 These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
-
-## Quick start
-
-```bash
-git clone https://github.com/ljunnan24-hash/x-insight-cards.git
-cd x-insight-cards
-./scripts/install-skill.sh
-```
-
-Then ask Codex:
-
-```text
-Use $x-insight-cards to find today's best posts about attention, habits,
-freedom, and long-term thinking. Create up to five verified bilingual
-image-and-caption content packs for Douyin and Xiaohongshu review.
-```
-
-That is the whole setup. The Skill contains the workflow, quality rubric, typography rules, renderer, and safety boundaries.
 
 ## Why creators use it
 

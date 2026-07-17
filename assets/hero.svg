@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="480" viewBox="0 0 1280 480" role="img" aria-labelledby="title desc">
   <title id="title">X Insight Cards</title>
-  <desc id="desc">Discover, verify, score, translate, render.</desc>
+  <desc id="desc">A one-command Codex Skill for creating Douyin and Xiaohongshu content from high-quality X posts.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07111f"/>
@@ -22,10 +22,10 @@
     <rect width="88" height="88" rx="22" fill="url(#accent)"/>
     <text x="44" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#07111f">XI</text>
   </g>
-  <text x="188" y="124" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#7dd3fc" letter-spacing="3">CODEX SKILL + PYTHON</text>
+  <text x="188" y="124" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#7dd3fc" letter-spacing="3">ONE-COMMAND CODEX SKILL</text>
   <text x="76" y="220" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#fff">X Insight Cards</text>
-  <text x="78" y="268" font-family="Arial, sans-serif" font-size="25" fill="#cbd5e1">High-quality X posts → Douyin &amp; Xiaohongshu images + captions</text>
-  <text x="78" y="302" font-family="PingFang SC, Arial, sans-serif" font-size="23" fill="#94a3b8">X 优质原帖 → 抖音 / 小红书双语图片与配文</text>
+  <text x="78" y="268" font-family="Arial, sans-serif" font-size="25" fill="#cbd5e1">Install once. Ask once. Get review-ready images + captions.</text>
+  <text x="78" y="302" font-family="PingFang SC, Arial, sans-serif" font-size="23" fill="#94a3b8">安装一次，说一句话，自动获得可审核的双语图片与配文</text>
   <text x="78" y="332" font-family="PingFang SC, Arial, sans-serif" font-size="17" font-weight="600" fill="#86efac">Creator-tested results · 真实账号实测</text>
   <g transform="translate(78 348)" font-family="Arial, sans-serif" fill="#e2e8f0">
     <g filter="url(#shadow)">

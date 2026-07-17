@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>自动筛选 X 上的优质内容，生成适合抖音、小红书的双语图片与配文素材。</strong><br />
-  <strong>Automatically turn high-quality X posts into image-and-caption content packs for Douyin and Xiaohongshu.</strong>
+  <strong>一条命令安装的 Codex Skill：把 X 优质原帖自动变成抖音、小红书双语图片与配文素材。</strong><br />
+  <strong>A one-command Codex Skill that turns high-quality X posts into Douyin and Xiaohongshu image-and-caption packs.</strong>
 </p>
 
 <p align="center">
@@ -20,6 +20,25 @@
   <img alt="隐私优先" src="https://img.shields.io/badge/privacy-no%20cookies-16A34A" />
   <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
+
+<a id="快速开始"></a>
+
+## 安装一次，一句话开始 · One command, one prompt
+
+**这是一个可安装的 Codex Skill，不是需要自己拼装脚本的模板。** 复制这一条命令：
+
+```bash
+npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
+```
+
+新建一个 Codex 任务，然后说：
+
+```text
+使用 $x-insight-cards 寻找今天最好的 X 原帖，生成最多 5 组
+可直接审核的抖音、小红书双语图片与极简中文配文。
+```
+
+**就这些。** 安装一次，以后在任何 Codex 任务里调用 `$x-insight-cards` 即可。无需 API Key、无需导出 Cookie、无需自己拼提示词，也无需登录发布平台；Skill 会从选题一直完成到视觉质检，并停在人工审核前。
 
 ## 它能做什么
 
@@ -66,23 +85,6 @@
 **English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **1,589 total likes and saves**, including a visible post with **7,113 views and 547 likes**.
 
 这两张截图已获创作者授权公开，用于证明工作流产出的素材经过真实账号使用，但不代表未来作品一定获得相同流量。点击图片可查看原始分辨率；选题、账号基础、发布时间和平台分发仍然会影响结果。
-
-## 快速开始
-
-```bash
-git clone https://github.com/ljunnan24-hash/x-insight-cards.git
-cd x-insight-cards
-./scripts/install-skill.sh
-```
-
-然后在 Codex 中输入：
-
-```text
-Use $x-insight-cards 搜索今天关于注意力、习惯、自由和长期主义的优质内容，
-生成最多 5 组适合抖音、小红书审核的双语图片与极简中文配文素材。
-```
-
-无需再拼装提示词。Skill 已包含完整工作流、评分标准、中文排版规则、渲染器和权限边界。
 
 ## 为什么值得用
 
