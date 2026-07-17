@@ -3,8 +3,30 @@
 </p>
 
 <p align="center">
-  <strong>Turn high-signal X posts into verified bilingual insight cards—without scraping credentials or auto-posting.</strong>
+  <strong>Turn high-signal X posts into verified bilingual insight cards—without scraping credentials or auto-posting.</strong><br />
+  <strong>把 X 上真正有价值的内容，变成来源可核验、中文排版准确的双语创作素材。</strong>
 </p>
+
+<p align="center">
+  <strong>Creator-tested result · 创作者实测</strong>
+</p>
+
+| **9,545 plays · 播放** | **358 likes · 点赞** | **42 saves · 收藏** | **+5,990 bonus views · 额外浏览奖励** |
+| ---: | ---: | ---: | ---: |
+
+<p align="center">
+  One Douyin video made with this workflow · 一条使用本工作流制作的抖音视频<br />
+  Public Douyin ID · 抖音号：<strong>51536643904</strong><br />
+  <sub>Observed result, not a reach guarantee · 真实使用结果，不构成流量承诺</sub>
+</p>
+
+### More documented creator results · 更多创作者实测数据
+
+| Platform · 平台 | Screenshot-verified evidence · 截图可核验数据 |
+| --- | --- |
+| **Douyin · 抖音** | **9,545 plays**, **358 likes**, **42 saves**, plus **5,990 bonus views** · **9,545 播放、358 赞、42 收藏、5,990 额外浏览奖励** |
+| **Xiaohongshu · 小红书** | Five visible post examples: **6,536 · 4,271 · 1,775 · 1,584 · 665 views** · 五条可见作品案例：**6,536 · 4,271 · 1,775 · 1,584 · 665 浏览** |
+| **Xiaohongshu · 小红书** | Visible post likes include **153, 131 and 105**; the account shows **1,511 total likes & saves** · 可见作品含 **153、131、105 赞**；账号累计 **1,511 获赞与收藏** |
 
 <p align="center">
   <a href="README.zh-CN.md">简体中文</a> ·
@@ -20,7 +42,15 @@
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
 
-## The problem
+## 一句话介绍 · One-line introduction
+
+**X Insight Cards is a creator-tested Codex Skill that finds high-signal X posts, verifies and scores them, then produces faithful English-Chinese cards and concise captions ready for human review.**
+
+**X Insight Cards 是一个经过真实创作者验证的 Codex Skill：从 X 筛选高认知内容，完成来源核验、评分、去重、翻译和中文排版，最终生成可审核的双语卡片与极简配文。**
+
+---
+
+## The problem · 为什么做它
 
 Finding useful posts is easy. Building a repeatable creator workflow is not:
 
@@ -89,13 +119,17 @@ The demo author and post are fictional. No third-party avatar or post is bundled
 | Scrape sessions or auto-post | Public read-only discovery and human review by default |
 | Opaque selection | Component scores, source links, hashes, and state history |
 
-## Creator-tested
+<a id="creator-tested"></a>
 
-This workflow grew out of a real Chinese knowledge-content account, not a synthetic growth demo.
+## Creator-tested · 创作者实测
 
-One example post reached **9,545 views, 358 likes, and 42 saves** on Douyin. The creator reports that most recent posts receive strong reach. Public account ID: **51536643904**.
+This workflow grew out of a real Chinese knowledge-content account, not a synthetic growth demo. One Douyin video made with it reached **9,545 plays, 358 likes, and 42 saves**, and received a platform notice for **5,990 bonus views**. Xiaohongshu screenshots also document five visible posts with **6,536, 4,271, 1,775, 1,584, and 665 views**; visible likes include **153, 131, and 105**, while the account shows **1,511 total likes and saves**.
 
-These numbers are evidence that the workflow has been used in practice—not a promise of future reach. Topic, account history, timing, and platform distribution still matter.
+这套工作流来自真实的中文知识内容账号，而不是虚构的增长案例。其中一条用本工作流制作的抖音视频获得 **9,545 播放、358 赞、42 收藏**，并收到平台的 **5,990 额外浏览量奖励**。小红书截图还记录了五条可见作品的 **6,536、4,271、1,775、1,584、665 浏览**；可见点赞案例包括 **153、131、105 赞**，账号累计 **1,511 获赞与收藏**。公开抖音号：**51536643904**。
+
+These numbers prove real-world use, not guaranteed future reach. Topic, account history, timing, and platform distribution still matter.
+
+这些数据用于证明工作流经过真实使用，不代表未来作品一定获得相同流量；选题、账号基础、发布时间和平台分发仍然会影响结果。
 
 ## Quality model
 
