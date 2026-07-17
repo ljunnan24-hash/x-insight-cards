@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>一条命令安装的 Codex Skill：把 X 优质原帖自动变成抖音、小红书双语图片与配文素材。</strong><br />
-  <strong>A one-command Codex Skill that turns high-quality X posts into Douyin and Xiaohongshu image-and-caption packs.</strong>
+  <strong>自动搜集 X 优质帖子，并转化为抖音、小红书双语图文素材的 Codex Skill。</strong><br />
+  <strong>A Codex Skill that finds high-quality X posts and turns them into bilingual content for Douyin and Xiaohongshu.</strong>
 </p>
 
 <p align="center">
