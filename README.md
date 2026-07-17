@@ -49,26 +49,23 @@ The workflow has already been used to make posts for real creator accounts. Resu
 | **Xiaohongshu account** | **1,589 total likes and saves** |
 | **Xiaohongshu visible posts** | **7,113 views / 547 likes**, **1,595 / 131**, **1,179 / 105**, and **1,041 / 153** |
 
-Public Douyin ID: `51536643904`.
+Public accounts: Douyin `51536643904` · Xiaohongshu `3876991164`.
 
-<table>
-  <tr>
-    <td width="70%" valign="top">
-      <a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="Douyin creator profile and visible post results" width="100%" /></a>
-    </td>
-    <td width="30%" valign="top">
-      <a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>Douyin creator results</strong> · 抖音账号与作品表现</td>
-    <td><strong>Xiaohongshu creator results</strong> · 小红书账号与作品表现</td>
-  </tr>
-</table>
+### Douyin creator results · 抖音账号与作品表现
+
+<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="Douyin creator profile and visible post results" width="100%" /></a>
+
+Douyin ID: `51536643904` · Click the image to inspect the original resolution.
+
+### Xiaohongshu creator results · 小红书账号与作品表现
+
+<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
+
+Xiaohongshu ID: `3876991164` · Click the image to inspect the original resolution.
 
 **中文说明：**抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**；小红书主页显示累计 **1,589 获赞与收藏**，其中可见作品包括 **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153**。
 
-These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter. Click either image to inspect the original resolution.
+These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
 
 ## Quick start
 
