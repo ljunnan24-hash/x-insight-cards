@@ -3,36 +3,15 @@
 </p>
 
 <p align="center">
-  <strong>Turn high-signal X posts into verified bilingual insight cards—without scraping credentials or auto-posting.</strong><br />
-  <strong>把 X 上真正有价值的内容，变成来源可核验、中文排版准确的双语创作素材。</strong>
+  <strong>Find the X posts worth sharing. Turn them into bilingual cards ready for review.</strong><br />
+  <strong>筛出真正值得分享的 X 内容，生成可直接审核的中英双语卡片。</strong>
 </p>
-
-<p align="center">
-  <strong>Creator-tested result · 创作者实测</strong>
-</p>
-
-| **9,545 plays · 播放** | **358 likes · 点赞** | **42 saves · 收藏** | **+5,990 bonus views · 额外浏览奖励** |
-| ---: | ---: | ---: | ---: |
-
-<p align="center">
-  One Douyin video made with this workflow · 一条使用本工作流制作的抖音视频<br />
-  Public Douyin ID · 抖音号：<strong>51536643904</strong><br />
-  <sub>Observed result, not a reach guarantee · 真实使用结果，不构成流量承诺</sub>
-</p>
-
-### More documented creator results · 更多创作者实测数据
-
-| Platform · 平台 | Screenshot-verified evidence · 截图可核验数据 |
-| --- | --- |
-| **Douyin · 抖音** | **9,545 plays**, **358 likes**, **42 saves**, plus **5,990 bonus views** · **9,545 播放、358 赞、42 收藏、5,990 额外浏览奖励** |
-| **Xiaohongshu · 小红书** | Five visible post examples: **6,536 · 4,271 · 1,775 · 1,584 · 665 views** · 五条可见作品案例：**6,536 · 4,271 · 1,775 · 1,584 · 665 浏览** |
-| **Xiaohongshu · 小红书** | Visible post likes include **153, 131 and 105**; the account shows **1,511 total likes & saves** · 可见作品含 **153、131、105 赞**；账号累计 **1,511 获赞与收藏** |
 
 <p align="center">
   <a href="README.zh-CN.md">简体中文</a> ·
   <a href="#quick-start">Quick start</a> ·
-  <a href="#why-this-is-different">Why it is different</a> ·
-  <a href="#creator-tested">Creator-tested</a>
+  <a href="#creator-tested">Real-world results</a> ·
+  <a href="#how-it-works">How it works</a>
 </p>
 
 <p align="center">
@@ -42,41 +21,22 @@
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
 
-## 一句话介绍 · One-line introduction
+## What it does
 
-**X Insight Cards is a creator-tested Codex Skill that finds high-signal X posts, verifies and scores them, then produces faithful English-Chinese cards and concise captions ready for human review.**
+**X Insight Cards is a Codex Skill for Chinese creators who want a repeatable way to turn high-value X posts into source-verified, well-typeset English-Chinese cards.**
 
-**X Insight Cards 是一个经过真实创作者验证的 Codex Skill：从 X 筛选高认知内容，完成来源核验、评分、去重、翻译和中文排版，最终生成可审核的双语卡片与极简配文。**
+**X Insight Cards 是为中文创作者设计的 Codex Skill：自动筛选高价值 X 原帖，核验来源、评分去重，并生成中英双语卡片与极简配文。**
 
----
+`discover → verify → rank → deduplicate → translate → typeset → review`
 
-## The problem · 为什么做它
+Each run gives you:
 
-Finding useful posts is easy. Building a repeatable creator workflow is not:
-
-- Viral posts are not always insightful.
-- Screenshots lose context and attribution.
-- Literal Chinese translations read poorly.
-- Mixed Latin/CJK fonts often produce visibly wrong weight and punctuation.
-- Most “automation” projects jump straight to risky credential scraping and auto-publishing.
-
-**X Insight Cards** turns that mess into an auditable pipeline:
-
-`discover → verify → deduplicate → score → translate → render → review`
-
-## What you get
-
-- A reusable **Codex Skill** for daily X curation.
-- A deterministic Python card renderer with cross-platform font discovery.
-- A 100-point quality rubric and a hard 75-point floor—never pad the list.
-- URL + normalized text-hash deduplication.
-- Simplified Chinese typography rules, including native punctuation placement.
-- One- or two-sentence captions that do not copy the translation.
-- A review-first safety boundary: no cookies, no CAPTCHA bypass, no automatic publishing.
+- Up to five posts that clear the quality bar—never filler added to reach a quota.
+- One source-attributed bilingual PNG per post.
+- One concise Chinese caption per card, ready to copy.
+- A private history record for duplicate prevention and auditability.
 
 ## Quick start
-
-### Install as a Codex Skill
 
 ```bash
 git clone https://github.com/ljunnan24-hash/x-insight-cards.git
@@ -87,11 +47,79 @@ cd x-insight-cards
 Then ask Codex:
 
 ```text
-Use $x-insight-cards to find and create today's top five verified bilingual
-insight cards about attention, habits, freedom, and long-term thinking.
+Use $x-insight-cards to find today's best posts about attention, habits,
+freedom, and long-term thinking. Create up to five verified bilingual cards
+with concise Chinese captions.
 ```
 
-### Render a synthetic demo card
+That is the whole setup. The Skill contains the workflow, quality rubric, typography rules, renderer, and safety boundaries.
+
+## Why creators use it
+
+| The usual problem | What this Skill does |
+| --- | --- |
+| Trending posts drown out useful ideas | Scores for insight, clarity, fit, credibility, freshness, and readability |
+| Screenshots lose context | Keeps the author, handle, source URL, date, and exact English text |
+| Literal Chinese feels translated | Preserves meaning and tone, then applies native Simplified Chinese typography |
+| Daily curation repeats the same posts | Deduplicates by canonical URL and normalized text hash |
+| Automation creates account risk | Uses public read-only sources and stops at human review |
+
+<a id="creator-tested"></a>
+
+## Built in a real creator workflow
+
+This is not a mock growth project. It was extracted from a workflow used on real Chinese content accounts.
+
+- **Douyin:** one video made with the workflow reached **9,545 plays, 358 likes, and 42 saves**, plus a platform notice for **5,990 bonus views**.
+- **Xiaohongshu:** documented post examples reached **6,536, 4,271, 1,775, 1,584, and 665 views**. Visible likes include **153, 131, and 105**; the account shows **1,511 total likes and saves**.
+- **Public Douyin ID:** `51536643904`.
+
+The numbers show that the workflow has been used in practice. They are not a promise of future reach; topic choice, account history, timing, and distribution still matter.
+
+<details>
+<summary><strong>中文实测说明</strong></summary>
+
+这不是为展示而虚构的增长项目，而是从真实中文内容账号的日常工作流中提炼出来的工具：抖音单条作品获得 **9,545 播放、358 赞、42 收藏**，并收到 **5,990 额外浏览量奖励**；小红书可见作品案例获得 **6,536、4,271、1,775、1,584、665 浏览**，可见点赞包括 **153、131、105 赞**，账号累计 **1,511 获赞与收藏**。这些数据只证明工具经过真实使用，不构成流量承诺。
+
+</details>
+
+<a id="how-it-works"></a>
+
+## How it works
+
+1. Search the last 24 hours; expand to 72 hours only when needed.
+2. Verify the URL, author, handle, exact text, date, and material view counts.
+3. Reject politics, stock tips, medical advice, course sales, reposts, and empty motivation.
+4. Score every candidate out of 100 and reject anything below 75.
+5. Remove previously used URLs and semantically duplicated text.
+6. Translate faithfully and match the Chinese typography to the English source style.
+7. Render the card, write a one- or two-sentence caption, run QA, and stop for review.
+
+If only three posts pass the bar, the output is three. Quality wins over quota.
+
+## Quality bar
+
+| Dimension | Points |
+| --- | ---: |
+| Insight gain | 30 |
+| One-idea clarity | 20 |
+| Chinese social fit | 20 |
+| Source credibility | 15 |
+| Freshness | 10 |
+| Visual readability | 5 |
+
+## Chinese typography is part of the product
+
+The English source remains the visual reference. Chinese matches its perceived size, stroke weight, line height, and color without changing the source style.
+
+- Mainland Simplified Chinese punctuation uses native full-width metrics.
+- Commas, stops, semicolons, colons, question marks, and exclamation marks keep their native lower placement.
+- Dashes and ellipses remain centered; paired marks keep their paired forms.
+- On macOS, the renderer prefers **PingFang SC Regular** for regular Chinese text.
+
+Override fonts with `XIC_LATIN_FONT`, `XIC_CJK_FONT`, and their optional index variables.
+
+## Use the renderer without Codex
 
 ```bash
 python3 -m venv .venv
@@ -107,91 +135,36 @@ python skills/x-insight-cards/scripts/render_card.py \
 
 The demo author and post are fictional. No third-party avatar or post is bundled.
 
-## Why this is different
+## Safety by default
 
-| Typical content automation | X Insight Cards |
-| --- | --- |
-| Optimize for volume | Optimize for transferable insight |
-| Rank by views | Score insight, clarity, fit, credibility, freshness, readability |
-| Copy popular posts | Verify and retain attribution |
-| Literal translation | Preserve meaning, structure, tone, and native Chinese typography |
-| Generate a fixed quota | Return fewer than five when quality is insufficient |
-| Scrape sessions or auto-post | Public read-only discovery and human review by default |
-| Opaque selection | Component scores, source links, hashes, and state history |
+- No cookies, passwords, tokens, or session exports.
+- No CAPTCHA, login-wall, rate-limit, or platform-control bypasses.
+- No automatic draft creation, upload, or publishing.
+- No bundled X posts, author avatars, platform screenshots, or system fonts.
+- Rearranged cards are identified as rearranged renders, never native screenshots.
 
-<a id="creator-tested"></a>
-
-## Creator-tested · 创作者实测
-
-This workflow grew out of a real Chinese knowledge-content account, not a synthetic growth demo. One Douyin video made with it reached **9,545 plays, 358 likes, and 42 saves**, and received a platform notice for **5,990 bonus views**. Xiaohongshu screenshots also document five visible posts with **6,536, 4,271, 1,775, 1,584, and 665 views**; visible likes include **153, 131, and 105**, while the account shows **1,511 total likes and saves**.
-
-这套工作流来自真实的中文知识内容账号，而不是虚构的增长案例。其中一条用本工作流制作的抖音视频获得 **9,545 播放、358 赞、42 收藏**，并收到平台的 **5,990 额外浏览量奖励**。小红书截图还记录了五条可见作品的 **6,536、4,271、1,775、1,584、665 浏览**；可见点赞案例包括 **153、131、105 赞**，账号累计 **1,511 获赞与收藏**。公开抖音号：**51536643904**。
-
-These numbers prove real-world use, not guaranteed future reach. Topic, account history, timing, and platform distribution still matter.
-
-这些数据用于证明工作流经过真实使用，不代表未来作品一定获得相同流量；选题、账号基础、发布时间和平台分发仍然会影响结果。
-
-## Quality model
-
-| Dimension | Points |
-| --- | ---: |
-| Insight gain | 30 |
-| One-idea clarity | 20 |
-| Chinese social fit | 20 |
-| Source credibility | 15 |
-| Freshness | 10 |
-| Visual readability | 5 |
-
-Candidates below **75/100** are rejected. If only three posts clear the bar, the output is three.
-
-## Typography that respects Chinese
-
-The English post remains the fixed visual reference. Chinese is calibrated to match its perceived size, stroke darkness, line height, and color.
-
-For Mainland Simplified Chinese horizontal text:
-
-- `、，；：。？！` use native full-width forms toward the lower-left of their character frame.
-- Quotation marks, parentheses, and book-title marks keep their paired native forms.
-- Dashes and ellipses remain centered.
-- No code pushes every punctuation mark into the same corner.
-
-On macOS, the renderer prefers **PingFang SC Regular** for regular Chinese text. Override fonts with `XIC_LATIN_FONT`, `XIC_CJK_FONT`, and their optional index variables.
+Publishing is always a separate, explicit human decision.
 
 ## Repository layout
 
 ```text
-.
-├── README.md
-├── README.zh-CN.md
-├── examples/
-│   ├── demo-post.json
-│   └── demo-card.png
-├── skills/x-insight-cards/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   ├── scripts/
-│   │   ├── render_card.py
-│   │   └── score_candidates.py
-│   ├── references/
-│   └── assets/demo-post.json
-└── tests/
+skills/x-insight-cards/
+├── SKILL.md
+├── agents/openai.yaml
+├── scripts/
+│   ├── render_card.py
+│   └── score_candidates.py
+├── references/
+└── assets/demo-post.json
 ```
 
-Only `skills/x-insight-cards/` is copied into the Codex skills directory.
-
-## Boundaries
-
-- This project does not ship X posts, author avatars, platform screenshots, cookies, or system fonts.
-- It is not affiliated with X, Douyin, Xiaohongshu, or any quoted author.
-- Keep source links and follow applicable platform rules and copyright law.
-- Reconstructed cards must be identified as rearranged renders, not native screenshots.
-- Publishing remains a separate, explicit human decision.
+Only `skills/x-insight-cards/` is installed into the Codex skills directory.
 
 ## Contributing
 
-Issues and pull requests are welcome—especially for Linux/Windows CJK font support, better line breaking, new scoring evidence, and accessibility. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Issues and pull requests are welcome—especially for Linux/Windows CJK fonts, line breaking, accessibility, and better scoring evidence. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-If this saves you from rebuilding the same workflow, consider starring the repository. It helps more creators find a safer, higher-signal alternative to blind content automation.
+If this saves you from rebuilding the same creator workflow, a Star helps other creators find it.
 
 ## License
 

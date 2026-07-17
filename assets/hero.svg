@@ -24,23 +24,19 @@
   </g>
   <text x="188" y="124" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#7dd3fc" letter-spacing="3">CODEX SKILL + PYTHON</text>
   <text x="76" y="220" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#fff">X Insight Cards</text>
-  <text x="78" y="276" font-family="Arial, sans-serif" font-size="25" fill="#cbd5e1">High-signal posts → verified bilingual creator assets</text>
-  <text x="78" y="310" font-family="PingFang SC, Arial, sans-serif" font-size="23" fill="#94a3b8">高信号内容 → 可核验的中英双语创作素材</text>
-  <text x="78" y="338" font-family="PingFang SC, Arial, sans-serif" font-size="17" font-weight="600" fill="#86efac">Creator-tested on Douyin + Xiaohongshu · 抖音 + 小红书实测</text>
-  <g transform="translate(78 352)" font-family="Arial, sans-serif" fill="#e2e8f0">
+  <text x="78" y="276" font-family="Arial, sans-serif" font-size="25" fill="#cbd5e1">Find → verify → translate → typeset → review</text>
+  <text x="78" y="310" font-family="PingFang SC, Arial, sans-serif" font-size="23" fill="#94a3b8">筛选 → 核验 → 翻译 → 排版 → 人工审核</text>
+  <g transform="translate(78 344)" font-family="Arial, sans-serif" fill="#e2e8f0">
     <g filter="url(#shadow)">
-      <rect x="0" y="0" width="248" height="76" rx="16" fill="#132a46" stroke="#38bdf8"/>
-      <rect x="270" y="0" width="248" height="76" rx="16" fill="#132a46" stroke="#38bdf8"/>
-      <rect x="540" y="0" width="248" height="76" rx="16" fill="#132a46" stroke="#38bdf8"/>
-      <rect x="810" y="0" width="248" height="76" rx="16" fill="#123c3b" stroke="#22c55e"/>
+      <rect x="0" y="0" width="336" height="84" rx="16" fill="#132a46" stroke="#38bdf8"/>
+      <rect x="360" y="0" width="336" height="84" rx="16" fill="#132a46" stroke="#38bdf8"/>
+      <rect x="720" y="0" width="336" height="84" rx="16" fill="#123c3b" stroke="#22c55e"/>
     </g>
-    <text x="124" y="33" text-anchor="middle" font-size="25" font-weight="700">9,545 plays</text>
-    <text x="124" y="59" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="18" fill="#bae6fd">9,545 播放</text>
-    <text x="394" y="33" text-anchor="middle" font-size="25" font-weight="700">358 likes</text>
-    <text x="394" y="59" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="18" fill="#bae6fd">358 赞</text>
-    <text x="664" y="33" text-anchor="middle" font-size="25" font-weight="700">42 saves</text>
-    <text x="664" y="59" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="18" fill="#bae6fd">42 收藏</text>
-    <text x="934" y="33" text-anchor="middle" font-size="25" font-weight="700" fill="#86efac">+5,990 bonus</text>
-    <text x="934" y="59" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="18" fill="#86efac">+5,990 额外浏览</text>
+    <text x="168" y="35" text-anchor="middle" font-size="24" font-weight="700">Quality over quota</text>
+    <text x="168" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#bae6fd">质量优先，不为数量凑数</text>
+    <text x="528" y="35" text-anchor="middle" font-size="24" font-weight="700">Sources verified</text>
+    <text x="528" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#bae6fd">作者、原文、链接可核验</text>
+    <text x="888" y="35" text-anchor="middle" font-size="24" font-weight="700" fill="#86efac">Chinese-native</text>
+    <text x="888" y="65" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="19" fill="#86efac">中文翻译与排版更自然</text>
   </g>
 </svg>
