@@ -53,15 +53,15 @@ Public accounts: Douyin `51536643904` · Xiaohongshu `3876991164`.
 
 ### Douyin creator results · 抖音账号与作品表现
 
-<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results.png" alt="Douyin creator profile and visible post results" width="100%" /></a>
+<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results-preview.webp" alt="Douyin creator profile and visible post results" width="100%" /></a>
 
-Douyin ID: `51536643904` · Click the image to inspect the original resolution.
+Douyin ID: `51536643904` · The README loads an optimized WebP preview; click it for the original PNG.
 
 ### Xiaohongshu creator results · 小红书账号与作品表现
 
-<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results.png" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
+<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results-preview.webp" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
 
-Xiaohongshu ID: `3876991164` · Click the image to inspect the original resolution.
+Xiaohongshu ID: `3876991164` · The README loads an optimized WebP preview; click it for the original PNG.
 
 **中文说明：**抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**；小红书主页显示累计 **1,589 获赞与收藏**，其中可见作品包括 **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153**。
 
