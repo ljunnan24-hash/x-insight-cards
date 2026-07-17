@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>Find the X posts worth sharing. Turn them into bilingual cards ready for review.</strong><br />
-  <strong>筛出真正值得分享的 X 内容，生成可直接审核的中英双语卡片。</strong>
+  <strong>Automatically turn high-quality X posts into image-and-caption content packs for Douyin and Xiaohongshu.</strong><br />
+  <strong>自动筛选 X 上的优质内容，生成适合抖音、小红书的双语图片与配文素材。</strong>
 </p>
 
 <p align="center">
@@ -23,18 +23,36 @@
 
 ## What it does
 
-**X Insight Cards is a Codex Skill for Chinese creators who want a repeatable way to turn high-value X posts into source-verified, well-typeset English-Chinese cards.**
+**X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates them, and produces bilingual images plus concise Chinese captions for Douyin and Xiaohongshu.**
 
-**X Insight Cards 是为中文创作者设计的 Codex Skill：自动筛选高价值 X 原帖，核验来源、评分去重，并生成中英双语卡片与极简配文。**
+**X Insight Cards 自动完成发布前的素材准备：寻找优质 X 原帖、核验来源、评分去重、翻译排版，最终生成适合抖音和小红书的双语图片与极简配文。**
 
 `discover → verify → rank → deduplicate → translate → typeset → review`
 
 Each run gives you:
 
-- Up to five posts that clear the quality bar—never filler added to reach a quota.
-- One source-attributed bilingual PNG per post.
-- One concise Chinese caption per card, ready to copy.
+- Automated discovery and ranking of recent high-quality source posts.
+- Up to five Douyin/Xiaohongshu content packs—never filler added to reach a quota.
+- One source-attributed bilingual PNG and one copy-ready Chinese caption per post.
 - A private history record for duplicate prevention and auditability.
+
+<a id="creator-tested"></a>
+
+## Creator-tested on Douyin and Xiaohongshu
+
+The workflow has already been used to make posts for real creator accounts. Results visible in the creator-provided screenshots include:
+
+| Platform | Documented results |
+| --- | --- |
+| **Douyin** | One post reached **9,545 plays, 358 likes, and 42 saves**, plus a platform notice for **5,990 bonus views** |
+| **Xiaohongshu** | Five visible posts reached **6,536, 4,271, 1,775, 1,584, and 665 views**; visible likes include **153, 131, and 105** |
+| **Xiaohongshu account** | **1,511 total likes and saves** |
+
+Public Douyin ID: `51536643904`.
+
+**中文说明：**由本工作流生成素材的抖音单条作品获得 **9,545 播放、358 赞、42 收藏**，并收到 **5,990 额外浏览量奖励**；小红书多条作品获得数百至数千浏览，账号累计 **1,511 获赞与收藏**。
+
+These figures demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
 
 ## Quick start
 
@@ -48,8 +66,8 @@ Then ask Codex:
 
 ```text
 Use $x-insight-cards to find today's best posts about attention, habits,
-freedom, and long-term thinking. Create up to five verified bilingual cards
-with concise Chinese captions.
+freedom, and long-term thinking. Create up to five verified bilingual
+image-and-caption content packs for Douyin and Xiaohongshu review.
 ```
 
 That is the whole setup. The Skill contains the workflow, quality rubric, typography rules, renderer, and safety boundaries.
@@ -58,30 +76,11 @@ That is the whole setup. The Skill contains the workflow, quality rubric, typogr
 
 | The usual problem | What this Skill does |
 | --- | --- |
-| Trending posts drown out useful ideas | Scores for insight, clarity, fit, credibility, freshness, and readability |
+| Finding good material every day takes time | Automatically discovers recent X posts and scores them for insight and creator fit |
 | Screenshots lose context | Keeps the author, handle, source URL, date, and exact English text |
 | Literal Chinese feels translated | Preserves meaning and tone, then applies native Simplified Chinese typography |
 | Daily curation repeats the same posts | Deduplicates by canonical URL and normalized text hash |
 | Automation creates account risk | Uses public read-only sources and stops at human review |
-
-<a id="creator-tested"></a>
-
-## Built in a real creator workflow
-
-This is not a mock growth project. It was extracted from a workflow used on real Chinese content accounts.
-
-- **Douyin:** one video made with the workflow reached **9,545 plays, 358 likes, and 42 saves**, plus a platform notice for **5,990 bonus views**.
-- **Xiaohongshu:** documented post examples reached **6,536, 4,271, 1,775, 1,584, and 665 views**. Visible likes include **153, 131, and 105**; the account shows **1,511 total likes and saves**.
-- **Public Douyin ID:** `51536643904`.
-
-The numbers show that the workflow has been used in practice. They are not a promise of future reach; topic choice, account history, timing, and distribution still matter.
-
-<details>
-<summary><strong>中文实测说明</strong></summary>
-
-这不是为展示而虚构的增长项目，而是从真实中文内容账号的日常工作流中提炼出来的工具：抖音单条作品获得 **9,545 播放、358 赞、42 收藏**，并收到 **5,990 额外浏览量奖励**；小红书可见作品案例获得 **6,536、4,271、1,775、1,584、665 浏览**，可见点赞包括 **153、131、105 赞**，账号累计 **1,511 获赞与收藏**。这些数据只证明工具经过真实使用，不构成流量承诺。
-
-</details>
 
 <a id="how-it-works"></a>
 

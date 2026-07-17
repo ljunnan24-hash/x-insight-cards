@@ -1,11 +1,11 @@
 ---
 name: x-insight-cards
-description: Find, verify, rank, deduplicate, translate, render, and quality-check recent X posts as English-Chinese insight cards with concise Chinese captions. Use for daily creator curation about wealth, life, goals, habits, attention, freedom, or long-term thinking when outputs must be source-auditable, typography-aware, ready for human review, and never auto-published or credential-backed.
+description: Automatically turn recent high-quality X posts into verified English-Chinese image-and-caption content packs for Douyin and Xiaohongshu creator review. Use when Codex needs to discover, verify, rank, deduplicate, translate, render, or quality-check posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, and publishing manual.
 ---
 
 # X Insight Cards
 
-Turn public X posts into a small, source-auditable set of bilingual cards and copy-ready captions. Optimize for insight quality, faithful attribution, natural Chinese typography, and human review—not volume.
+Automate the preparation of Douyin and Xiaohongshu content packs from public X posts. Produce a small, source-auditable set of bilingual images and copy-ready Chinese captions. Optimize for insight quality, faithful attribution, natural Chinese typography, and human review—not volume.
 
 ## Workflow
 
@@ -49,8 +49,8 @@ Read [references/candidate-schema.md](references/candidate-schema.md) when prepa
 
 Default deliverables:
 
-- One PNG per selected post.
-- One copy-ready caption per post in the response or a user-requested structured file.
+- One bilingual PNG per selected post, prepared as Douyin/Xiaohongshu creator material.
+- One copy-ready Chinese caption per post in the response or a user-requested structured file.
 - A private/auditable history record outside the public deliverable folder.
 
 Do not add poster backgrounds, ratings, Chinese titles, commentary, decorative AI art, platform watermarks, or captions inside the card.
