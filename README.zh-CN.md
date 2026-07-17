@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>自动搜集 X 优质帖子，并转化为抖音、小红书双语图文素材的 Codex Skill。</strong><br />
-  <strong>A Codex Skill that finds high-quality X posts and turns them into bilingual content for Douyin and Xiaohongshu.</strong>
+  <strong>自动搜集 X 优质帖子，并转化为抖音、小红书图文素材的 Codex Skill。</strong><br />
+  <strong>A Codex Skill that finds high-quality X posts and turns them into content for Douyin and Xiaohongshu.</strong>
 </p>
 
 <p align="center">
@@ -35,16 +35,16 @@ npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insig
 
 ```text
 使用 $x-insight-cards 寻找今天最好的 X 原帖，生成最多 5 组
-可直接审核的抖音、小红书双语图片与极简中文配文。
+可直接审核的抖音、小红书图片与极简中文配文。
 ```
 
 **就这些。** 安装一次，以后在任何 Codex 任务里调用 `$x-insight-cards` 即可。无需 API Key、无需导出 Cookie、无需自己拼提示词，也无需登录发布平台；Skill 会从选题一直完成到视觉质检，并停在人工审核前。
 
 ## 它能做什么
 
-**X Insight Cards 自动完成发布前的素材准备：寻找优质 X 原帖、核验来源、评分去重、翻译排版，最终生成适合抖音和小红书的双语图片与极简配文。**
+**X Insight Cards 自动完成发布前的素材准备：寻找优质 X 原帖、核验来源、评分去重、按需翻译排版，最终生成适合抖音和小红书的图片与极简配文。**
 
-**X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates them, and produces bilingual images plus concise Chinese captions for Douyin and Xiaohongshu.**
+**X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates when needed, and produces source-attributed images plus concise Chinese captions for Douyin and Xiaohongshu.**
 
 `发现 → 核验 → 排序 → 去重 → 翻译 → 排版 → 人工审核`
 
@@ -52,7 +52,7 @@ npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insig
 
 - 自动发现并排序近期值得做成内容的优质 X 原帖。
 - 最多 5 组抖音、小红书素材；不足 5 条绝不凑数。
-- 每组包含 1 张保留作者与来源的双语 PNG，以及 1 条可直接复制的极简中文配文。
+- 每组包含 1 张保留作者与来源的 PNG，以及 1 条可直接复制的极简中文配文。
 - 1 份不进入公开交付目录的历史记录，用于去重和审计。
 
 <a id="creator-tested"></a>

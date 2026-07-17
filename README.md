@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <strong>A Codex Skill that finds high-quality X posts and turns them into bilingual content for Douyin and Xiaohongshu.</strong><br />
-  <strong>自动搜集 X 优质帖子，并转化为抖音、小红书双语图文素材的 Codex Skill。</strong>
+  <strong>A Codex Skill that finds high-quality X posts and turns them into content for Douyin and Xiaohongshu.</strong><br />
+  <strong>自动搜集 X 优质帖子，并转化为抖音、小红书图文素材的 Codex Skill。</strong>
 </p>
 
 <p align="center">
@@ -35,16 +35,16 @@ Start a new Codex task and say:
 
 ```text
 Use $x-insight-cards to find today's best X posts and create up to five
-review-ready bilingual image-and-caption packs for Douyin and Xiaohongshu.
+review-ready image-and-caption packs for Douyin and Xiaohongshu.
 ```
 
 **That is the whole setup.** Install it once, then invoke `$x-insight-cards` from any Codex task. No API key, Cookie export, prompt assembly, or platform login is required. The Skill handles discovery through visual QA and stops before publishing.
 
 ## What it does
 
-**X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates them, and produces bilingual images plus concise Chinese captions for Douyin and Xiaohongshu.**
+**X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates when needed, and produces source-attributed images plus concise Chinese captions for Douyin and Xiaohongshu.**
 
-**X Insight Cards 自动完成发布前的素材准备：寻找优质 X 原帖、核验来源、评分去重、翻译排版，最终生成适合抖音和小红书的双语图片与极简配文。**
+**X Insight Cards 自动完成发布前的素材准备：寻找优质 X 原帖、核验来源、评分去重、按需翻译排版，最终生成适合抖音和小红书的图片与极简配文。**
 
 `discover → verify → rank → deduplicate → translate → typeset → review`
 
@@ -52,7 +52,7 @@ Each run gives you:
 
 - Automated discovery and ranking of recent high-quality source posts.
 - Up to five Douyin/Xiaohongshu content packs—never filler added to reach a quota.
-- One source-attributed bilingual PNG and one copy-ready Chinese caption per post.
+- One source-attributed PNG and one copy-ready Chinese caption per post.
 - A private history record for duplicate prevention and auditability.
 
 <a id="creator-tested"></a>
@@ -144,7 +144,7 @@ python skills/x-insight-cards/scripts/render_card.py \
   --output examples/demo-card.png
 ```
 
-![Synthetic bilingual card example](examples/demo-card.png)
+![Synthetic card example](examples/demo-card.png)
 
 The demo author and post are fictional. No third-party avatar or post is bundled.
 

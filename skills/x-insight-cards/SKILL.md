@@ -1,11 +1,11 @@
 ---
 name: x-insight-cards
-description: Automatically turn recent high-quality X posts into verified English-Chinese image-and-caption content packs for Douyin and Xiaohongshu creator review. Use when Codex needs to discover, verify, rank, deduplicate, translate, render, or quality-check posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, and publishing manual.
+description: Automatically turn recent high-quality X posts into verified image-and-caption content packs for Douyin and Xiaohongshu creator review. Use when Codex needs to discover, verify, rank, deduplicate, translate when needed, render, or quality-check posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, and publishing manual.
 ---
 
 # X Insight Cards
 
-Automate the preparation of Douyin and Xiaohongshu content packs from public X posts. Produce a small, source-auditable set of bilingual images and copy-ready Chinese captions. Optimize for insight quality, faithful attribution, natural Chinese typography, and human review—not volume.
+Automate the preparation of Douyin and Xiaohongshu content packs from public X posts. Produce a small, source-auditable set of post images and copy-ready Chinese captions. Optimize for insight quality, faithful attribution, natural Chinese typography, and human review—not volume.
 
 ## Workflow
 
@@ -49,7 +49,7 @@ Read [references/candidate-schema.md](references/candidate-schema.md) when prepa
 
 Default deliverables:
 
-- One bilingual PNG per selected post, prepared as Douyin/Xiaohongshu creator material.
+- One source-attributed PNG per selected post, prepared as Douyin/Xiaohongshu creator material.
 - One copy-ready Chinese caption per post in the response or a user-requested structured file.
 - A private/auditable history record outside the public deliverable folder.
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "X Insight Cards"
   short_description: "Turn quality X posts into Douyin/Xiaohongshu content"
-  default_prompt: "Use $x-insight-cards to find today’s best X posts and turn them into up to five verified bilingual content packs for Douyin and Xiaohongshu review."
+  default_prompt: "Use $x-insight-cards to find today’s best X posts and turn them into up to five verified image-and-caption content packs for Douyin and Xiaohongshu review."
