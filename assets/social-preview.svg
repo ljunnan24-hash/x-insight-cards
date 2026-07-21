@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">X Insight Cards</title>
+  <desc id="desc">Turn quality X posts into verified bilingual content cards for Douyin and Xiaohongshu.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.62" stop-color="#10213a"/>
+      <stop offset="1" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <circle cx="1120" cy="60" r="240" fill="#38bdf8" opacity="0.08"/>
+  <circle cx="60" cy="630" r="260" fill="#22c55e" opacity="0.07"/>
+
+  <g transform="translate(72 70)">
+    <rect width="82" height="82" rx="21" fill="url(#accent)"/>
+    <text x="41" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#07111f">XI</text>
+  </g>
+
+  <text x="178" y="104" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#7dd3fc" letter-spacing="2.5">OPEN-SOURCE CODEX SKILL</text>
+  <text x="72" y="225" font-family="Arial, sans-serif" font-size="62" font-weight="700" fill="#fff">X Insight Cards</text>
+  <text x="74" y="282" font-family="PingFang SC, Arial, sans-serif" font-size="27" fill="#e2e8f0">把 X 优质帖子变成小红书、抖音图文素材</text>
+  <text x="74" y="326" font-family="Arial, sans-serif" font-size="22" fill="#94a3b8">Discover → verify → rank → translate → typeset</text>
+
+  <g transform="translate(74 378)" font-family="Arial, PingFang SC, sans-serif">
+    <rect width="236" height="82" rx="16" fill="#123c3b" stroke="#22c55e"/>
+    <text x="118" y="34" text-anchor="middle" font-size="25" font-weight="700" fill="#86efac">17K likes + saves</text>
+    <text x="118" y="62" text-anchor="middle" font-size="17" fill="#bbf7d0">真实账号实测</text>
+  </g>
+
+  <g transform="translate(326 378)" font-family="Arial, PingFang SC, sans-serif">
+    <rect width="250" height="82" rx="16" fill="#132a46" stroke="#38bdf8"/>
+    <text x="125" y="34" text-anchor="middle" font-size="24" font-weight="700" fill="#e2e8f0">One prompt to run</text>
+    <text x="125" y="62" text-anchor="middle" font-size="17" fill="#bae6fd">无需 API Key</text>
+  </g>
+
+  <text x="74" y="530" font-family="Arial, PingFang SC, sans-serif" font-size="18" fill="#cbd5e1">Source-auditable · Chinese typography QA · Human review before publishing</text>
+  <text x="74" y="570" font-family="Arial, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#7dd3fc">github.com/ljunnan24-hash/x-insight-cards</text>
+
+  <g filter="url(#shadow)">
+    <rect x="648" y="126" width="574" height="374" rx="24" fill="#fff" opacity="0.98"/>
+    <image href="../examples/demo-card.png" x="665" y="146" width="540" height="312" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+  <text x="935" y="535" text-anchor="middle" font-family="PingFang SC, Arial, sans-serif" font-size="18" fill="#bae6fd">保留作者与来源的中英双语卡片</text>
+</svg>
