@@ -1,10 +1,13 @@
 PYTHON ?= python3
 SKILL_DIR := skills/x-insight-cards
 
-.PHONY: demo test validate privacy-check check
+.PHONY: demo demo-gif test validate privacy-check check
 
 demo:
 	$(PYTHON) $(SKILL_DIR)/scripts/render_card.py --input examples/demo-post.json --output examples/demo-card.png
+
+demo-gif: demo
+	$(PYTHON) scripts/build-demo-gif.py
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
@@ -15,4 +18,4 @@ validate:
 privacy-check:
 	$(PYTHON) tests/privacy_check.py .
 
-check: test validate privacy-check demo
+check: test validate privacy-check demo-gif

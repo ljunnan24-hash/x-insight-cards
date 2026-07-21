@@ -10,12 +10,15 @@
 <p align="center">
   <a href="README.md">English</a> ·
   <a href="#快速开始">快速开始</a> ·
+  <a href="#workflow-demo">观看演示</a> ·
   <a href="#creator-tested">实测数据</a> ·
-  <a href="#工作流程">工作流程</a>
+  <a href="https://github.com/ljunnan24-hash/x-insight-cards/releases/latest">最新版本</a>
 </p>
 
 <p align="center">
   <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827" />
+  <a href="https://github.com/ljunnan24-hash/x-insight-cards/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/ljunnan24-hash/x-insight-cards" /></a>
+  <a href="https://github.com/ljunnan24-hash/x-insight-cards/actions/workflows/ci.yml"><img alt="持续集成" src="https://github.com/ljunnan24-hash/x-insight-cards/actions/workflows/ci.yml/badge.svg" /></a>
   <a href="https://skills.sh/ljunnan24-hash/x-insight-cards/x-insight-cards"><img alt="skills.sh 安装量" src="https://skills.sh/b/ljunnan24-hash/x-insight-cards" /></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" />
   <img alt="隐私优先" src="https://img.shields.io/badge/privacy-no%20cookies-16A34A" />
@@ -29,7 +32,7 @@
 **这是一个可安装的 Codex Skill，不是需要自己拼装脚本的模板。** 复制这一条命令：
 
 ```bash
-npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
+npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
 ```
 
 新建一个 Codex 任务，然后说：
@@ -40,6 +43,16 @@ npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insig
 ```
 
 **就这些。** 安装一次，以后在任何 Codex 任务里调用 `$x-insight-cards` 即可。无需 API Key、无需导出 Cookie、无需自己拼提示词，也无需登录发布平台；Skill 会从选题一直完成到视觉质检，并停在人工审核前。
+
+<a id="workflow-demo"></a>
+
+## 一句话到完整素材包 · One prompt to a review-ready pack
+
+![从一句指令到可审核卡片与配文的 X Insight Cards 动态工作流](assets/demo-workflow.gif)
+
+动画使用仓库中的真实演示卡片，并展示完整的七步工作流：发现、来源核验、评分、去重、翻译、排版与质检。最终交付一张保留来源的图片和一条可复制配文，发布权始终留给创作者。
+
+运行 `make demo-gif` 可在本地重新生成这段演示。
 
 ## 直接看结果 · See the output
 

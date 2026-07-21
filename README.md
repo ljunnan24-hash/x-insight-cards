@@ -10,12 +10,15 @@
 <p align="center">
   <a href="README.zh-CN.md">简体中文</a> ·
   <a href="#quick-start">Quick start</a> ·
+  <a href="#workflow-demo">Watch demo</a> ·
   <a href="#creator-tested">Real-world results</a> ·
-  <a href="#how-it-works">How it works</a>
+  <a href="https://github.com/ljunnan24-hash/x-insight-cards/releases/latest">Latest release</a>
 </p>
 
 <p align="center">
   <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827" />
+  <a href="https://github.com/ljunnan24-hash/x-insight-cards/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/ljunnan24-hash/x-insight-cards" /></a>
+  <a href="https://github.com/ljunnan24-hash/x-insight-cards/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/ljunnan24-hash/x-insight-cards/actions/workflows/ci.yml/badge.svg" /></a>
   <a href="https://skills.sh/ljunnan24-hash/x-insight-cards/x-insight-cards"><img alt="skills.sh installs" src="https://skills.sh/b/ljunnan24-hash/x-insight-cards" /></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" />
   <img alt="Privacy first" src="https://img.shields.io/badge/privacy-no%20cookies-16A34A" />
@@ -29,7 +32,7 @@
 **This is an installable Codex Skill—not a script kit you have to assemble.** Copy one command:
 
 ```bash
-npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
+npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
 ```
 
 Start a new Codex task and say:
@@ -40,6 +43,16 @@ review-ready image-and-caption packs for Douyin and Xiaohongshu.
 ```
 
 **That is the whole setup.** Install it once, then invoke `$x-insight-cards` from any Codex task. No API key, Cookie export, prompt assembly, or platform login is required. The Skill handles discovery through visual QA and stops before publishing.
+
+<a id="workflow-demo"></a>
+
+## One prompt to a review-ready pack · 一句话到完整素材包
+
+![Animated X Insight Cards workflow from prompt to verified card and caption](assets/demo-workflow.gif)
+
+The animation uses the repository's real demo card and the actual seven-stage workflow: discovery, source verification, ranking, deduplication, translation, typesetting, and QA. The result is one attributed image plus one copy-ready caption, with publishing left to the creator.
+
+Rebuild the demo locally with `make demo-gif`.
 
 ## See the output · 直接看结果
 
