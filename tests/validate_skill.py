@@ -27,6 +27,7 @@ def main() -> None:
         skill / "scripts" / "score_candidates.py",
         skill / "references" / "workflow.md",
         skill / "references" / "typography.md",
+        skill / "references" / "private-delivery.md",
     ]
     missing = [str(path) for path in required if not path.exists()]
     if missing:

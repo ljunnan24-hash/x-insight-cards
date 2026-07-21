@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a three-scene README demo from a real, source-linked X post."""
+"""Build a four-scene demo of the scheduled workflow and private delivery."""
 
 from __future__ import annotations
 
@@ -73,35 +73,32 @@ def pill(
     draw.text((x, y), label, font=label_font, fill=color)
 
 
-def prompt_frame(
+def schedule_frame(
     latin_regular: tuple[str, int],
     latin_bold: tuple[str, int],
     cjk: tuple[str, int],
 ) -> Image.Image:
-    image, draw = base_frame("1 / 3", latin_regular, latin_bold, cjk)
-    draw.text((70, 126), "输入一句中文指令", font=font(cjk, 45), fill=INK)
-    draw.text((72, 184), "在 Codex 中调用 Skill，不需要配置 X API。", font=font(cjk, 25), fill=MUTED)
+    image, draw = base_frame("1 / 4", latin_regular, latin_bold, cjk)
+    draw.text((70, 126), "每天 12:00，自动开始", font=font(cjk, 45), fill=INK)
+    draw.text((72, 184), "Codex 定时任务自动唤醒 $x-insight-cards。", font=font(cjk, 25), fill=MUTED)
 
     draw.rounded_rectangle((70, 250, 1210, 548), 22, fill=SURFACE, outline="#2B4566", width=2)
-    draw.ellipse((96, 278, 110, 292), fill="#FF6B6B")
-    draw.ellipse((120, 278, 134, 292), fill="#FFD166")
-    draw.ellipse((144, 278, 158, 292), fill=GREEN)
-    draw.text((182, 270), "Codex", font=font(latin_bold, 21), fill=MUTED)
-    draw.line((96, 318, 1184, 318), fill="#263A55", width=2)
+    draw.rounded_rectangle((104, 286, 318, 500), 24, fill="#F8FAFC")
+    draw.rounded_rectangle((104, 286, 318, 350), 24, fill=ACCENT)
+    draw.rectangle((104, 326, 318, 350), fill=ACCENT)
+    draw.text((171, 300), "DAILY", font=font(latin_bold, 22), fill=BACKGROUND)
+    draw.text((138, 369), "12:00", font=font(latin_bold, 49), fill="#101828")
+    draw.text((151, 442), "北京时间", font=font(cjk, 19), fill="#536471")
 
-    draw.text((100, 350), "›", font=font(latin_bold, 30), fill=ACCENT)
-    draw.text((134, 348), "$x-insight-cards", font=font(latin_bold, 27), fill=ACCENT)
-    draw.text(
-        (100, 404),
-        "找一条关于长期主义的高质量 X 帖子，核验来源，",
-        font=font(cjk, 29),
-        fill=INK,
-    )
-    draw.text((100, 454), "生成中英双语卡片和小红书配文。", font=font(cjk, 29), fill=INK)
+    draw.text((370, 294), "每日 X 优质认知帖子 Top 5", font=font(cjk, 31), fill=INK)
+    draw.text((370, 354), "自动发现、核验、评分、去重、翻译与排版", font=font(cjk, 23), fill=MUTED)
+    draw.text((370, 404), "最近 24 小时优先 · 不足 75 分不凑数", font=font(cjk, 22), fill=MUTED)
+    pill(draw, (370, 458, 514, 504), "已启用", font(cjk, 18), "#12392E", GREEN)
+    draw.text((540, 468), "下一次运行：明天 12:00", font=font(cjk, 19), fill=ACCENT)
 
-    pill(draw, (70, 592, 256, 640), "只读公开来源", font(cjk, 18), "#12392E", GREEN)
-    pill(draw, (270, 592, 474, 640), "保留原帖链接", font(cjk, 18), "#15304B", ACCENT)
-    pill(draw, (488, 592, 710, 640), "发布前停下来", font(cjk, 18), "#2A2E47", "#D8C8FF")
+    pill(draw, (70, 592, 276, 640), "无需每天输入", font(cjk, 18), "#15304B", ACCENT)
+    pill(draw, (290, 592, 488, 640), "历史自动去重", font(cjk, 18), "#12392E", GREEN)
+    pill(draw, (502, 592, 742, 640), "完成后送到微信", font(cjk, 18), "#2A2E47", "#D8C8FF")
     return image
 
 
@@ -112,7 +109,7 @@ def processing_frame(
     latin_bold: tuple[str, int],
     cjk: tuple[str, int],
 ) -> Image.Image:
-    image, draw = base_frame("2 / 3", latin_regular, latin_bold, cjk)
+    image, draw = base_frame("2 / 4", latin_regular, latin_bold, cjk)
     draw.text((70, 118), "找到帖子，并留下核验证据", font=font(cjk, 42), fill=INK)
     draw.text((72, 172), "不是黑盒：来源、内容和筛选结果都能追溯。", font=font(cjk, 24), fill=MUTED)
 
@@ -164,9 +161,9 @@ def output_frame(
     latin_bold: tuple[str, int],
     cjk: tuple[str, int],
 ) -> Image.Image:
-    image, draw = base_frame("3 / 3", latin_regular, latin_bold, cjk)
-    draw.text((52, 112), "得到可审核素材包", font=font(cjk, 42), fill=INK)
-    draw.text((54, 164), "双语卡片、中文配文和原帖链接一次交付。", font=font(cjk, 23), fill=MUTED)
+    image, draw = base_frame("3 / 4", latin_regular, latin_bold, cjk)
+    draw.text((52, 112), "生成可审核素材包", font=font(cjk, 42), fill=INK)
+    draw.text((54, 164), "双语卡片、中文配文和原帖链接已准备完成。", font=font(cjk, 23), fill=MUTED)
 
     source_card = Image.open(card_path).convert("RGB")
     max_width, max_height = 680, 462
@@ -195,9 +192,76 @@ def output_frame(
     draw.text((790, 513), "x.com/JamesClear/status/2045205…", font=font(latin_regular, 17), fill=ACCENT)
 
     pill(draw, (790, 558, 952, 602), "来源已核验", font(cjk, 17), "#12392E", GREEN)
-    pill(draw, (966, 558, 1166, 602), "等待人工审核", font(cjk, 17), "#15304B", ACCENT)
+    pill(draw, (966, 558, 1166, 602), "等待微信交付", font(cjk, 17), "#15304B", ACCENT)
     draw.rounded_rectangle((790, 620, 1196, 658), 12, fill="#18273D")
-    draw.text((827, 626), "生成完成，不会自动发布。", font=font(cjk, 19), fill=INK)
+    draw.text((827, 626), "生成完成，准备发送到手机。", font=font(cjk, 19), fill=INK)
+    return image
+
+
+def delivery_frame(
+    card_path: Path,
+    data: dict,
+    sent_count: int,
+    latin_regular: tuple[str, int],
+    latin_bold: tuple[str, int],
+    cjk: tuple[str, int],
+) -> Image.Image:
+    image, draw = base_frame("4 / 4", latin_regular, latin_bold, cjk)
+    complete = sent_count == 5
+    title = "已送达微信文件传输助手" if complete else "发送到微信文件传输助手"
+    draw.text((52, 112), title, font=font(cjk, 40), fill=INK)
+    draw.text(
+        (54, 164),
+        "PNG 作为图片，配文作为独立文字；手机可直接保存。",
+        font=font(cjk, 23),
+        fill=MUTED,
+    )
+
+    draw.rounded_rectangle((52, 218, 404, 646), 22, fill=SURFACE, outline="#2B4566", width=2)
+    draw.text((82, 248), "今日 Top 5", font=font(cjk, 24), fill=INK)
+    for index in range(5):
+        y = 304 + index * 61
+        delivered = index < sent_count
+        draw.rounded_rectangle((82, y, 374, y + 46), 12, fill=SURFACE_LIGHT)
+        draw.rounded_rectangle((94, y + 8, 126, y + 38), 7, fill=ACCENT if delivered else PENDING)
+        draw.text((103, y + 9), str(index + 1), font=font(latin_bold, 16), fill=BACKGROUND if delivered else MUTED)
+        draw.text((142, y + 10), "图片 + 配文", font=font(cjk, 18), fill=INK if delivered else MUTED)
+        draw.text((329, y + 10), "✓" if delivered else "…", font=font(cjk, 18), fill=GREEN if delivered else MUTED)
+
+    draw.line((430, 424, 486, 424), fill=ACCENT, width=5)
+    draw.polygon(((486, 414), (506, 424), (486, 434)), fill=ACCENT)
+
+    draw.rounded_rectangle((526, 218, 1228, 646), 22, fill="#EFF2F5", outline="#2B4566", width=2)
+    draw.rounded_rectangle((526, 218, 1228, 282), 22, fill="#F8FAFC")
+    draw.rectangle((526, 258, 1228, 282), fill="#F8FAFC")
+    draw.ellipse((554, 234, 586, 266), fill="#20C05C")
+    draw.text((597, 231), "文件传输助手", font=font(cjk, 23), fill="#172033")
+    pill(draw, (1018, 228, 1196, 268), "目标已核对", font(cjk, 16), "#E1F5E8", "#168A45")
+
+    source_card = Image.open(card_path).convert("RGB")
+    thumb_width = 302
+    thumb_height = int(source_card.height * thumb_width / source_card.width)
+    source_card = source_card.resize((thumb_width, thumb_height), Image.Resampling.LANCZOS)
+    image.paste(source_card, (568, 310))
+    draw.rounded_rectangle((888, 330, 1190, 444), 16, fill="#95EC69")
+    draw.text((910, 350), "真正改变人生的，", font=font(cjk, 19), fill="#172033")
+    draw.text((910, 382), "是日复一日的练习。", font=font(cjk, 19), fill="#172033")
+    draw.text((910, 414), "#长期主义 #习惯养成", font=font(cjk, 15), fill="#31503B")
+
+    status_color = GREEN if complete else ACCENT
+    status = "5 / 5 已发送到手机" if complete else f"正在发送… {sent_count} / 5"
+    draw.rounded_rectangle((568, 560, 1190, 610), 14, fill="#E4E9EE")
+    draw.text((592, 571), status, font=font(cjk, 20), fill="#168A45" if complete else "#1684B4")
+    draw.ellipse((1144, 573, 1168, 597), fill=status_color)
+    if complete:
+        draw.text((1149, 571), "✓", font=font(cjk, 17), fill=BACKGROUND)
+
+    draw.text(
+        (52, 670),
+        "只发送给自己 · 小红书、抖音仍由你审核发布",
+        font=font(cjk, 19),
+        fill=MUTED,
+    )
     return image
 
 
@@ -208,13 +272,15 @@ def build_demo(card_path: Path, output_path: Path, data_path: Path | None = None
     if not str(data.get("source_url", "")).startswith("https://x.com/"):
         raise ValueError("Demo data must include a public X source_url")
 
-    frames = [prompt_frame(latin_regular, latin_bold, cjk)]
+    frames = [schedule_frame(latin_regular, latin_bold, cjk)]
     frames.extend(
         processing_frame(completed, data, latin_regular, latin_bold, cjk)
         for completed in range(1, 5)
     )
     frames.append(output_frame(card_path, data, latin_regular, latin_bold, cjk))
-    durations = [2300, 1200, 1200, 1200, 1600, 3500]
+    frames.append(delivery_frame(card_path, data, 3, latin_regular, latin_bold, cjk))
+    frames.append(delivery_frame(card_path, data, 5, latin_regular, latin_bold, cjk))
+    durations = [2200, 900, 900, 900, 1200, 2200, 1500, 3200]
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     frames[0].save(

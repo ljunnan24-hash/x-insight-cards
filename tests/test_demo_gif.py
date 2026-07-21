@@ -26,12 +26,12 @@ class DemoGifTests(unittest.TestCase):
             self.assertTrue(output.exists())
             with Image.open(output) as image:
                 self.assertEqual(image.size, (1280, 720))
-                self.assertEqual(image.n_frames, 6)
+                self.assertEqual(image.n_frames, 8)
                 durations = []
                 for frame_index in range(image.n_frames):
                     image.seek(frame_index)
                     durations.append(image.info["duration"])
-                self.assertEqual(sum(durations), 11000)
+                self.assertEqual(sum(durations), 13000)
 
     def test_requires_a_public_x_source(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

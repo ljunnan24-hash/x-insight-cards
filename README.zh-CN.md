@@ -27,7 +27,7 @@
 
 <a id="快速开始"></a>
 
-## 安装一次，一句话开始 · One command, one prompt
+## 安装一次，每天自动运行 · Install once, run every day
 
 **这是一个可安装的 Codex Skill，不是需要自己拼装脚本的模板。** 复制这一条命令：
 
@@ -35,22 +35,24 @@
 npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent codex --global --copy --yes
 ```
 
-新建一个 Codex 任务，然后说：
+把下面这段提示词加入每日 Codex 自动任务；演示采用本地时间 12:00：
 
 ```text
 使用 $x-insight-cards 寻找今天最好的 X 原帖，生成最多 5 组
-可直接审核的抖音、小红书图片与极简中文配文。
+可直接审核的抖音、小红书图片与极简中文配文。质检完成后，
+核对微信“文件传输助手”，在完成必要确认后逐组发送 PNG 图片和配文文字。
+不得自动发布到任何内容平台。
 ```
 
-**就这些。** 安装一次，以后在任何 Codex 任务里调用 `$x-insight-cards` 即可。无需 API Key、无需导出 Cookie、无需自己拼提示词，也无需登录发布平台；Skill 会从选题一直完成到视觉质检，并停在人工审核前。
+安装一次、设置一次定时任务，之后每天自动运行；同时仍支持手动调用。无需 X API Key、无需导出 Cookie、无需自己拼提示词。只有传到手机时需要登录微信桌面端，内容平台发布始终由你手动决定。
 
 <a id="workflow-demo"></a>
 
-## 一句话到完整素材包 · One prompt to a review-ready pack
+## 每日定时生成并送到微信 · Daily schedule to WeChat review
 
-![从一句指令到可审核卡片与配文的 X Insight Cards 动态工作流](assets/demo-workflow.gif)
+![从每日定时触发到微信文件传输助手的 X Insight Cards 动态工作流](assets/demo-workflow.gif)
 
-这段 11 秒演示以一条真实公开的 [James Clear 帖子](https://x.com/JamesClear/status/2045205241885323635) 为例，从 Codex 中文指令开始，依次展示来源核验、评分、去重、卡片生成与可复制配文。流程停在人工审核，不会自动发布。
+这段 13 秒演示从每天 12:00 的 Codex 定时任务开始，以一条真实公开的 [James Clear 帖子](https://x.com/JamesClear/status/2045205241885323635) 为例，依次展示来源核验、评分、去重、卡片生成，最后把 PNG 和配文私下发送到已核对的微信“文件传输助手”。它不会自动发布到抖音或小红书。
 
 运行 `make demo-gif` 可在本地重新生成这段演示。
 
@@ -58,7 +60,7 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 
 ![Skill 生成的中英双语 X 洞察卡片](examples/demo-card.png)
 
-一句话即可得到保留作者与来源的中英双语卡片，以及一条等待创作者审核的极简中文配文。此示例使用虚构内容，不包含第三方头像。
+每次定时运行都会得到保留作者与来源的卡片，以及等待创作者审核的极简中文配文。此示例使用真实公开原帖和重排渲染，并以姓名首字母代替第三方头像。
 
 ## 它能做什么
 
@@ -66,13 +68,14 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 
 **X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates when needed, and produces source-attributed images plus concise Chinese captions for Douyin and Xiaohongshu.**
 
-`发现 → 核验 → 排序 → 去重 → 翻译 → 排版 → 人工审核`
+`定时触发 → 发现 → 核验 → 排序 → 去重 → 翻译 → 排版 → 微信审核`
 
 每次运行会得到：
 
 - 自动发现并排序近期值得做成内容的优质 X 原帖。
 - 最多 5 组抖音、小红书素材；不足 5 条绝不凑数。
 - 每组包含 1 张保留作者与来源的 PNG，以及 1 条可直接复制的极简中文配文。
+- 可选私下发送到已核对的微信“文件传输助手”。
 - 1 份不进入公开交付目录的历史记录，用于去重和审计。
 
 <a id="creator-tested"></a>
@@ -114,17 +117,17 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 | 截图传播丢失作者与上下文 | 保留作者、账号、原帖链接、日期与英文原文 |
 | 直译中文生硬，混排字体不协调 | 忠实保留语义和语气，并按简体中文原生规则排版 |
 | 日更容易重复旧内容和旧选题 | 按规范化 URL 与正文哈希双重去重 |
-| 自动化容易越过账号安全边界 | 只使用公开只读来源，默认停在人工审核 |
+| 自动化容易越过账号安全边界 | 只使用公开只读来源、核对微信自传会话，并且绝不自动发布 |
 
 ## 工作流程
 
-1. 搜索最近 24 小时内容；不足时扩展到 72 小时，再不足时使用未采用过的常青内容。
-2. 核验 URL、作者、账号、英文原文、日期和必要浏览量。
-3. 排除政治争议、荐股、医疗建议、卖课、搬运和纯情绪鸡汤。
-4. 对候选内容进行 100 分评分，低于 75 分直接淘汰。
-5. 对照历史记录，排除重复 URL、重复正文和重复选题。
-6. 忠实翻译，并让中文排版单向匹配英文原帖的视觉格式。
-7. 渲染卡片、生成一至两句配文、完成质检，停在人工审核。
+1. 从每日 Codex 定时任务开始，也可手动运行。
+2. 搜索最近 24 小时内容；不足时扩展到 72 小时，再不足时使用未采用过的常青内容。
+3. 核验 URL、作者、账号、英文原文、日期和必要浏览量。
+4. 排除政治争议、荐股、医疗建议、卖课、搬运和纯情绪鸡汤。
+5. 对候选内容进行 100 分评分，低于 75 分直接淘汰，并对照历史记录去重。
+6. 忠实翻译、排版、生成极简配文并完成视觉质检。
+7. 启用私有交付时，核对微信“文件传输助手”，把 PNG 图片和对应配文发送到手机等待审核。
 
 如果只有 3 条达到 75 分，就只交付 3 条。质量优先于数量。
 
@@ -162,17 +165,18 @@ python skills/x-insight-cards/scripts/render_card.py \
   --output examples/demo-card.png
 ```
 
-README 顶部展示的演示作者和内容均为虚构，不包含第三方头像或真实原帖。
+README 顶部使用一条真实公开的 [James Clear 帖子](https://x.com/JamesClear/status/2045205241885323635) 进行重排演示，不包含第三方头像。
 
 ## 默认权限边界
 
 - 不读取、导出或保存 Cookie、密码、Token 和会话数据。
 - 不绕过登录墙、验证码、风控、速率限制或平台权限。
 - 不自动打开发布页、创建草稿、上传或发布。
+- 微信交付只允许发送到已核对的“文件传输助手”，并遵守发送前必要确认。
 - `assets/proof/` 中两张创作者授权的结果截图仅用于项目说明；仓库不包含账号凭据、私密账号数据或系统字体。
 - 重排卡片必须标记为“重排渲染”，不得冒充原生截图。
 
-发布永远是独立、明确、由用户决定的下一步。
+私下传到手机可自动执行到必要的发送确认；平台发布永远是独立、由用户决定的下一步。
 
 ## 贡献
 

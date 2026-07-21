@@ -1,6 +1,6 @@
 ---
 name: x-insight-cards
-description: Automatically turn recent high-quality X posts into verified image-and-caption content packs for Douyin and Xiaohongshu creator review. Use when Codex needs to discover, verify, rank, deduplicate, translate when needed, render, or quality-check posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, and publishing manual.
+description: Run scheduled or manual creator curation that turns recent high-quality X posts into verified image-and-caption packs for Douyin and Xiaohongshu review, with optional private delivery to a confirmed WeChat File Transfer Assistant self-chat. Use when Codex needs to discover, verify, rank, deduplicate, translate, render, quality-check, or privately deliver posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, and platform publishing manual.
 ---
 
 # X Insight Cards
@@ -18,7 +18,8 @@ Automate the preparation of Douyin and Xiaohongshu content packs from public X p
 7. Translate faithfully. Preserve paragraphs, quotation marks, dashes, parentheses, and tone.
 8. Render one card per selected post. Prefer a real post screenshot when the environment can capture it cleanly. Otherwise use `scripts/render_card.py` and label the record `rearranged-render`.
 9. Write one concise Chinese caption per card: normally one sentence, at most two, followed by 3–5 relevant hashtags. Do not copy the translation.
-10. Run the checks in [references/qa-checklist.md](references/qa-checklist.md). Stop at review-ready; do not upload or publish.
+10. Run the checks in [references/qa-checklist.md](references/qa-checklist.md) and mark accepted items `READY_FOR_REVIEW`.
+11. When the user has configured private delivery, read [references/private-delivery.md](references/private-delivery.md), verify the self-chat destination, obtain any required send confirmation, and send each PNG plus its matching caption. Never upload or publish to a content platform.
 
 ## Rendering
 
@@ -52,6 +53,7 @@ Default deliverables:
 - One source-attributed PNG per selected post, prepared as Douyin/Xiaohongshu creator material.
 - One copy-ready Chinese caption per post in the response or a user-requested structured file.
 - A private/auditable history record outside the public deliverable folder.
+- When explicitly configured, private delivery of each PNG and matching caption to the user's confirmed WeChat File Transfer Assistant self-chat.
 
 Do not add poster backgrounds, ratings, Chinese titles, commentary, decorative AI art, platform watermarks, or captions inside the card.
 
@@ -61,4 +63,5 @@ Do not add poster backgrounds, ratings, Chinese titles, commentary, decorative A
 - Do not bypass login challenges, rate limits, CAPTCHAs, or platform restrictions.
 - Do not imply endorsement by X or any quoted author.
 - Keep source links and attribution. Do not redistribute third-party media unless the user has the necessary rights.
-- Never publish automatically. A separate, explicit user request and platform-specific workflow is required for any upload.
+- Never publish automatically. Private self-delivery is not publication and requires exact recipient verification plus any just-in-time confirmation required by the computer-control environment.
+- A separate, explicit user request and platform-specific workflow is required for any social-platform upload.

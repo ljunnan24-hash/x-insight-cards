@@ -1,4 +1,4 @@
 interface:
   display_name: "X Insight Cards"
-  short_description: "Turn quality X posts into Douyin/Xiaohongshu content"
-  default_prompt: "Use $x-insight-cards to find today’s best X posts and turn them into up to five verified image-and-caption content packs for Douyin and Xiaohongshu review."
+  short_description: "Schedule X curation and deliver review packs"
+  default_prompt: "Use $x-insight-cards in a daily run to curate up to five verified X content packs and, when configured, privately deliver them to my confirmed WeChat File Transfer Assistant for review."

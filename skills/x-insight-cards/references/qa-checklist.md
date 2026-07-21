@@ -26,4 +26,5 @@
 
 - No credentials, cookies, tokens, personal paths, private logs, or platform drafts were created.
 - Reconstructed cards are labeled `rearranged-render` in the private record.
-- Output stops at `READY_FOR_REVIEW`.
+- Output reaches `READY_FOR_REVIEW` before any private delivery.
+- When private delivery is configured, the destination is verified and the send follows `private-delivery.md`; otherwise the run stops at `READY_FOR_REVIEW`.
