@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Build the README workflow demo GIF from the repository's real demo card."""
+"""Build a three-scene README demo from a real, source-linked X post."""
 
 from __future__ import annotations
 
 import argparse
 import importlib.util
+import json
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -19,173 +20,201 @@ SPEC.loader.exec_module(RENDER_MODULE)
 
 WIDTH = 1280
 HEIGHT = 720
-BACKGROUND = "#09111F"
-SURFACE = "#111C2E"
-SURFACE_LIGHT = "#18263C"
+BACKGROUND = "#07111F"
+SURFACE = "#101D30"
+SURFACE_LIGHT = "#172840"
 INK = "#F8FAFC"
-MUTED = "#9FB0C8"
-ACCENT = "#35C2FF"
-ACCENT_GREEN = "#4ADE80"
+MUTED = "#9DB0C9"
+ACCENT = "#37C4FF"
+GREEN = "#4ADE80"
+PENDING = "#344760"
 
 
 def font(spec: tuple[str, int], size: int) -> ImageFont.FreeTypeFont:
     return RENDER_MODULE.load_font(spec, size)
 
 
-def base_frame() -> tuple[Image.Image, ImageDraw.ImageDraw]:
+def base_frame(
+    scene: str,
+    latin_regular: tuple[str, int],
+    latin_bold: tuple[str, int],
+    cjk: tuple[str, int],
+) -> tuple[Image.Image, ImageDraw.ImageDraw]:
     image = Image.new("RGB", (WIDTH, HEIGHT), BACKGROUND)
     draw = ImageDraw.Draw(image)
-    draw.ellipse((-190, -260, 500, 430), fill="#102B45")
-    draw.ellipse((930, 430, 1510, 1010), fill="#17243B")
-    draw.rounded_rectangle((34, 28, WIDTH - 34, HEIGHT - 28), 30, outline="#21324A", width=2)
+    draw.ellipse((-230, -310, 510, 430), fill="#0D2A45")
+    draw.ellipse((1000, 500, 1470, 970), fill="#14233A")
+    draw.rounded_rectangle((30, 24, WIDTH - 30, HEIGHT - 24), 28, outline="#213651", width=2)
+
+    draw.rounded_rectangle((58, 48, 100, 90), 12, fill=ACCENT)
+    draw.text((72, 55), "X", font=font(latin_bold, 23), fill=BACKGROUND)
+    draw.text((116, 54), "X Insight Cards", font=font(latin_bold, 23), fill=INK)
+    label = f"{scene}  ·  真实工作流演示"
+    label_font = font(cjk, 20)
+    label_width = draw.textlength(label, font=label_font)
+    draw.text((WIDTH - 58 - label_width, 58), label, font=label_font, fill=MUTED)
     return image, draw
 
 
-def header(
+def pill(
     draw: ImageDraw.ImageDraw,
-    regular: ImageFont.FreeTypeFont,
-    bold: ImageFont.FreeTypeFont,
+    box: tuple[int, int, int, int],
+    label: str,
+    label_font: ImageFont.FreeTypeFont,
+    fill: str,
+    color: str,
 ) -> None:
-    draw.rounded_rectangle((60, 50, 100, 90), 12, fill=ACCENT)
-    draw.text((74, 58), "X", font=bold, fill=BACKGROUND)
-    draw.text((116, 55), "X Insight Cards", font=bold, fill=INK)
-    label = "v1.0.0 workflow demo"
-    box = draw.textbbox((0, 0), label, font=regular)
-    draw.text((WIDTH - 62 - (box[2] - box[0]), 60), label, font=regular, fill=MUTED)
+    draw.rounded_rectangle(box, 14, fill=fill)
+    text_box = draw.textbbox((0, 0), label, font=label_font)
+    text_width = text_box[2] - text_box[0]
+    text_height = text_box[3] - text_box[1]
+    x = box[0] + (box[2] - box[0] - text_width) / 2
+    y = box[1] + (box[3] - box[1] - text_height) / 2 - text_box[1]
+    draw.text((x, y), label, font=label_font, fill=color)
 
 
-def intro_frame(
+def prompt_frame(
     latin_regular: tuple[str, int],
     latin_bold: tuple[str, int],
     cjk: tuple[str, int],
 ) -> Image.Image:
-    image, draw = base_frame()
-    header(draw, font(latin_regular, 22), font(latin_bold, 22))
-    draw.text((80, 142), "One prompt. A complete creator pack.", font=font(latin_bold, 52), fill=INK)
-    draw.text((82, 210), "一句指令，完成选题、核验、翻译、排版与质检。", font=font(cjk, 29), fill=MUTED)
+    image, draw = base_frame("1 / 3", latin_regular, latin_bold, cjk)
+    draw.text((70, 126), "输入一句中文指令", font=font(cjk, 45), fill=INK)
+    draw.text((72, 184), "在 Codex 中调用 Skill，不需要配置 X API。", font=font(cjk, 25), fill=MUTED)
 
-    draw.rounded_rectangle((80, 300, WIDTH - 80, 512), 24, fill=SURFACE, outline="#29415F", width=2)
-    draw.text((112, 330), "$x-insight-cards", font=font(latin_bold, 28), fill=ACCENT)
+    draw.rounded_rectangle((70, 250, 1210, 548), 22, fill=SURFACE, outline="#2B4566", width=2)
+    draw.ellipse((96, 278, 110, 292), fill="#FF6B6B")
+    draw.ellipse((120, 278, 134, 292), fill="#FFD166")
+    draw.ellipse((144, 278, 158, 292), fill=GREEN)
+    draw.text((182, 270), "Codex", font=font(latin_bold, 21), fill=MUTED)
+    draw.line((96, 318, 1184, 318), fill="#263A55", width=2)
+
+    draw.text((100, 350), "›", font=font(latin_bold, 30), fill=ACCENT)
+    draw.text((134, 348), "$x-insight-cards", font=font(latin_bold, 27), fill=ACCENT)
     draw.text(
-        (112, 386),
-        "Find today's best X posts and create up to five\nreview-ready packs for Douyin and Xiaohongshu.",
-        font=font(latin_regular, 31),
+        (100, 404),
+        "找一条关于长期主义的高质量 X 帖子，核验来源，",
+        font=font(cjk, 29),
         fill=INK,
-        spacing=13,
     )
+    draw.text((100, 454), "生成中英双语卡片和小红书配文。", font=font(cjk, 29), fill=INK)
 
-    draw.text(
-        (80, 588),
-        "No API key  ·  No cookies  ·  Source attributed  ·  Stops before publishing",
-        font=font(latin_regular, 24),
-        fill=ACCENT_GREEN,
-    )
+    pill(draw, (70, 592, 256, 640), "只读公开来源", font(cjk, 18), "#12392E", GREEN)
+    pill(draw, (270, 592, 474, 640), "保留原帖链接", font(cjk, 18), "#15304B", ACCENT)
+    pill(draw, (488, 592, 710, 640), "发布前停下来", font(cjk, 18), "#2A2E47", "#D8C8FF")
     return image
 
 
-def workflow_frame(
-    active_index: int,
+def processing_frame(
+    completed: int,
+    data: dict,
     latin_regular: tuple[str, int],
     latin_bold: tuple[str, int],
+    cjk: tuple[str, int],
 ) -> Image.Image:
-    image, draw = base_frame()
-    regular_22 = font(latin_regular, 22)
-    bold_22 = font(latin_bold, 22)
-    header(draw, regular_22, bold_22)
-    draw.text((80, 135), "Source-verified workflow", font=font(latin_bold, 48), fill=INK)
+    image, draw = base_frame("2 / 3", latin_regular, latin_bold, cjk)
+    draw.text((70, 118), "找到帖子，并留下核验证据", font=font(cjk, 42), fill=INK)
+    draw.text((72, 172), "不是黑盒：来源、内容和筛选结果都能追溯。", font=font(cjk, 24), fill=MUTED)
+
+    draw.rounded_rectangle((70, 230, 770, 622), 22, fill=SURFACE, outline="#2B4566", width=2)
+    draw.text((100, 258), "发现 1 条高质量候选", font=font(cjk, 22), fill=ACCENT)
+    draw.text((100, 306), str(data["author"]), font=font(latin_bold, 30), fill=INK)
+    draw.text((292, 312), str(data["handle"]), font=font(latin_regular, 22), fill=MUTED)
     draw.text(
-        (82, 196),
-        "Every stage leaves evidence. Quality wins over quota.",
-        font=font(latin_regular, 27),
-        fill=MUTED,
+        (100, 360),
+        "The wedding is an event, love is a practice.\n"
+        "The graduation is an event, education is a practice.\n"
+        "The race is an event, fitness is a practice.",
+        font=font(latin_regular, 23),
+        fill=INK,
+        spacing=13,
     )
+    draw.line((100, 500, 740, 500), fill="#2A3D58", width=2)
+    draw.text((100, 522), "公开来源", font=font(cjk, 18), fill=MUTED)
+    draw.text((100, 557), str(data["source_url"]), font=font(latin_regular, 17), fill=ACCENT)
 
-    steps = ["discover", "verify", "rank", "deduplicate", "translate", "typeset", "QA"]
-    gap = 12
-    card_width = 150
-    start_x = (WIDTH - (len(steps) * card_width + (len(steps) - 1) * gap)) // 2
-    for index, step in enumerate(steps):
-        x = start_x + index * (card_width + gap)
-        active = index == active_index
-        draw.rounded_rectangle(
-            (x, 286, x + card_width, 364),
-            18,
-            fill=ACCENT if active else SURFACE_LIGHT,
-            outline=ACCENT if active else "#2A3A52",
-            width=2,
-        )
-        label_font = font(latin_bold if active else latin_regular, 19)
-        box = draw.textbbox((0, 0), step, font=label_font)
-        draw.text(
-            (x + (card_width - (box[2] - box[0])) / 2, 314),
-            step,
-            font=label_font,
-            fill=BACKGROUND if active else INK,
-        )
-
-    evidence = [
-        "Source fields checked: URL · author · handle · exact text · date",
-        "Quality gate applied: only candidates scoring 75/100 or higher",
-        "History checked: canonical URL and normalized text hash",
+    draw.rounded_rectangle((800, 230, 1210, 622), 22, fill=SURFACE, outline="#2B4566", width=2)
+    draw.text((832, 258), "核验记录", font=font(cjk, 25), fill=INK)
+    score = sum(int(value) for value in data["score_detail"].values())
+    checks = [
+        "公开来源已读取",
+        "作者、账号与日期一致",
+        "英文原文逐字核对完成",
+        f"评分 {score}/100；历史未使用",
     ]
-    for index, line in enumerate(evidence):
-        y = 430 + index * 58
-        draw.ellipse((84, y + 7, 102, y + 25), fill=ACCENT_GREEN)
-        draw.text((122, y), line, font=font(latin_regular, 24), fill=INK)
+    for index, label in enumerate(checks):
+        y = 322 + index * 67
+        done = index < completed
+        draw.ellipse((834, y, 862, y + 28), fill=GREEN if done else PENDING)
+        if done:
+            draw.text((840, y - 2), "✓", font=font(cjk, 20), fill=BACKGROUND)
+        draw.text((880, y - 2), label, font=font(cjk, 21), fill=INK if done else MUTED)
 
-    progress = f"{active_index + 1} / {len(steps)}"
-    draw.text((82, 630), progress, font=regular_22, fill=MUTED)
-    draw.rounded_rectangle((160, 640, WIDTH - 80, 650), 5, fill="#253650")
-    progress_width = int((WIDTH - 240) * (active_index + 1) / len(steps))
-    draw.rounded_rectangle((160, 640, 160 + progress_width, 650), 5, fill=ACCENT)
+    status = "正在读取公开来源…" if completed == 1 else "正在核验与筛选…"
+    if completed == len(checks):
+        status = "核验完成，开始生成素材包。"
+    draw.text((832, 574), status, font=font(cjk, 18), fill=GREEN if completed == 4 else ACCENT)
     return image
 
 
 def output_frame(
     card_path: Path,
+    data: dict,
     latin_regular: tuple[str, int],
     latin_bold: tuple[str, int],
     cjk: tuple[str, int],
 ) -> Image.Image:
-    image, draw = base_frame()
-    header(draw, font(latin_regular, 22), font(latin_bold, 22))
-    draw.text((60, 120), "Review-ready output", font=font(latin_bold, 44), fill=INK)
-    draw.text((62, 174), "One attributed card + one copy-ready caption", font=font(latin_regular, 25), fill=MUTED)
+    image, draw = base_frame("3 / 3", latin_regular, latin_bold, cjk)
+    draw.text((52, 112), "得到可审核素材包", font=font(cjk, 42), fill=INK)
+    draw.text((54, 164), "双语卡片、中文配文和原帖链接一次交付。", font=font(cjk, 23), fill=MUTED)
 
     source_card = Image.open(card_path).convert("RGB")
-    target_width = 720
-    target_height = int(source_card.height * target_width / source_card.width)
-    source_card = source_card.resize((target_width, target_height), Image.Resampling.LANCZOS)
-    image.paste(source_card, (60, 230))
+    max_width, max_height = 680, 462
+    scale = min(max_width / source_card.width, max_height / source_card.height)
+    card_size = (int(source_card.width * scale), int(source_card.height * scale))
+    source_card = source_card.resize(card_size, Image.Resampling.LANCZOS)
+    card_x = 52 + (680 - card_size[0]) // 2
+    card_y = 212 + (462 - card_size[1]) // 2
+    image.paste(source_card, (card_x, card_y))
 
-    panel = (820, 230, 1220, 632)
-    draw.rounded_rectangle(panel, 22, fill=SURFACE, outline="#2A3A52", width=2)
-    draw.text((852, 262), "Caption", font=font(latin_bold, 25), fill=ACCENT)
+    draw.rounded_rectangle((758, 212, 1228, 674), 22, fill=SURFACE, outline="#2B4566", width=2)
+    draw.text((790, 244), "小红书配文", font=font(cjk, 23), fill=ACCENT)
+    caption = str(data["caption"])
+    caption_lines = caption.replace("，", "，\n")
+    hashtags = "  ".join(f"#{tag}" for tag in data["hashtags"])
     draw.text(
-        (852, 315),
-        "注意力从来不是时间管理问题，\n而是选择问题。你反复答应什么，\n生活就会向什么方向复利。",
-        font=font(cjk, 28),
+        (790, 292),
+        caption_lines,
+        font=font(cjk, 26),
         fill=INK,
-        spacing=15,
+        spacing=16,
     )
-    draw.text((852, 480), "#长期主义  #注意力管理  #认知成长", font=font(cjk, 20), fill=MUTED)
+    draw.text((790, 422), hashtags, font=font(cjk, 18), fill=MUTED)
+    draw.line((790, 458, 1196, 458), fill="#2A3D58", width=2)
+    draw.text((790, 480), "原帖来源", font=font(cjk, 17), fill=MUTED)
+    draw.text((790, 513), "x.com/JamesClear/status/2045205…", font=font(latin_regular, 17), fill=ACCENT)
 
-    draw.rounded_rectangle((852, 540, 1034, 584), 14, fill="#153C31")
-    draw.text((874, 551), "SOURCE VERIFIED", font=font(latin_bold, 15), fill=ACCENT_GREEN)
-    draw.rounded_rectangle((1048, 540, 1188, 584), 14, fill="#20334C")
-    draw.text((1070, 551), "HUMAN REVIEW", font=font(latin_bold, 15), fill=ACCENT)
+    pill(draw, (790, 558, 952, 602), "来源已核验", font(cjk, 17), "#12392E", GREEN)
+    pill(draw, (966, 558, 1166, 602), "等待人工审核", font(cjk, 17), "#15304B", ACCENT)
+    draw.rounded_rectangle((790, 620, 1196, 658), 12, fill="#18273D")
+    draw.text((827, 626), "生成完成，不会自动发布。", font=font(cjk, 19), fill=INK)
     return image
 
 
-def build_demo(card_path: Path, output_path: Path) -> None:
+def build_demo(card_path: Path, output_path: Path, data_path: Path | None = None) -> None:
     latin_regular, latin_bold, cjk = RENDER_MODULE.find_fonts()
-    frames = [intro_frame(latin_regular, latin_bold, cjk)]
+    data_path = data_path or ROOT / "examples" / "demo-post.json"
+    data = json.loads(data_path.read_text(encoding="utf-8"))
+    if not str(data.get("source_url", "")).startswith("https://x.com/"):
+        raise ValueError("Demo data must include a public X source_url")
+
+    frames = [prompt_frame(latin_regular, latin_bold, cjk)]
     frames.extend(
-        workflow_frame(index, latin_regular, latin_bold)
-        for index in range(7)
+        processing_frame(completed, data, latin_regular, latin_bold, cjk)
+        for completed in range(1, 5)
     )
-    frames.append(output_frame(card_path, latin_regular, latin_bold, cjk))
-    durations = [1500] + [420] * 7 + [2600]
+    frames.append(output_frame(card_path, data, latin_regular, latin_bold, cjk))
+    durations = [2300, 1200, 1200, 1200, 1600, 3500]
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     frames[0].save(
@@ -202,9 +231,10 @@ def build_demo(card_path: Path, output_path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--card", type=Path, default=ROOT / "examples" / "demo-card.png")
+    parser.add_argument("--data", type=Path, default=ROOT / "examples" / "demo-post.json")
     parser.add_argument("--output", type=Path, default=ROOT / "assets" / "demo-workflow.gif")
     args = parser.parse_args()
-    build_demo(args.card, args.output)
+    build_demo(args.card, args.output, args.data)
     print(args.output)
 
 

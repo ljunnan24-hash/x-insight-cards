@@ -50,7 +50,7 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 
 ![从一句指令到可审核卡片与配文的 X Insight Cards 动态工作流](assets/demo-workflow.gif)
 
-动画使用仓库中的真实演示卡片，并展示完整的七步工作流：发现、来源核验、评分、去重、翻译、排版与质检。最终交付一张保留来源的图片和一条可复制配文，发布权始终留给创作者。
+这段 11 秒演示以一条真实公开的 [James Clear 帖子](https://x.com/JamesClear/status/2045205241885323635) 为例，从 Codex 中文指令开始，依次展示来源核验、评分、去重、卡片生成与可复制配文。流程停在人工审核，不会自动发布。
 
 运行 `make demo-gif` 可在本地重新生成这段演示。
 

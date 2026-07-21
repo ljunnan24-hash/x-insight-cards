@@ -50,7 +50,7 @@ review-ready image-and-caption packs for Douyin and Xiaohongshu.
 
 ![Animated X Insight Cards workflow from prompt to verified card and caption](assets/demo-workflow.gif)
 
-The animation uses the repository's real demo card and the actual seven-stage workflow: discovery, source verification, ranking, deduplication, translation, typesetting, and QA. The result is one attributed image plus one copy-ready caption, with publishing left to the creator.
+The 11-second demo follows one real, public [James Clear post](https://x.com/JamesClear/status/2045205241885323635) from a Chinese Codex prompt through visible source checks, scoring, deduplication, card rendering, and a copy-ready caption. It stops at human review and never publishes automatically.
 
 Rebuild the demo locally with `make demo-gif`.
 

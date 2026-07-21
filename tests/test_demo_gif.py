@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -25,7 +26,28 @@ class DemoGifTests(unittest.TestCase):
             self.assertTrue(output.exists())
             with Image.open(output) as image:
                 self.assertEqual(image.size, (1280, 720))
-                self.assertEqual(image.n_frames, 9)
+                self.assertEqual(image.n_frames, 6)
+                durations = []
+                for frame_index in range(image.n_frames):
+                    image.seek(frame_index)
+                    durations.append(image.info["duration"])
+                self.assertEqual(sum(durations), 11000)
+
+    def test_requires_a_public_x_source(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            data = Path(directory) / "demo.json"
+            data.write_text('{"source_url": ""}', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "public X source_url"):
+                MODULE.build_demo(
+                    ROOT / "examples" / "demo-card.png",
+                    Path(directory) / "demo.gif",
+                    data,
+                )
+
+    def test_demo_score_is_auditable(self) -> None:
+        data = json.loads((ROOT / "examples" / "demo-post.json").read_text(encoding="utf-8"))
+        self.assertEqual(sum(data["score_detail"].values()), 86)
+        self.assertEqual(data["source_url"], "https://x.com/JamesClear/status/2045205241885323635")
 
 
 if __name__ == "__main__":
