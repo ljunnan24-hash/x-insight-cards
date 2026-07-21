@@ -16,6 +16,7 @@
 
 <p align="center">
   <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827" />
+  <a href="https://skills.sh/ljunnan24-hash/x-insight-cards/x-insight-cards"><img alt="skills.sh 安装量" src="https://skills.sh/b/ljunnan24-hash/x-insight-cards" /></a>
   <img alt="Python 3.10+" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" />
   <img alt="隐私优先" src="https://img.shields.io/badge/privacy-no%20cookies-16A34A" />
   <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue" />
@@ -39,6 +40,12 @@ npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insig
 ```
 
 **就这些。** 安装一次，以后在任何 Codex 任务里调用 `$x-insight-cards` 即可。无需 API Key、无需导出 Cookie、无需自己拼提示词，也无需登录发布平台；Skill 会从选题一直完成到视觉质检，并停在人工审核前。
+
+## 直接看结果 · See the output
+
+![Skill 生成的中英双语 X 洞察卡片](examples/demo-card.png)
+
+一句话即可得到保留作者与来源的中英双语卡片，以及一条等待创作者审核的极简中文配文。此示例使用虚构内容，不包含第三方头像。
 
 ## 它能做什么
 
@@ -65,8 +72,8 @@ npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insig
 | --- | --- |
 | **抖音账号** | **12 条作品**，累计 **1,591 获赞** |
 | **抖音可见作品** | **1.1 万、9,635、1,148、1,063、703、676 播放** |
-| **小红书账号** | 累计 **1,589 获赞与收藏** |
-| **小红书可见作品** | **7,113 浏览 / 547 赞、1,595 / 131、1,179 / 105、1,041 / 153** |
+| **小红书账号** | 累计 **1.7 万获赞与收藏** |
+| **小红书可见作品** | **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141** |
 
 公开账号：抖音号 `51536643904` · 小红书号 `3876991164`。
 
@@ -82,7 +89,7 @@ npx skills add https://github.com/ljunnan24-hash/x-insight-cards --skill x-insig
 
 小红书号：`3876991164` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
 
-**English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **1,589 total likes and saves**, including a visible post with **7,113 views and 547 likes**.
+**English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **17K total likes and saves**, including a visible post with **96,225 views and 8,877 likes**.
 
 这两张截图已获创作者授权公开，用于证明工作流产出的素材经过真实账号使用，但不代表未来作品一定获得相同流量。点击图片可查看原始分辨率；选题、账号基础、发布时间和平台分发仍然会影响结果。
 
@@ -142,9 +149,7 @@ python skills/x-insight-cards/scripts/render_card.py \
   --output examples/demo-card.png
 ```
 
-![虚构内容演示卡片](examples/demo-card.png)
-
-演示作者和内容均为虚构，不包含第三方头像或真实原帖。
+README 顶部展示的演示作者和内容均为虚构，不包含第三方头像或真实原帖。
 
 ## 默认权限边界
 
