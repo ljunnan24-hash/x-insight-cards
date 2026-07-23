@@ -175,6 +175,29 @@ test("exact pinned command immediately delivers the ready pack and writes a rece
   );
 });
 
+test("an exact command before the first history file gets a not-ready reply", async (t) => {
+  const fake = await startFakeIlink([{
+    message_id: 551,
+    from_user_id: recipient,
+    context_token: "test-missing-history-context",
+    item_list: [{ type: 1, text_item: { text: EXACT_COMMAND } }],
+  }]);
+  t.after(fake.close);
+  const fixture = await makeFixture(fake.origin);
+  t.after(async () => await fs.rm(fixture.directory, { recursive: true, force: true }));
+  await fs.unlink(fixture.history);
+
+  await run({
+    once: true,
+    config: fixture.config,
+    history: fixture.history,
+  });
+
+  assert.equal(fake.messages.length, 1);
+  assert.equal(fake.messages[0].to_user_id, recipient);
+  assert.match(fake.messages[0].item_list[0].text_item.text, /尚未准备好/);
+});
+
 test("other users stay ignored while pinned non-command text gets safe guidance", async (t) => {
   const fake = await startFakeIlink([
     {

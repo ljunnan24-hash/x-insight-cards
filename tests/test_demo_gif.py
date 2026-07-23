@@ -49,6 +49,23 @@ class DemoGifTests(unittest.TestCase):
         self.assertEqual(sum(data["score_detail"].values()), 86)
         self.assertEqual(data["source_url"], "https://x.com/JamesClear/status/2045205241885323635")
 
+    def test_final_scene_uses_the_phone_triggered_robot_route(self) -> None:
+        text = SCRIPT.read_text(encoding="utf-8")
+        self.assertIn("发今日素材", text)
+        self.assertIn("素材审核机器人", text)
+        self.assertIn("收件人已固定", text)
+        self.assertNotIn("文件传输助手", text)
+
+    def test_bilingual_readmes_include_complete_listener_onboarding(self) -> None:
+        for name in ("README.md", "README.zh-CN.md"):
+            with self.subTest(name=name):
+                text = (ROOT / name).read_text(encoding="utf-8")
+                self.assertIn("weclaw login", text)
+                self.assertIn("绑定素材助手", text)
+                self.assertIn("wechat_ilink_listener_service.sh", text)
+                self.assertIn("--history \"$HOME/Documents/x-insight-cards/history.jsonl\"", text)
+                self.assertIn("发今日素材", text)
+
 
 if __name__ == "__main__":
     unittest.main()

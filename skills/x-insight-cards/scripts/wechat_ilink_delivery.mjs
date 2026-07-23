@@ -9,6 +9,7 @@ import { pathToFileURL } from "node:url";
 const SCHEMA_VERSION = 1;
 const APP_VERSION = "2.4.6";
 const APP_CLIENT_VERSION = String((2 << 16) | (4 << 8) | 6);
+const SETUP_COMMAND = "绑定素材助手";
 const DEFAULT_CONFIG = "~/.weclaw/x-insight-cards-delivery.json";
 const DEFAULT_CDN_BASE = "https://novac2c.cdn.weixin.qq.com/c2c";
 
@@ -76,6 +77,15 @@ async function readJson(filePath, label) {
     return JSON.parse(text);
   } catch {
     throw new DeliveryError("INVALID_JSON", `${label} is not valid JSON: ${filePath}`);
+  }
+}
+
+async function pathExists(filePath) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
   }
 }
 
@@ -209,20 +219,14 @@ async function loadRuntime(configPath) {
   };
 }
 
-async function configure(options) {
-  const configPath = absolutePath(options.config || DEFAULT_CONFIG);
-  const credentialsPath = absolutePath(requireOption(options, "credentials"));
-  const syncPath = absolutePath(requireOption(options, "sync"));
-  const recipientId = requireOption(options, "recipient");
-  if (!recipientId.endsWith("@im.wechat")) {
-    throw new DeliveryError("INVALID_RECIPIENT", "recipient must end with @im.wechat");
-  }
-  await requirePrivateFile(credentialsPath, "bot credentials");
-  await requirePrivateFile(syncPath, "sync cursor");
-  const credentials = await readJson(credentialsPath, "bot credentials");
-  if (!credentials.bot_token || !credentials.ilink_bot_id) {
-    throw new DeliveryError("INVALID_CREDENTIALS", "bot credentials are incomplete");
-  }
+function buildPinnedConfig({
+  configPath,
+  credentialsPath,
+  syncPath,
+  credentials,
+  recipientId,
+  options,
+}) {
   const privateDirectory = path.join(path.dirname(configPath), "x-insight-cards-delivery");
   const config = {
     schema_version: SCHEMA_VERSION,
@@ -243,11 +247,129 @@ async function configure(options) {
   ) {
     throw new DeliveryError("INVALID_ARGUMENT", "inter-message delay must be 0–10000 ms");
   }
+  return config;
+}
+
+async function configure(options) {
+  const configPath = absolutePath(options.config || DEFAULT_CONFIG);
+  const credentialsPath = absolutePath(requireOption(options, "credentials"));
+  const syncPath = absolutePath(requireOption(options, "sync"));
+  const recipientId = requireOption(options, "recipient");
+  if (!recipientId.endsWith("@im.wechat")) {
+    throw new DeliveryError("INVALID_RECIPIENT", "recipient must end with @im.wechat");
+  }
+  await requirePrivateFile(credentialsPath, "bot credentials");
+  await requirePrivateFile(syncPath, "sync cursor");
+  const credentials = await readJson(credentialsPath, "bot credentials");
+  if (!credentials.bot_token || !credentials.ilink_bot_id) {
+    throw new DeliveryError("INVALID_CREDENTIALS", "bot credentials are incomplete");
+  }
+  const config = buildPinnedConfig({
+    configPath,
+    credentialsPath,
+    syncPath,
+    credentials,
+    recipientId,
+    options,
+  });
   await atomicWriteJson(configPath, config);
   console.log(JSON.stringify({
     status: "CONFIGURED",
     recipient_fingerprint: config.recipient_sha256.slice(0, 12),
     config: configPath,
+  }));
+}
+
+function extractText(message) {
+  return (message.item_list || [])
+    .filter((item) => Number(item.type) === 1 && typeof item.text_item?.text === "string")
+    .map((item) => item.text_item.text)
+    .join("\n")
+    .trim();
+}
+
+async function setup(options) {
+  const configPath = absolutePath(options.config || DEFAULT_CONFIG);
+  if (await pathExists(configPath)) {
+    throw new DeliveryError(
+      "CONFIG_EXISTS",
+      "delivery config already exists; setup refuses to repin the recipient",
+    );
+  }
+  const credentialsPath = absolutePath(requireOption(options, "credentials"));
+  await requirePrivateFile(credentialsPath, "bot credentials");
+  const credentials = await readJson(credentialsPath, "bot credentials");
+  if (!credentials.bot_token || !credentials.ilink_bot_id) {
+    throw new DeliveryError("INVALID_CREDENTIALS", "bot credentials are incomplete");
+  }
+  const derivedSyncPath = credentialsPath.endsWith(".json")
+    ? `${credentialsPath.slice(0, -5)}.sync.json`
+    : `${credentialsPath}.sync.json`;
+  const syncPath = absolutePath(options.sync || derivedSyncPath);
+  if (!(await pathExists(syncPath))) {
+    await atomicWriteJson(syncPath, { get_updates_buf: "" });
+  }
+  await requirePrivateFile(syncPath, "sync cursor");
+  const sync = await readJson(syncPath, "sync cursor");
+  const runtime = {
+    token: credentials.bot_token,
+    baseUrl: (credentials.baseurl || "https://ilinkai.weixin.qq.com").replace(/\/+$/, ""),
+  };
+  const result = await postJson(runtime, "ilink/bot/getupdates", {
+    get_updates_buf: sync.get_updates_buf || "",
+    base_info: baseInfo(),
+  }, Number(options.wait_ms || 45000) + 5000);
+  const matches = (result.msgs || [])
+    .filter((message) =>
+      message.from_user_id?.endsWith("@im.wechat") &&
+      message.context_token &&
+      (!message.to_user_id || message.to_user_id === credentials.ilink_bot_id) &&
+      extractText(message) === SETUP_COMMAND,
+    )
+    .sort((left, right) =>
+      Number(right.message_id || right.seq || 0) -
+      Number(left.message_id || left.seq || 0)
+    );
+  const recipients = new Set(matches.map((message) => message.from_user_id));
+  if (recipients.size === 0) {
+    throw new DeliveryError(
+      "NO_SETUP_MESSAGE",
+      `no exact “${SETUP_COMMAND}” message was received`,
+      23,
+    );
+  }
+  if (recipients.size !== 1) {
+    throw new DeliveryError(
+      "AMBIGUOUS_SETUP_MESSAGE",
+      "setup saw the binding command from more than one user and pinned nobody",
+      23,
+    );
+  }
+  const message = matches[0];
+  const recipientId = message.from_user_id;
+  const config = buildPinnedConfig({
+    configPath,
+    credentialsPath,
+    syncPath,
+    credentials,
+    recipientId,
+    options,
+  });
+  if (result.get_updates_buf) {
+    await atomicWriteJson(syncPath, { get_updates_buf: result.get_updates_buf });
+  }
+  await atomicWriteJson(absolutePath(config.context_file), {
+    schema_version: SCHEMA_VERSION,
+    recipient_sha256: config.recipient_sha256,
+    context_token: message.context_token,
+    captured_at: new Date().toISOString(),
+  });
+  await atomicWriteJson(configPath, config);
+  console.log(JSON.stringify({
+    status: "SETUP_COMPLETE",
+    recipient_fingerprint: config.recipient_sha256.slice(0, 12),
+    config: configPath,
+    sync: syncPath,
   }));
 }
 
@@ -617,6 +739,7 @@ async function deliver(options) {
 
 function printUsage() {
   console.log(`Usage:
+  wechat_ilink_delivery.mjs setup --credentials FILE [--sync FILE] [--config FILE]
   wechat_ilink_delivery.mjs configure --credentials FILE --sync FILE --recipient ID [--config FILE]
   wechat_ilink_delivery.mjs capture-context [--config FILE] [--cursor-file FILE]
   wechat_ilink_delivery.mjs preflight [--config FILE]
@@ -625,6 +748,7 @@ function printUsage() {
 
 export {
   DeliveryError,
+  SETUP_COMMAND,
   atomicWriteJson,
   baseInfo,
   captureContext,
@@ -635,11 +759,15 @@ export {
   postJson,
   runPreflight,
   sendPinnedText,
+  setup,
 };
 
 async function main() {
   const { command, options } = parseArgs(process.argv.slice(2));
   switch (command) {
+    case "setup":
+      await setup(options);
+      break;
     case "configure":
       await configure(options);
       break;
