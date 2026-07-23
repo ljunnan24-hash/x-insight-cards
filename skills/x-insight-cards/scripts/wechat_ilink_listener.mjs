@@ -165,6 +165,7 @@ function selectReadyCandidates(records, runDate) {
 async function buildManifest(historyPath, queueDirectory, runDate) {
   const manifestPath = path.join(queueDirectory, `${runDate}.json`);
   if (await pathExists(manifestPath)) return manifestPath;
+  if (!(await pathExists(historyPath))) return null;
   const records = await readHistory(historyPath);
   const candidates = selectReadyCandidates(records, runDate);
   if (candidates.length === 0) return null;

@@ -18,7 +18,51 @@ For the requested Shanghai calendar date, the listener selects the candidates im
 
 If the pack is not ready, reply only that it is not ready and require a later command. If a private receipt already exists for the date, reply that it was already sent and do not resend. A transport error keeps the durable command pending with bounded exponential backoff.
 
-Configure once:
+### One-time installation
+
+Use [WeClaw](https://github.com/fastclaw-ai/weclaw) only to perform the QR login and create a dedicated bot credential:
+
+```bash
+go install github.com/fastclaw-ai/weclaw@latest
+weclaw login
+```
+
+Do not run `weclaw start` for the same bot. WeClaw and this listener both consume the iLink long-poll cursor, so running them together can make one process miss a command.
+
+Find the newly created credential under `~/.weclaw/accounts/`. If more than one account exists, require the user to choose the intended dedicated bot. Start secure binding:
+
+```bash
+node scripts/wechat_ilink_delivery.mjs setup \
+  --credentials /absolute/path/to/account.json
+```
+
+While `setup` is waiting, send the exact text `绑定素材助手` from the user's phone to that dedicated bot. The helper creates the sync cursor when needed, accepts only that exact binding text, requires one unique sender, pins the sender fingerprint, saves the fresh context, and refuses to overwrite an existing delivery config.
+
+Verify the saved context without sending a message:
+
+```bash
+node scripts/wechat_ilink_delivery.mjs preflight
+```
+
+Install the macOS background listener after choosing the stable private history path used by the daily automation:
+
+```bash
+mkdir -p "$HOME/Documents/x-insight-cards"
+scripts/wechat_ilink_listener_service.sh install \
+  --history "$HOME/Documents/x-insight-cards/history.jsonl"
+
+scripts/wechat_ilink_listener_service.sh status
+```
+
+The installer performs a zero-message preflight, writes a private per-user `launchd` plist, starts it immediately, and keeps it running across login. It stores only absolute program, config, history, and log paths in the plist; it never stores credentials, tokens, a recipient ID, or message content there.
+
+To remove the service while keeping private credentials and logs:
+
+```bash
+scripts/wechat_ilink_listener_service.sh uninstall
+```
+
+For an already managed account, advanced manual pinning remains available:
 
 ```bash
 node scripts/wechat_ilink_delivery.mjs configure \
@@ -27,19 +71,7 @@ node scripts/wechat_ilink_delivery.mjs configure \
   --recipient 'fixed-user-id@im.wechat'
 ```
 
-Capture a context after the pinned user messages the dedicated robot:
-
-```bash
-node scripts/wechat_ilink_delivery.mjs capture-context
-```
-
-Run the required zero-message preflight:
-
-```bash
-node scripts/wechat_ilink_delivery.mjs preflight
-```
-
-If preflight exits with code `23`, ask the user to send one character to the dedicated robot, run `capture-context`, and repeat preflight. Do not start a batch with missing, empty, mismatched, or rejected context. Context refresh requires an inbound user message; never imitate one, use another recipient, or fall back to context-free sending.
+If preflight exits with code `23`, ask the pinned user to send one character to the dedicated robot, run `capture-context`, and repeat preflight. Do not start a batch with missing, empty, mismatched, or rejected context. Context refresh requires an inbound user message; never imitate one, use another recipient, or fall back to context-free sending.
 
 Prepare a private manifest outside the public deliverable folder:
 
@@ -67,10 +99,10 @@ The helper validates 1–5 final PNGs and their hashes, preflights context befor
 
 `TRANSPORT_ACCEPTED` means iLink accepted every image and caption. Ask the user to confirm that the complete set is visible before recording `DELIVERED_FOR_REVIEW`.
 
-The default macOS service label is `com.junnan.x-insight-cards-wechat-listener`. Inspect it without sending:
+The macOS service label is `com.x-insight-cards.wechat-listener`. Inspect it without sending:
 
 ```bash
-launchctl print "gui/$(id -u)/com.junnan.x-insight-cards-wechat-listener"
+scripts/wechat_ilink_listener_service.sh status
 ```
 
 ## File Transfer Assistant fallback

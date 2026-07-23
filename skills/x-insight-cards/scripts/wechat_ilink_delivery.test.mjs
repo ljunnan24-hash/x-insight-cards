@@ -30,7 +30,12 @@ async function runCli(args) {
   });
 }
 
-async function startFakeIlink({ preflightRet = 0, captionFailures = 0 } = {}) {
+async function startFakeIlink({
+  preflightRet = 0,
+  captionFailures = 0,
+  inboundText = "private content is ignored",
+  inboundMessages = null,
+} = {}) {
   const requests = [];
   const messages = [];
   let remainingCaptionFailures = captionFailures;
@@ -48,11 +53,12 @@ async function startFakeIlink({ preflightRet = 0, captionFailures = 0 } = {}) {
       response.setHeader("Content-Type", "application/json");
       response.end(JSON.stringify({
         ret: 0,
-        msgs: [{
+        msgs: inboundMessages || [{
           message_id: 101,
           from_user_id: recipient,
+          to_user_id: botId,
           context_token: "test-fresh-context-token",
-          item_list: [{ type: 1, text_item: { text: "private content is ignored" } }],
+          item_list: [{ type: 1, text_item: { text: inboundText } }],
         }],
         get_updates_buf: "next-cursor",
       }));
@@ -110,6 +116,105 @@ async function startFakeIlink({ preflightRet = 0, captionFailures = 0 } = {}) {
     close: async () => await new Promise((resolve) => server.close(resolve)),
   };
 }
+
+test("setup pins the unique binding sender and initializes private state", async (t) => {
+  const fake = await startFakeIlink({ inboundText: "绑定素材助手" });
+  t.after(fake.close);
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "xic-ilink-setup-test-"));
+  t.after(async () => await fs.rm(directory, { recursive: true, force: true }));
+  const credentials = path.join(directory, "account.json");
+  const config = path.join(directory, "delivery.json");
+  await fs.writeFile(credentials, JSON.stringify({
+    bot_token: "test-token",
+    ilink_bot_id: botId,
+    baseurl: fake.origin,
+  }), { mode: 0o600 });
+
+  const result = await runCli([
+    "setup",
+    "--credentials", credentials,
+    "--config", config,
+    "--inter-message-delay-ms", "0",
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.equal(JSON.parse(result.stdout).status, "SETUP_COMPLETE");
+  const configured = JSON.parse(await fs.readFile(config, "utf8"));
+  assert.equal(configured.recipient_id, recipient);
+  assert.equal(configured.bot_id, botId);
+  assert.equal(JSON.parse(await fs.readFile(configured.sync_file, "utf8")).get_updates_buf,
+    "next-cursor");
+  const context = JSON.parse(await fs.readFile(configured.context_file, "utf8"));
+  assert.equal(context.context_token, "test-fresh-context-token");
+  assert.equal((await fs.stat(config)).mode & 0o077, 0);
+  assert.equal((await fs.stat(configured.sync_file)).mode & 0o077, 0);
+  assert.equal((await fs.stat(configured.context_file)).mode & 0o077, 0);
+});
+
+test("setup ignores ordinary messages and creates no recipient binding", async (t) => {
+  const fake = await startFakeIlink({ inboundText: "发今日素材" });
+  t.after(fake.close);
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "xic-ilink-setup-ignore-test-"));
+  t.after(async () => await fs.rm(directory, { recursive: true, force: true }));
+  const credentials = path.join(directory, "account.json");
+  const config = path.join(directory, "delivery.json");
+  await fs.writeFile(credentials, JSON.stringify({
+    bot_token: "test-token",
+    ilink_bot_id: botId,
+    baseurl: fake.origin,
+  }), { mode: 0o600 });
+
+  const result = await runCli([
+    "setup",
+    "--credentials", credentials,
+    "--config", config,
+  ]);
+
+  assert.equal(result.code, 23);
+  assert.equal(JSON.parse(result.stderr).code, "NO_SETUP_MESSAGE");
+  await assert.rejects(fs.access(config));
+});
+
+test("setup pins nobody when the binding command has multiple senders", async (t) => {
+  const fake = await startFakeIlink({
+    inboundMessages: [
+      {
+        message_id: 102,
+        from_user_id: recipient,
+        to_user_id: botId,
+        context_token: "test-context-one",
+        item_list: [{ type: 1, text_item: { text: "绑定素材助手" } }],
+      },
+      {
+        message_id: 101,
+        from_user_id: "another-review-user@im.wechat",
+        to_user_id: botId,
+        context_token: "test-context-two",
+        item_list: [{ type: 1, text_item: { text: "绑定素材助手" } }],
+      },
+    ],
+  });
+  t.after(fake.close);
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "xic-ilink-setup-ambiguous-test-"));
+  t.after(async () => await fs.rm(directory, { recursive: true, force: true }));
+  const credentials = path.join(directory, "account.json");
+  const config = path.join(directory, "delivery.json");
+  await fs.writeFile(credentials, JSON.stringify({
+    bot_token: "test-token",
+    ilink_bot_id: botId,
+    baseurl: fake.origin,
+  }), { mode: 0o600 });
+
+  const result = await runCli([
+    "setup",
+    "--credentials", credentials,
+    "--config", config,
+  ]);
+
+  assert.equal(result.code, 23);
+  assert.equal(JSON.parse(result.stderr).code, "AMBIGUOUS_SETUP_MESSAGE");
+  await assert.rejects(fs.access(config));
+});
 
 async function makeFixture(origin) {
   const directory = await fs.mkdtemp(path.join(os.tmpdir(), "xic-ilink-test-"));

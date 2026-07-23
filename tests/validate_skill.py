@@ -29,6 +29,7 @@ def main() -> None:
         skill / "scripts" / "wechat_ilink_delivery.test.mjs",
         skill / "scripts" / "wechat_ilink_listener.mjs",
         skill / "scripts" / "wechat_ilink_listener.test.mjs",
+        skill / "scripts" / "wechat_ilink_listener_service.sh",
         skill / "scripts" / "wechat_main_window_delivery.sh",
         skill / "scripts" / "wechat_main_window_delivery.swift",
         skill / "references" / "workflow.md",

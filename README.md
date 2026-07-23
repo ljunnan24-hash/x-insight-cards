@@ -40,7 +40,8 @@ Add this prompt to a daily Codex automation—the demo uses 12:00 local time:
 ```text
 Use $x-insight-cards to find today's best X posts and create up to five
 review-ready image-and-caption packs for Douyin and Xiaohongshu. After QA,
-mark the pack READY_FOR_REVIEW and stop. Do not open WeChat or send anything;
+write the private history to ~/Documents/x-insight-cards/history.jsonl,
+mark the pack READY_FOR_REVIEW, and stop. Do not open WeChat or send anything;
 private delivery is triggered later by the pinned review bot. Never publish.
 ```
 
@@ -62,6 +63,59 @@ The preferred helper pins one recipient during configuration and never accepts a
 
 Credentials, context tokens, manifests, checkpoints, and receipts stay under the user's private `~/.weclaw` directory and are never committed. The listener can run under `launchd` on macOS or another process supervisor. It does not open, inspect, or control WeChat Desktop.
 
+#### One-time macOS setup
+
+Prerequisites: Node.js 18 or newer, the Skill installed by the command above, and a Mac that remains powered on, awake, online, and signed in to that macOS user account.
+
+1. Install [WeClaw](https://github.com/fastclaw-ai/weclaw), then use it only for the QR login:
+
+   ```bash
+   curl -sSL https://raw.githubusercontent.com/fastclaw-ai/weclaw/main/install.sh | sh
+   weclaw login
+   ```
+
+   Scan the QR code in WeChat and choose the dedicated robot conversation. Do **not** run `weclaw start` for the same robot: both processes would consume the same long-poll feed.
+
+2. Locate the account credential created by login:
+
+   ```bash
+   find "$HOME/.weclaw/accounts" -maxdepth 1 -name '*.json' \
+     ! -name '*.sync.json' -print
+   ```
+
+   If more than one file is listed, choose the dedicated robot account intentionally. Never paste the file contents anywhere.
+
+3. Bind exactly one private review chat. Start the command below, then immediately send `绑定素材助手` from your phone to that robot:
+
+   ```bash
+   XIC_SKILL="${CODEX_HOME:-$HOME/.codex}/skills/x-insight-cards"
+   node "$XIC_SKILL/scripts/wechat_ilink_delivery.mjs" setup \
+     --credentials /absolute/path/to/account.json
+   node "$XIC_SKILL/scripts/wechat_ilink_delivery.mjs" preflight
+   ```
+
+   Setup accepts only that exact phrase, requires one unique sender, stores a recipient fingerprint, and refuses to overwrite an existing binding.
+
+4. Install and start the background listener:
+
+   ```bash
+   mkdir -p "$HOME/Documents/x-insight-cards"
+   "$XIC_SKILL/scripts/wechat_ilink_listener_service.sh" install \
+     --history "$HOME/Documents/x-insight-cards/history.jsonl"
+   "$XIC_SKILL/scripts/wechat_ilink_listener_service.sh" status
+   ```
+
+   `launchd` starts it immediately, restarts it after a crash, and starts it again at macOS login. No WeChat Desktop window is involved. To remove only the listener while preserving private credentials and logs, run:
+
+   ```bash
+   "$XIC_SKILL/scripts/wechat_ilink_listener_service.sh" uninstall
+   ```
+
+After the daily Codex automation reaches `READY_FOR_REVIEW`, send `发今日素材` to the dedicated robot from the phone. The background listener replies “not ready” if the pack is incomplete and prevents a second delivery when that day's receipt already exists. On Linux or Windows, run `wechat_ilink_listener.mjs` with the system's process supervisor; the bundled automatic service installer is macOS-only.
+
+<details>
+<summary>Advanced manual configuration</summary>
+
 ```bash
 # Pin the account files and recipient once
 node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs configure \
@@ -77,6 +131,8 @@ node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs preflight
 node skills/x-insight-cards/scripts/wechat_ilink_listener.mjs \
   --history /absolute/path/to/history.jsonl
 ```
+
+</details>
 
 The macOS integrated-main-window File Transfer Assistant helper remains available as a separately configured, fail-closed fallback. See [`private-delivery.md`](skills/x-insight-cards/references/private-delivery.md).
 
@@ -199,7 +255,7 @@ The demo shown near the top uses a real public [James Clear post](https://x.com/
 - No cookies, passwords, tokens, or session exports.
 - No CAPTCHA, login-wall, rate-limit, or platform-control bypasses.
 - No automatic draft creation, upload, or publishing.
-- Optional WeChat delivery goes only to a verified File Transfer Assistant self-chat, after required send confirmation.
+- Optional WeChat delivery goes only to the recipient pinned during one-time bot binding; the desktop File Transfer Assistant route remains a separately verified fallback.
 - The two creator-authorized result screenshots in `assets/proof/` are documentation evidence; no credentials, private account data, or system fonts are bundled.
 - Rearranged cards are identified as rearranged renders, never native screenshots.
 

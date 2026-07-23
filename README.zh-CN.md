@@ -40,8 +40,9 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 ```text
 使用 $x-insight-cards 寻找今天最好的 X 原帖，生成最多 5 组
 可直接审核的抖音、小红书图片与极简中文配文。质检完成后标记为
-READY_FOR_REVIEW 并结束；不要打开微信或发送任何消息。微信私有交付
-稍后由固定机器人触发。不得自动发布到任何内容平台。
+READY_FOR_REVIEW，把私有历史写入
+~/Documents/x-insight-cards/history.jsonl，然后结束；不要打开微信或
+发送任何消息。微信私有交付稍后由固定机器人触发。不得自动发布。
 ```
 
 安装一次、设置一次定时任务，之后每天自动运行；同时仍支持手动调用。无需 X API Key、无需导出 Cookie、无需自己拼提示词。可选的固定 iLink 审核机器人能够在后台把素材传到手机，不依赖微信桌面端；内容平台发布始终由你手动决定。
@@ -62,6 +63,59 @@ READY_FOR_REVIEW 并结束；不要打开微信或发送任何消息。微信私
 
 账号凭据、会话上下文、私有清单、检查点和收据都保存在用户自己的 `~/.weclaw` 私有目录中，不进入 Git。监听器可由 macOS `launchd` 或其他进程守护器持续运行；它不会打开、识别或控制微信桌面端。
 
+#### macOS 一次性安装
+
+准备条件：Node.js 18 或更高版本、已经通过上方命令安装本 Skill，以及一台保持开机、唤醒、联网并登录当前 macOS 用户的 Mac。
+
+1. 安装 [WeClaw](https://github.com/fastclaw-ai/weclaw)，只用它完成一次二维码登录：
+
+   ```bash
+   curl -sSL https://raw.githubusercontent.com/fastclaw-ai/weclaw/main/install.sh | sh
+   weclaw login
+   ```
+
+   用微信扫描二维码并选定专属机器人对话。同一个机器人不要再运行 `weclaw start`，否则两个进程会同时消费同一条长轮询消息流。
+
+2. 找到登录后生成的账号凭据：
+
+   ```bash
+   find "$HOME/.weclaw/accounts" -maxdepth 1 -name '*.json' \
+     ! -name '*.sync.json' -print
+   ```
+
+   如果列出多个文件，必须明确选择专属机器人的账号；不要复制、粘贴或展示文件内容。
+
+3. 一次性绑定唯一私聊。先运行下面的命令，随后立刻在手机上向该机器人发送 `绑定素材助手`：
+
+   ```bash
+   XIC_SKILL="${CODEX_HOME:-$HOME/.codex}/skills/x-insight-cards"
+   node "$XIC_SKILL/scripts/wechat_ilink_delivery.mjs" setup \
+     --credentials /absolute/path/to/account.json
+   node "$XIC_SKILL/scripts/wechat_ilink_delivery.mjs" preflight
+   ```
+
+   绑定只接受这句完全一致的文字，只允许一个唯一发送者，保存的是收件人指纹；已有配置时会拒绝覆盖。
+
+4. 安装并启动后台监听：
+
+   ```bash
+   mkdir -p "$HOME/Documents/x-insight-cards"
+   "$XIC_SKILL/scripts/wechat_ilink_listener_service.sh" install \
+     --history "$HOME/Documents/x-insight-cards/history.jsonl"
+   "$XIC_SKILL/scripts/wechat_ilink_listener_service.sh" status
+   ```
+
+   `launchd` 会立即启动监听器，在异常退出后重启，并在 macOS 登录后自动启动；全程不需要打开微信桌面端。只卸载监听服务、保留私有凭据和日志：
+
+   ```bash
+   "$XIC_SKILL/scripts/wechat_ilink_listener_service.sh" uninstall
+   ```
+
+每天的 Codex 自动任务到达 `READY_FOR_REVIEW` 后，在手机上向专属机器人发送 `发今日素材` 即可。素材未准备好时，监听器会明确回复“尚未准备好”；当天已有交付收据时不会重复发送。Linux 或 Windows 可用系统自己的进程守护器运行 `wechat_ilink_listener.mjs`；仓库内的一键后台安装器目前仅支持 macOS。
+
+<details>
+<summary>高级手动配置</summary>
+
 ```bash
 # 一次性固定账号文件和收件人
 node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs configure \
@@ -77,6 +131,8 @@ node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs preflight
 node skills/x-insight-cards/scripts/wechat_ilink_listener.mjs \
   --history /absolute/path/to/history.jsonl
 ```
+
+</details>
 
 macOS 微信集成主窗口的“文件传输助手”交付器仍作为单独配置、失败即停止的回退方案保留。详见 [`private-delivery.md`](skills/x-insight-cards/references/private-delivery.md)。
 
@@ -196,7 +252,7 @@ README 顶部使用一条真实公开的 [James Clear 帖子](https://x.com/Jame
 - 不读取、导出或保存 Cookie、密码、Token 和会话数据。
 - 不绕过登录墙、验证码、风控、速率限制或平台权限。
 - 不自动打开发布页、创建草稿、上传或发布。
-- 微信交付只允许发送到已核对的“文件传输助手”，并遵守发送前必要确认。
+- 微信交付只允许发给一次性绑定时固定的收件人；桌面端“文件传输助手”仅作为独立核验的回退方案。
 - `assets/proof/` 中两张创作者授权的结果截图仅用于项目说明；仓库不包含账号凭据、私密账号数据或系统字体。
 - 重排卡片必须标记为“重排渲染”，不得冒充原生截图。
 

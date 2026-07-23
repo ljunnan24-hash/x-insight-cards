@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a four-scene demo of the scheduled workflow and private delivery."""
+"""Build a four-scene demo of scheduled preparation and phone-triggered delivery."""
 
 from __future__ import annotations
 
@@ -98,7 +98,7 @@ def schedule_frame(
 
     pill(draw, (70, 592, 276, 640), "无需每天输入", font(cjk, 18), "#15304B", ACCENT)
     pill(draw, (290, 592, 488, 640), "历史自动去重", font(cjk, 18), "#12392E", GREEN)
-    pill(draw, (502, 592, 742, 640), "完成后送到微信", font(cjk, 18), "#2A2E47", "#D8C8FF")
+    pill(draw, (502, 592, 742, 640), "完成后等待指令", font(cjk, 18), "#2A2E47", "#D8C8FF")
     return image
 
 
@@ -192,9 +192,9 @@ def output_frame(
     draw.text((790, 513), "x.com/JamesClear/status/2045205…", font=font(latin_regular, 17), fill=ACCENT)
 
     pill(draw, (790, 558, 952, 602), "来源已核验", font(cjk, 17), "#12392E", GREEN)
-    pill(draw, (966, 558, 1166, 602), "等待微信交付", font(cjk, 17), "#15304B", ACCENT)
+    pill(draw, (966, 558, 1166, 602), "等待手机指令", font(cjk, 17), "#15304B", ACCENT)
     draw.rounded_rectangle((790, 620, 1196, 658), 12, fill="#18273D")
-    draw.text((827, 626), "生成完成，准备发送到手机。", font=font(cjk, 19), fill=INK)
+    draw.text((817, 626), "素材已就绪，等待“发今日素材”。", font=font(cjk, 18), fill=INK)
     return image
 
 
@@ -208,11 +208,11 @@ def delivery_frame(
 ) -> Image.Image:
     image, draw = base_frame("4 / 4", latin_regular, latin_bold, cjk)
     complete = sent_count == 5
-    title = "已送达微信文件传输助手" if complete else "发送到微信文件传输助手"
+    title = "已送达专属微信机器人" if complete else "发送到专属微信机器人"
     draw.text((52, 112), title, font=font(cjk, 40), fill=INK)
     draw.text(
         (54, 164),
-        "PNG 作为图片，配文作为独立文字；手机可直接保存。",
+        "手机发送“发今日素材”，后台机器人即刻交付。",
         font=font(cjk, 23),
         fill=MUTED,
     )
@@ -235,21 +235,23 @@ def delivery_frame(
     draw.rounded_rectangle((526, 218, 1228, 282), 22, fill="#F8FAFC")
     draw.rectangle((526, 258, 1228, 282), fill="#F8FAFC")
     draw.ellipse((554, 234, 586, 266), fill="#20C05C")
-    draw.text((597, 231), "文件传输助手", font=font(cjk, 23), fill="#172033")
-    pill(draw, (1018, 228, 1196, 268), "目标已核对", font(cjk, 16), "#E1F5E8", "#168A45")
+    draw.text((597, 231), "素材审核机器人", font=font(cjk, 23), fill="#172033")
+    pill(draw, (1002, 228, 1196, 268), "收件人已固定", font(cjk, 15), "#E1F5E8", "#168A45")
 
     source_card = Image.open(card_path).convert("RGB")
     thumb_width = 302
     thumb_height = int(source_card.height * thumb_width / source_card.width)
     source_card = source_card.resize((thumb_width, thumb_height), Image.Resampling.LANCZOS)
     image.paste(source_card, (568, 310))
-    draw.rounded_rectangle((888, 330, 1190, 444), 16, fill="#95EC69")
-    draw.text((910, 350), "真正改变人生的，", font=font(cjk, 19), fill="#172033")
-    draw.text((910, 382), "是日复一日的练习。", font=font(cjk, 19), fill="#172033")
-    draw.text((910, 414), "#长期主义 #习惯养成", font=font(cjk, 15), fill="#31503B")
+    draw.rounded_rectangle((974, 300, 1190, 346), 15, fill="#95EC69")
+    draw.text((1005, 308), "发今日素材", font=font(cjk, 19), fill="#172033")
+    draw.rounded_rectangle((888, 366, 1190, 480), 16, fill="#FFFFFF")
+    draw.text((910, 386), "真正改变人生的，", font=font(cjk, 19), fill="#172033")
+    draw.text((910, 418), "是日复一日的练习。", font=font(cjk, 19), fill="#172033")
+    draw.text((910, 450), "#长期主义 #习惯养成", font=font(cjk, 15), fill="#536471")
 
     status_color = GREEN if complete else ACCENT
-    status = "5 / 5 已发送到手机" if complete else f"正在发送… {sent_count} / 5"
+    status = "5 / 5 已发送到专属机器人" if complete else f"正在发送… {sent_count} / 5"
     draw.rounded_rectangle((568, 560, 1190, 610), 14, fill="#E4E9EE")
     draw.text((592, 571), status, font=font(cjk, 20), fill="#168A45" if complete else "#1684B4")
     draw.ellipse((1144, 573, 1168, 597), fill=status_color)
@@ -258,7 +260,7 @@ def delivery_frame(
 
     draw.text(
         (52, 670),
-        "只发送给自己 · 小红书、抖音仍由你审核发布",
+        "固定机器人私聊 · 小红书、抖音仍由你审核发布",
         font=font(cjk, 19),
         fill=MUTED,
     )
