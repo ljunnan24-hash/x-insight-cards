@@ -1,4 +1,4 @@
 interface:
   display_name: "X Insight Cards"
-  short_description: "Schedule X curation and deliver review packs"
-  default_prompt: "Use $x-insight-cards in a daily run to curate up to five verified X content packs and, when configured, privately deliver them to my confirmed WeChat File Transfer Assistant for review."
+  short_description: "Curate X posts and safely deliver review packs"
+  default_prompt: "Use $x-insight-cards to curate up to five verified X content packs and privately deliver them to my pinned WeChat review chat."

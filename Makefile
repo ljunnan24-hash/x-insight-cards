@@ -1,4 +1,5 @@
 PYTHON ?= python3
+NODE ?= node
 SKILL_DIR := skills/x-insight-cards
 
 .PHONY: demo demo-gif test validate privacy-check check
@@ -11,6 +12,7 @@ demo-gif: demo
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
+	$(NODE) --test $(SKILL_DIR)/scripts/wechat_ilink_delivery.test.mjs $(SKILL_DIR)/scripts/wechat_ilink_listener.test.mjs
 
 validate:
 	$(PYTHON) tests/validate_skill.py $(SKILL_DIR)

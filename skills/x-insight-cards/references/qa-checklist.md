@@ -24,7 +24,11 @@
 
 ## Safety
 
-- No credentials, cookies, tokens, personal paths, private logs, or platform drafts were created.
+- No credentials, cookies, tokens, private paths, or private logs appear in public outputs, history records, or model-visible diagnostics. Keep the local delivery config, context cache, checkpoint, and absolute-path manifest private.
 - Reconstructed cards are labeled `rearranged-render` in the private record.
 - Output reaches `READY_FOR_REVIEW` before any private delivery.
-- When private delivery is configured, the destination is verified and the send follows `private-delivery.md`; otherwise the run stops at `READY_FOR_REVIEW`.
+- A robot delivery manifest is private, uses absolute paths plus final PNG hashes, and never contains credentials, tokens, or an editable recipient.
+- Robot context preflight succeeds before the first media upload; a context failure produces zero material messages.
+- A background listener triggers only on exact text from the pinned recipient, journals before advancing the sync cursor, and refuses to resend a date with an existing private receipt.
+- When private delivery is configured, the pinned destination and every checkpoint follow `private-delivery.md`; otherwise the run stops at `READY_FOR_REVIEW`.
+- Record `DELIVERED_FOR_REVIEW` only after transport acceptance and user confirmation that the complete set is visible.
