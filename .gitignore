@@ -25,6 +25,8 @@ private/
 *.cookie
 cookies.json
 secrets.*
+.weclaw/
+private-delivery-manifest*.json
 
 # Never vendor system or third-party fonts
 *.ttf

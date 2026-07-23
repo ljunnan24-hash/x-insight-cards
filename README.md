@@ -40,21 +40,45 @@ Add this prompt to a daily Codex automation—the demo uses 12:00 local time:
 ```text
 Use $x-insight-cards to find today's best X posts and create up to five
 review-ready image-and-caption packs for Douyin and Xiaohongshu. After QA,
-verify WeChat File Transfer Assistant and send each PNG as an image followed
-by its caption as separate text after the required confirmation. Never publish.
+mark the pack READY_FOR_REVIEW and stop. Do not open WeChat or send anything;
+private delivery is triggered later by the pinned review bot. Never publish.
 ```
 
-Install once and schedule once; manual runs remain supported. No X API key, Cookie export, or prompt assembly is required. A signed-in WeChat desktop session is needed only for private phone delivery, while publishing remains manual.
+Install once and schedule once; manual runs remain supported. No X API key, Cookie export, or prompt assembly is required. With an optional pinned iLink review bot, private phone delivery runs headlessly and does not depend on WeChat Desktop. Publishing remains manual.
 
 <a id="workflow-demo"></a>
 
-## Daily schedule to WeChat review · 每日定时生成并送到微信
+## Daily preparation, phone-triggered WeChat review · 每日准备，手机触发微信交付
 
-![Scheduled X Insight Cards workflow from daily trigger to WeChat File Transfer Assistant](assets/demo-workflow.gif)
+![Scheduled X Insight Cards workflow from daily preparation to private WeChat review](assets/demo-workflow.gif)
 
-The 13-second demo starts from a daily 12:00 Codex automation, follows one real, public [James Clear post](https://x.com/JamesClear/status/2045205241885323635) through visible source checks, scoring, deduplication, and rendering, then privately delivers the PNG and caption to a verified WeChat File Transfer Assistant self-chat. It never publishes to Douyin or Xiaohongshu.
+The 13-second demo starts from a daily 12:00 Codex automation and follows one real, public [James Clear post](https://x.com/JamesClear/status/2045205241885323635) through visible source checks, scoring, deduplication, rendering, and private review delivery. In the current preferred route, the scheduled job stops at `READY_FOR_REVIEW`; the creator later sends `发今日素材` from their phone to a pinned iLink bot, which delivers the PNG and caption without opening WeChat Desktop. It never publishes to Douyin or Xiaohongshu.
 
 Rebuild the demo locally with `make demo-gif`.
+
+### Headless delivery through a pinned WeChat iLink bot
+
+The preferred helper pins one recipient during configuration and never accepts a destination override while sending. Its long-poll listener accepts only the exact command `发今日素材` from that recipient, journals the request before advancing the sync cursor, checks for a completed review pack, and sends each image followed by its matching caption. Stable message IDs and checkpoints make retries resumable; a daily receipt prevents a second batch.
+
+Credentials, context tokens, manifests, checkpoints, and receipts stay under the user's private `~/.weclaw` directory and are never committed. The listener can run under `launchd` on macOS or another process supervisor. It does not open, inspect, or control WeChat Desktop.
+
+```bash
+# Pin the account files and recipient once
+node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs configure \
+  --credentials /absolute/path/to/account.json \
+  --sync /absolute/path/to/account.sync.json \
+  --recipient 'fixed-user-id@im.wechat'
+
+# After the pinned user messages the bot, capture and verify fresh context
+node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs capture-context
+node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs preflight
+
+# Run continuously; use a process supervisor for unattended operation
+node skills/x-insight-cards/scripts/wechat_ilink_listener.mjs \
+  --history /absolute/path/to/history.jsonl
+```
+
+The macOS integrated-main-window File Transfer Assistant helper remains available as a separately configured, fail-closed fallback. See [`private-delivery.md`](skills/x-insight-cards/references/private-delivery.md).
 
 ## See the output · 直接看结果
 
@@ -68,14 +92,14 @@ Each scheduled run produces source-attributed cards plus concise Chinese caption
 
 **X Insight Cards 自动完成发布前的素材准备：寻找优质 X 原帖、核验来源、评分去重、按需翻译排版，最终生成适合抖音和小红书的图片与极简配文。**
 
-`schedule → discover → verify → rank → deduplicate → translate → typeset → WeChat review`
+`schedule → discover → verify → rank → deduplicate → translate → typeset → READY → phone command → WeChat review`
 
 Each run gives you:
 
 - Automated discovery and ranking of recent high-quality source posts.
 - Up to five Douyin/Xiaohongshu content packs—never filler added to reach a quota.
 - One source-attributed PNG and one copy-ready Chinese caption per post.
-- Optional private delivery to a verified WeChat File Transfer Assistant self-chat.
+- Optional headless private delivery to a pinned WeChat iLink review bot.
 - A private history record for duplicate prevention and auditability.
 
 <a id="creator-tested"></a>
@@ -117,7 +141,7 @@ These creator-authorized screenshots demonstrate real-world use, not guaranteed 
 | Screenshots lose context | Keeps the author, handle, source URL, date, and exact English text |
 | Literal Chinese feels translated | Preserves meaning and tone, then applies native Simplified Chinese typography |
 | Daily curation repeats the same posts | Deduplicates by canonical URL and normalized text hash |
-| Automation creates account risk | Uses public read-only sources, verifies the private self-chat, and never publishes |
+| Automation creates account risk | Uses public read-only sources, pins one private recipient, and never publishes |
 
 <a id="how-it-works"></a>
 
@@ -130,7 +154,7 @@ These creator-authorized screenshots demonstrate real-world use, not guaranteed 
 5. Score every candidate out of 100 and reject anything below 75.
 6. Remove previously used URLs and semantically duplicated text.
 7. Translate, render, write a concise caption, and run visual QA.
-8. When configured, verify WeChat File Transfer Assistant and privately send the PNG plus matching caption for review.
+8. When configured, stop at `READY_FOR_REVIEW`; a later exact phone command triggers private delivery to the pinned review bot.
 
 If only three posts pass the bar, the output is three. Quality wins over quota.
 

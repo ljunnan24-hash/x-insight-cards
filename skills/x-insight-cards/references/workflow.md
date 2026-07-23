@@ -53,7 +53,7 @@ Reject:
 
 Use this monotonic state model when logging a run:
 
-`DISCOVERED → VERIFIED → SCORED → CAPTURED → TRANSLATED → READY_FOR_REVIEW [→ DELIVERED_FOR_REVIEW]`
+`DISCOVERED → VERIFIED → SCORED → CAPTURED → TRANSLATED → READY_FOR_REVIEW [→ TRANSPORT_ACCEPTED → DELIVERED_FOR_REVIEW]`
 
 Send unusable candidates to `REJECTED`; rendering failures go to `FAILED` with a reason.
-`DELIVERED_FOR_REVIEW` is optional and means the review pack reached a verified private self-chat. It never means uploaded, drafted, or published on a content platform.
+`TRANSPORT_ACCEPTED` means the private transport accepted every image and caption. `DELIVERED_FOR_REVIEW` is optional and requires user confirmation that the complete pack is visible in the pinned private review chat. Neither state means uploaded, drafted, or published on a content platform.

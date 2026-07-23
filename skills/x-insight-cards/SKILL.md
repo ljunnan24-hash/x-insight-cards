@@ -1,6 +1,6 @@
 ---
 name: x-insight-cards
-description: Run scheduled or manual creator curation that turns recent high-quality X posts into verified image-and-caption packs for Douyin and Xiaohongshu review, with optional private delivery to a confirmed WeChat File Transfer Assistant self-chat. Use when Codex needs to discover, verify, rank, deduplicate, translate, render, quality-check, or privately deliver posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, and platform publishing manual.
+description: Run scheduled or manual creator curation that turns recent high-quality X posts into verified image-and-caption packs for Douyin and Xiaohongshu review, with optional private delivery to a pinned WeChat iLink bot review chat or confirmed File Transfer Assistant self-chat. Use when Codex needs to discover, verify, rank, deduplicate, translate, render, quality-check, resume, or privately deliver posts about wealth, life, goals, habits, attention, freedom, or long-term thinking while keeping sources auditable, Chinese typography accurate, recipient-safe, and platform publishing manual.
 ---
 
 # X Insight Cards
@@ -19,7 +19,7 @@ Automate the preparation of Douyin and Xiaohongshu content packs from public X p
 8. Render one card per selected post. Prefer a real post screenshot when the environment can capture it cleanly. Otherwise use `scripts/render_card.py` and label the record `rearranged-render`.
 9. Write one concise Chinese caption per card: normally one sentence, at most two, followed by 3–5 relevant hashtags. Do not copy the translation.
 10. Run the checks in [references/qa-checklist.md](references/qa-checklist.md) and mark accepted items `READY_FOR_REVIEW`.
-11. When the user has configured private delivery, read [references/private-delivery.md](references/private-delivery.md), verify the self-chat destination, obtain any required send confirmation, and send each PNG plus its matching caption. Never upload or publish to a content platform.
+11. When the user has configured private delivery, read [references/private-delivery.md](references/private-delivery.md). Prefer the pinned iLink robot helper for unattended delivery when configured: its headless listener accepts only the exact command `发今日素材` from the pinned user, replies with safe usage guidance for other nonempty text from that same user, derives the current review-ready manifest from private history, preflights the fresh context, then sends each PNG and matching caption with checkpointed, stable message IDs. Use the verified integrated-main-window helper only for a separately configured File Transfer Assistant destination. Never upload or publish to a content platform.
 
 ## Rendering
 
@@ -53,15 +53,15 @@ Default deliverables:
 - One source-attributed PNG per selected post, prepared as Douyin/Xiaohongshu creator material.
 - One copy-ready Chinese caption per post in the response or a user-requested structured file.
 - A private/auditable history record outside the public deliverable folder.
-- When explicitly configured, private delivery of each PNG and matching caption to the user's confirmed WeChat File Transfer Assistant self-chat.
+- When explicitly configured, private delivery of each PNG and matching caption to the user's pinned iLink robot review chat or confirmed WeChat File Transfer Assistant self-chat.
 
 Do not add poster backgrounds, ratings, Chinese titles, commentary, decorative AI art, platform watermarks, or captions inside the card.
 
 ## Safety and rights
 
-- Use public, read-only sources. Never read, export, or store cookies, passwords, or access tokens.
+- Use public, read-only content sources. Never read, export, print, or copy cookies, passwords, bot tokens, or context tokens into prompts, logs, manifests, history, or deliverables. A private delivery helper may open its pinned local `0600` credential and context files internally without emitting their contents.
 - Do not bypass login challenges, rate limits, CAPTCHAs, or platform restrictions.
 - Do not imply endorsement by X or any quoted author.
 - Keep source links and attribution. Do not redistribute third-party media unless the user has the necessary rights.
-- Never publish automatically. Private self-delivery is not publication and requires exact recipient verification plus any just-in-time confirmation required by the computer-control environment.
+- Never publish automatically. Private review delivery is not publication and requires a pinned recipient plus any just-in-time confirmation required by the active transport.
 - A separate, explicit user request and platform-specific workflow is required for any social-platform upload.

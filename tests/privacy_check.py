@@ -6,11 +6,26 @@ import sys
 from pathlib import Path
 
 
-TEXT_SUFFIXES = {".md", ".py", ".json", ".yaml", ".yml", ".txt", ".sh", ""}
+TEXT_SUFFIXES = {
+    ".md",
+    ".mjs",
+    ".py",
+    ".swift",
+    ".json",
+    ".yaml",
+    ".yml",
+    ".txt",
+    ".sh",
+    "",
+}
 FORBIDDEN_PATH_PARTS = {"__pycache__", ".venv", "private", "runs", "daily"}
 PATTERNS = {
     "personal absolute path": re.compile(r"/Users/(?!example(?:/|$))[A-Za-z0-9._-]+/"),
-    "credential assignment": re.compile(r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*['\"][^'\"]+"),
+    "credential assignment": re.compile(
+        r"(?i)(api[_-]?key|secret|token|password)\s*[:=]\s*['\"]"
+        r"(?!test(?:[-_]|['\"])|example(?:[-_]|['\"])|placeholder(?:[-_]|['\"]))"
+        r"[^'\"]+"
+    ),
     "cookie file": re.compile(r"(?i)cookies?\.json|\.cookie\b"),
 }
 

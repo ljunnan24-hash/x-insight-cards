@@ -39,22 +39,46 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 
 ```text
 使用 $x-insight-cards 寻找今天最好的 X 原帖，生成最多 5 组
-可直接审核的抖音、小红书图片与极简中文配文。质检完成后，
-核对微信“文件传输助手”，在完成必要确认后逐组发送 PNG 图片和配文文字。
-不得自动发布到任何内容平台。
+可直接审核的抖音、小红书图片与极简中文配文。质检完成后标记为
+READY_FOR_REVIEW 并结束；不要打开微信或发送任何消息。微信私有交付
+稍后由固定机器人触发。不得自动发布到任何内容平台。
 ```
 
-安装一次、设置一次定时任务，之后每天自动运行；同时仍支持手动调用。无需 X API Key、无需导出 Cookie、无需自己拼提示词。只有传到手机时需要登录微信桌面端，内容平台发布始终由你手动决定。
+安装一次、设置一次定时任务，之后每天自动运行；同时仍支持手动调用。无需 X API Key、无需导出 Cookie、无需自己拼提示词。可选的固定 iLink 审核机器人能够在后台把素材传到手机，不依赖微信桌面端；内容平台发布始终由你手动决定。
 
 <a id="workflow-demo"></a>
 
-## 每日定时生成并送到微信 · Daily schedule to WeChat review
+## 每日准备，手机触发微信交付 · Daily preparation, phone-triggered WeChat review
 
-![从每日定时触发到微信文件传输助手的 X Insight Cards 动态工作流](assets/demo-workflow.gif)
+![从每日定时准备到微信私有审核的 X Insight Cards 动态工作流](assets/demo-workflow.gif)
 
-这段 13 秒演示从每天 12:00 的 Codex 定时任务开始，以一条真实公开的 [James Clear 帖子](https://x.com/JamesClear/status/2045205241885323635) 为例，依次展示来源核验、评分、去重、卡片生成，最后把 PNG 和配文私下发送到已核对的微信“文件传输助手”。它不会自动发布到抖音或小红书。
+这段 13 秒演示从每天 12:00 的 Codex 定时任务开始，以一条真实公开的 [James Clear 帖子](https://x.com/JamesClear/status/2045205241885323635) 为例，依次展示来源核验、评分、去重、卡片生成和私有审核交付。当前首选流程会让定时任务停在 `READY_FOR_REVIEW`；创作者之后在手机上向固定 iLink 机器人发送 `发今日素材`，后台便会发送 PNG 与配文，全程不打开微信桌面端。它不会自动发布到抖音或小红书。
 
 运行 `make demo-gif` 可在本地重新生成这段演示。
+
+### 固定微信 iLink 机器人的无界面交付
+
+首选交付器在配置时固定唯一收件人，发送时不接受临时目标覆盖。后台长轮询只接受该用户发来的精确指令 `发今日素材`，在推进同步游标前先持久记录请求，确认当天审核素材已经完成，再逐组发送图片和配文。稳定消息 ID 与检查点支持断点续传；当天收据会阻止重复发送整批素材。
+
+账号凭据、会话上下文、私有清单、检查点和收据都保存在用户自己的 `~/.weclaw` 私有目录中，不进入 Git。监听器可由 macOS `launchd` 或其他进程守护器持续运行；它不会打开、识别或控制微信桌面端。
+
+```bash
+# 一次性固定账号文件和收件人
+node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs configure \
+  --credentials /absolute/path/to/account.json \
+  --sync /absolute/path/to/account.sync.json \
+  --recipient 'fixed-user-id@im.wechat'
+
+# 固定用户先给机器人发消息，然后捕获并预检新鲜上下文
+node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs capture-context
+node skills/x-insight-cards/scripts/wechat_ilink_delivery.mjs preflight
+
+# 持续运行；无人值守时交给进程守护器
+node skills/x-insight-cards/scripts/wechat_ilink_listener.mjs \
+  --history /absolute/path/to/history.jsonl
+```
+
+macOS 微信集成主窗口的“文件传输助手”交付器仍作为单独配置、失败即停止的回退方案保留。详见 [`private-delivery.md`](skills/x-insight-cards/references/private-delivery.md)。
 
 ## 直接看结果 · See the output
 
@@ -68,14 +92,14 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 
 **X Insight Cards automates the work before publishing: it finds strong X posts, verifies and ranks them, removes duplicates, translates when needed, and produces source-attributed images plus concise Chinese captions for Douyin and Xiaohongshu.**
 
-`定时触发 → 发现 → 核验 → 排序 → 去重 → 翻译 → 排版 → 微信审核`
+`定时触发 → 发现 → 核验 → 排序 → 去重 → 翻译 → 排版 → READY → 手机指令 → 微信审核`
 
 每次运行会得到：
 
 - 自动发现并排序近期值得做成内容的优质 X 原帖。
 - 最多 5 组抖音、小红书素材；不足 5 条绝不凑数。
 - 每组包含 1 张保留作者与来源的 PNG，以及 1 条可直接复制的极简中文配文。
-- 可选私下发送到已核对的微信“文件传输助手”。
+- 可选无界面发送到已固定的微信 iLink 审核机器人。
 - 1 份不进入公开交付目录的历史记录，用于去重和审计。
 
 <a id="creator-tested"></a>
@@ -117,7 +141,7 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 | 截图传播丢失作者与上下文 | 保留作者、账号、原帖链接、日期与英文原文 |
 | 直译中文生硬，混排字体不协调 | 忠实保留语义和语气，并按简体中文原生规则排版 |
 | 日更容易重复旧内容和旧选题 | 按规范化 URL 与正文哈希双重去重 |
-| 自动化容易越过账号安全边界 | 只使用公开只读来源、核对微信自传会话，并且绝不自动发布 |
+| 自动化容易越过账号安全边界 | 只使用公开只读来源、固定唯一私有收件人，并且绝不自动发布 |
 
 ## 工作流程
 
@@ -127,7 +151,7 @@ npx skills add ljunnan24-hash/x-insight-cards --skill x-insight-cards --agent co
 4. 排除政治争议、荐股、医疗建议、卖课、搬运和纯情绪鸡汤。
 5. 对候选内容进行 100 分评分，低于 75 分直接淘汰，并对照历史记录去重。
 6. 忠实翻译、排版、生成极简配文并完成视觉质检。
-7. 启用私有交付时，核对微信“文件传输助手”，把 PNG 图片和对应配文发送到手机等待审核。
+7. 启用私有交付时停在 `READY_FOR_REVIEW`；之后由手机发送精确指令，触发后台向固定审核机器人交付。
 
 如果只有 3 条达到 75 分，就只交付 3 条。质量优先于数量。
 
