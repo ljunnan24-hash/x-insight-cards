@@ -29,14 +29,14 @@
 
 ## Creator-tested on Xiaohongshu and Douyin
 
-**A Xiaohongshu experiment using this workflow gained 100+ followers in less than one week.**
+**A Xiaohongshu experiment using this workflow gained 100+ followers in less than one week and now has 139 followers.**
 
 The workflow has been used to make posts for real creator accounts. Results visible in the creator-provided screenshots include:
 
 | Platform | Documented results |
 | --- | --- |
-| **Xiaohongshu account** | **17K total likes and saves** |
-| **Xiaohongshu visible posts** | **96,225 views / 8,877 likes**, **13,804 / 1,067**, **1,907 / 167**, and **1,700 / 141** |
+| **Xiaohongshu account** | **139 followers** and **19K total likes and saves** |
+| **Xiaohongshu visible posts** | **98,003 views / 8,876 likes**, **21,455 / 1,618**, **1,972 / 169**, and **1,773 / 143** |
 | **Douyin account** | **12 posts** and **1,591 total likes** |
 | **Douyin visible posts** | **11K, 9,635, 1,148, 1,063, 703, and 676 plays** |
 
@@ -54,7 +54,7 @@ Xiaohongshu ID: `3876991164` · The README loads an optimized WebP preview; clic
 
 Douyin ID: `51536643904` · The README loads an optimized WebP preview; click it for the original PNG.
 
-**中文说明：**使用这套工作流运营的小红书账号，**不到一周新增 100＋粉丝**；主页显示累计 **1.7 万获赞与收藏**，其中可见作品包括 **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141**。抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**。
+**中文说明：**使用这套工作流运营的小红书账号，**不到一周新增 100＋粉丝，目前 139 粉丝**；主页显示累计 **1.9 万获赞与收藏**，其中可见作品包括 **98,003 浏览 / 8,876 赞、21,455 / 1,618、1,972 / 169、1,773 / 143**。抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**。
 
 These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
 
