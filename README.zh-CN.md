@@ -25,6 +25,39 @@
   <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
 
+<a id="creator-tested"></a>
+
+## 小红书、抖音真实账号实测
+
+**使用这套工作流运营的小红书账号，不到一周新增 100＋粉丝。**
+
+这套工作流已经用于真实创作者账号。用户提供的原始截图显示：
+
+| 平台 | 实测数据 |
+| --- | --- |
+| **小红书账号** | 累计 **1.7 万获赞与收藏** |
+| **小红书可见作品** | **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141** |
+| **抖音账号** | **12 条作品**，累计 **1,591 获赞** |
+| **抖音可见作品** | **1.1 万、9,635、1,148、1,063、703、676 播放** |
+
+公开账号：小红书号 `3876991164` · 抖音号 `51536643904`。
+
+### 小红书账号与作品表现 · Xiaohongshu creator results
+
+<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results-preview.webp" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
+
+小红书号：`3876991164` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
+
+### 抖音账号与作品表现 · Douyin creator results
+
+<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results-preview.webp" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
+
+抖音号：`51536643904` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
+
+**English summary:** A Xiaohongshu experiment using this workflow gained **100+ followers in less than one week**. The profile shows **17K total likes and saves**, including a visible post with **96,225 views and 8,877 likes**. The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**.
+
+这两张截图已获创作者授权公开，用于证明工作流产出的素材经过真实账号使用，但不代表未来作品一定获得相同流量。点击图片可查看原始分辨率；选题、账号基础、发布时间和平台分发仍然会影响结果。
+
 <a id="快速开始"></a>
 
 ## 安装一次，每天自动运行 · Install once, run every day
@@ -157,37 +190,6 @@ macOS 微信集成主窗口的“文件传输助手”交付器仍作为单独�
 - 每组包含 1 张保留作者与来源的 PNG，以及 1 条可直接复制的极简中文配文。
 - 可选无界面发送到已固定的微信 iLink 审核机器人。
 - 1 份不进入公开交付目录的历史记录，用于去重和审计。
-
-<a id="creator-tested"></a>
-
-## 抖音、小红书真实账号实测
-
-这套工作流已经用于真实创作者账号。用户提供的原始截图显示：
-
-| 平台 | 实测数据 |
-| --- | --- |
-| **抖音账号** | **12 条作品**，累计 **1,591 获赞** |
-| **抖音可见作品** | **1.1 万、9,635、1,148、1,063、703、676 播放** |
-| **小红书账号** | 累计 **1.7 万获赞与收藏** |
-| **小红书可见作品** | **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141** |
-
-公开账号：抖音号 `51536643904` · 小红书号 `3876991164`。
-
-### 抖音账号与作品表现 · Douyin creator results
-
-<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results-preview.webp" alt="抖音创作者主页与可见作品数据" width="100%" /></a>
-
-抖音号：`51536643904` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
-
-### 小红书账号与作品表现 · Xiaohongshu creator results
-
-<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results-preview.webp" alt="小红书创作者主页与可见作品数据" width="100%" /></a>
-
-小红书号：`3876991164` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
-
-**English summary:** The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**. The Xiaohongshu profile shows **17K total likes and saves**, including a visible post with **96,225 views and 8,877 likes**.
-
-这两张截图已获创作者授权公开，用于证明工作流产出的素材经过真实账号使用，但不代表未来作品一定获得相同流量。点击图片可查看原始分辨率；选题、账号基础、发布时间和平台分发仍然会影响结果。
 
 ## 为什么值得用
 

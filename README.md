@@ -25,6 +25,39 @@
   <img alt="MIT license" src="https://img.shields.io/badge/license-MIT-blue" />
 </p>
 
+<a id="creator-tested"></a>
+
+## Creator-tested on Xiaohongshu and Douyin
+
+**A Xiaohongshu experiment using this workflow gained 100+ followers in less than one week.**
+
+The workflow has been used to make posts for real creator accounts. Results visible in the creator-provided screenshots include:
+
+| Platform | Documented results |
+| --- | --- |
+| **Xiaohongshu account** | **17K total likes and saves** |
+| **Xiaohongshu visible posts** | **96,225 views / 8,877 likes**, **13,804 / 1,067**, **1,907 / 167**, and **1,700 / 141** |
+| **Douyin account** | **12 posts** and **1,591 total likes** |
+| **Douyin visible posts** | **11K, 9,635, 1,148, 1,063, 703, and 676 plays** |
+
+Public accounts: Xiaohongshu `3876991164` · Douyin `51536643904`.
+
+### Xiaohongshu creator results · 小红书账号与作品表现
+
+<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results-preview.webp" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
+
+Xiaohongshu ID: `3876991164` · The README loads an optimized WebP preview; click it for the original PNG.
+
+### Douyin creator results · 抖音账号与作品表现
+
+<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results-preview.webp" alt="Douyin creator profile and visible post results" width="100%" /></a>
+
+Douyin ID: `51536643904` · The README loads an optimized WebP preview; click it for the original PNG.
+
+**中文说明：**使用这套工作流运营的小红书账号，**不到一周新增 100＋粉丝**；主页显示累计 **1.7 万获赞与收藏**，其中可见作品包括 **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141**。抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**。
+
+These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
+
 <a id="quick-start"></a>
 
 ## Install once. Run every day. · 安装一次，每天自动运行
@@ -157,37 +190,6 @@ Each run gives you:
 - One source-attributed PNG and one copy-ready Chinese caption per post.
 - Optional headless private delivery to a pinned WeChat iLink review bot.
 - A private history record for duplicate prevention and auditability.
-
-<a id="creator-tested"></a>
-
-## Creator-tested on Douyin and Xiaohongshu
-
-The workflow has already been used to make posts for real creator accounts. Results visible in the creator-provided screenshots include:
-
-| Platform | Documented results |
-| --- | --- |
-| **Douyin account** | **12 posts** and **1,591 total likes** |
-| **Douyin visible posts** | **11K, 9,635, 1,148, 1,063, 703, and 676 plays** |
-| **Xiaohongshu account** | **17K total likes and saves** |
-| **Xiaohongshu visible posts** | **96,225 views / 8,877 likes**, **13,804 / 1,067**, **1,907 / 167**, and **1,700 / 141** |
-
-Public accounts: Douyin `51536643904` · Xiaohongshu `3876991164`.
-
-### Douyin creator results · 抖音账号与作品表现
-
-<a href="assets/proof/douyin-creator-results.png"><img src="assets/proof/douyin-creator-results-preview.webp" alt="Douyin creator profile and visible post results" width="100%" /></a>
-
-Douyin ID: `51536643904` · The README loads an optimized WebP preview; click it for the original PNG.
-
-### Xiaohongshu creator results · 小红书账号与作品表现
-
-<a href="assets/proof/xiaohongshu-creator-results.png"><img src="assets/proof/xiaohongshu-creator-results-preview.webp" alt="Xiaohongshu creator profile and visible post results" width="100%" /></a>
-
-Xiaohongshu ID: `3876991164` · The README loads an optimized WebP preview; click it for the original PNG.
-
-**中文说明：**抖音主页显示 **12 条作品、累计获赞 1,591**，多条可见作品达到数百至 **1.1 万播放**；小红书主页显示累计 **1.7 万获赞与收藏**，其中可见作品包括 **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141**。
-
-These creator-authorized screenshots demonstrate real-world use, not guaranteed future reach. Topic choice, account history, timing, and platform distribution still matter.
 
 ## Why creators use it
 
