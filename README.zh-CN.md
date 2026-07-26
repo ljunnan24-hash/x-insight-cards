@@ -29,14 +29,14 @@
 
 ## 小红书、抖音真实账号实测
 
-**使用这套工作流运营的小红书账号，不到一周新增 100＋粉丝。**
+**使用这套工作流运营的小红书账号，不到一周新增 100＋粉丝，目前 139 粉丝。**
 
 这套工作流已经用于真实创作者账号。用户提供的原始截图显示：
 
 | 平台 | 实测数据 |
 | --- | --- |
-| **小红书账号** | 累计 **1.7 万获赞与收藏** |
-| **小红书可见作品** | **96,225 浏览 / 8,877 赞、13,804 / 1,067、1,907 / 167、1,700 / 141** |
+| **小红书账号** | **139 粉丝**，累计 **1.9 万获赞与收藏** |
+| **小红书可见作品** | **98,003 浏览 / 8,876 赞、21,455 / 1,618、1,972 / 169、1,773 / 143** |
 | **抖音账号** | **12 条作品**，累计 **1,591 获赞** |
 | **抖音可见作品** | **1.1 万、9,635、1,148、1,063、703、676 播放** |
 
@@ -54,7 +54,7 @@
 
 抖音号：`51536643904` · README 加载轻量 WebP 预览；点击图片查看原始 PNG。
 
-**English summary:** A Xiaohongshu experiment using this workflow gained **100+ followers in less than one week**. The profile shows **17K total likes and saves**, including a visible post with **96,225 views and 8,877 likes**. The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**.
+**English summary:** A Xiaohongshu experiment using this workflow gained **100+ followers in less than one week** and now has **139 followers**. The profile shows **19K total likes and saves**, including visible posts with **98,003 views and 8,876 likes** and **21,455 views and 1,618 likes**. The Douyin profile shows **12 posts and 1,591 total likes**, with visible posts reaching up to **11K plays**.
 
 这两张截图已获创作者授权公开，用于证明工作流产出的素材经过真实账号使用，但不代表未来作品一定获得相同流量。点击图片可查看原始分辨率；选题、账号基础、发布时间和平台分发仍然会影响结果。
 
