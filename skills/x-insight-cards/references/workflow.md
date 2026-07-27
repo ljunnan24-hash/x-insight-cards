@@ -1,5 +1,18 @@
 # Daily curation workflow
 
+## Scheduled-run recovery
+
+The daily schedule is a target time, not permission to silently skip a day. On every local login and after network connectivity becomes available, a lightweight OS-level checker must inspect the Shanghai calendar date and the private history/output paths. It must not depend on the Codex desktop app being opened.
+
+- If the scheduled time has not arrived, exit without running curation.
+- If a matching `run_completion` with `selection_count > 0` and its final `READY_FOR_REVIEW` PNG assets exist, exit without running again.
+- If the scheduled time has passed and either condition is missing, start one serialized catch-up run immediately. Prevent overlapping runs with a lock.
+- Record `scheduled_for`, `actual_run_at`, and a `catch_up` object explaining why the run started late in the final `run_completion` record.
+- Retry only when the public network check succeeds. Never turn a network failure into a fabricated completion.
+- A catch-up run follows the same source, deduplication, scoring, rendering, QA, and output rules as an on-time run. It prepares materials only: it must not open WeChat, send a message, upload, draft, or publish.
+
+On macOS, use a per-user `launchd` agent with `RunAtLoad` and a short `StartInterval` for the checker. Other operating systems should use an equivalent per-user service or scheduler.
+
 ## Discovery ladder
 
 1. Search the last 24 hours.

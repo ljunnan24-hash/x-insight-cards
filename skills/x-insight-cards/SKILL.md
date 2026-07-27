@@ -10,16 +10,17 @@ Automate the preparation of Douyin and Xiaohongshu content packs from public X p
 ## Workflow
 
 1. Read [references/workflow.md](references/workflow.md) before running a daily curation job.
-2. Check the user's history file and existing output folders. Deduplicate by canonical URL and normalized English-text SHA-256.
-3. Discover posts from the last 24 hours. Expand to 72 hours only when necessary; then use unused evergreen posts.
-4. Verify each candidate's URL, author, handle, exact English text, publication date, and views when views are material to selection.
-5. Reject politics, stock tips, medical advice, course sales, unattributed reposts, pure motivational filler, and unverifiable content.
-6. Score candidates using [references/scoring.md](references/scoring.md). Select no more than five, sorted by score. Never pad below 75/100.
-7. Translate faithfully. Preserve paragraphs, quotation marks, dashes, parentheses, and tone.
-8. Render one card per selected post. Prefer a real post screenshot when the environment can capture it cleanly. Otherwise use `scripts/render_card.py` and label the record `rearranged-render`.
-9. Write one concise Chinese caption per card: normally one sentence, at most two, followed by 3–5 relevant hashtags. Do not copy the translation.
-10. Run the checks in [references/qa-checklist.md](references/qa-checklist.md) and mark accepted items `READY_FOR_REVIEW`.
-11. When the user has configured private delivery, read [references/private-delivery.md](references/private-delivery.md). For a fresh macOS installation, use the one-time `setup` binding and `wechat_ilink_listener_service.sh` flow documented there. Prefer the pinned iLink robot helper for unattended delivery when configured: its headless listener accepts only the exact command `发今日素材` from the pinned user, replies with safe usage guidance for other nonempty text from that same user, derives the current review-ready manifest from private history, preflights the fresh context, then sends each PNG and matching caption with checkpointed, stable message IDs. Use the verified integrated-main-window helper only for a separately configured File Transfer Assistant destination. Never upload or publish to a content platform.
+2. For a scheduled daily job, first apply the catch-up policy in [references/workflow.md](references/workflow.md): when the scheduled time has passed and the daily completion record or final assets are missing, run the missed preparation immediately once network access is available. The catch-up mechanism must be independent of opening the Codex app.
+3. Check the user's history file and existing output folders. Deduplicate by canonical URL and normalized English-text SHA-256.
+4. Discover posts from the last 24 hours. Expand to 72 hours only when necessary; then use unused evergreen posts.
+5. Verify each candidate's URL, author, handle, exact English text, publication date, and views when views are material to selection.
+6. Reject politics, stock tips, medical advice, course sales, unattributed reposts, pure motivational filler, and unverifiable content.
+7. Score candidates using [references/scoring.md](references/scoring.md). Select no more than five, sorted by score. Never pad below 75/100.
+8. Translate faithfully. Preserve paragraphs, quotation marks, dashes, parentheses, and tone.
+9. Render one card per selected post. Prefer a real post screenshot when the environment can capture it cleanly. Otherwise use `scripts/render_card.py` and label the record `rearranged-render`.
+10. Write one concise Chinese caption per card: normally one sentence, at most two, followed by 3–5 relevant hashtags. Do not copy the translation.
+11. Run the checks in [references/qa-checklist.md](references/qa-checklist.md) and mark accepted items `READY_FOR_REVIEW`.
+12. When the user has configured private delivery, read [references/private-delivery.md](references/private-delivery.md). For a fresh macOS installation, use the one-time `setup` binding and `wechat_ilink_listener_service.sh` flow documented there. Prefer the pinned iLink robot helper for unattended delivery when configured: its headless listener accepts only the exact command `发今日素材` from the pinned user, replies with safe usage guidance for other nonempty text from that same user, derives the current review-ready manifest from private history, preflights the fresh context, then sends each PNG and matching caption with checkpointed, stable message IDs. Use the verified integrated-main-window helper only for a separately configured File Transfer Assistant destination. Never upload or publish to a content platform.
 
 ## Rendering
 
