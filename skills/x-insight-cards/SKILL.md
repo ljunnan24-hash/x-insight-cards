@@ -10,7 +10,7 @@ Automate the preparation of Douyin and Xiaohongshu content packs from public X p
 ## Workflow
 
 1. Read [references/workflow.md](references/workflow.md) before running a daily curation job.
-2. For a scheduled daily job, first apply the catch-up policy in [references/workflow.md](references/workflow.md): when the scheduled time has passed and the daily completion record or final assets are missing, run the missed preparation immediately once network access is available. The catch-up mechanism must be independent of opening the Codex app.
+2. For a scheduled daily job, first apply the catch-up policy in [references/workflow.md](references/workflow.md): when the scheduled time has passed and the daily completion record or final assets are missing, run the missed preparation immediately once network access is available. The catch-up mechanism must be independent of opening the Codex app. The normal job must acquire `scripts/daily_run_guard.sh` before doing work; an external catch-up command must use `scripts/daily_run_once.sh`. Both paths therefore share one dated lock.
 3. Check the user's history file and existing output folders. Deduplicate by canonical URL and normalized English-text SHA-256.
 4. Discover posts from the last 24 hours. Expand to 72 hours only when necessary; then use unused evergreen posts.
 5. Verify each candidate's URL, author, handle, exact English text, publication date, and views when views are material to selection.

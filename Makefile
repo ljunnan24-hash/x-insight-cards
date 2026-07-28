@@ -12,7 +12,7 @@ demo-gif: demo
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
-	$(NODE) --test $(SKILL_DIR)/scripts/wechat_ilink_delivery.test.mjs $(SKILL_DIR)/scripts/wechat_ilink_listener.test.mjs
+	$(NODE) --test $(SKILL_DIR)/scripts/daily_run_guard.test.mjs $(SKILL_DIR)/scripts/wechat_ilink_delivery.test.mjs $(SKILL_DIR)/scripts/wechat_ilink_listener.test.mjs
 
 validate:
 	$(PYTHON) tests/validate_skill.py $(SKILL_DIR)

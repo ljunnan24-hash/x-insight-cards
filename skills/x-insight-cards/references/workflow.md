@@ -6,12 +6,59 @@ The daily schedule is a target time, not permission to silently skip a day. On e
 
 - If the scheduled time has not arrived, exit without running curation.
 - If a matching `run_completion` with `selection_count > 0` and its final `READY_FOR_REVIEW` PNG assets exist, exit without running again.
-- If the scheduled time has passed and either condition is missing, start one serialized catch-up run immediately. Prevent overlapping runs with a lock.
+- If the scheduled time has passed and either condition is missing, start one serialized catch-up run immediately. The normal scheduler and catch-up checker must use the same dated atomic lock.
 - Record `scheduled_for`, `actual_run_at`, and a `catch_up` object explaining why the run started late in the final `run_completion` record.
 - Retry only when the public network check succeeds. Never turn a network failure into a fabricated completion.
 - A catch-up run follows the same source, deduplication, scoring, rendering, QA, and output rules as an on-time run. It prepares materials only: it must not open WeChat, send a message, upload, draft, or publish.
 
 On macOS, use a per-user `launchd` agent with `RunAtLoad` and a short `StartInterval` for the checker. Other operating systems should use an equivalent per-user service or scheduler.
+
+### Single-instance guard
+
+Both the normal schedule and every catch-up path must use
+`scripts/daily_run_guard.sh`. When the scheduler supports command wrappers,
+use `scripts/daily_run_once.sh` as the outermost command. A prompt-driven
+Codex automation must acquire the guard as its first action, keep it for the
+entire run, and call `mark-complete` only after QA. The guard creates a
+completion sentinel only after
+`verify_daily_completion.mjs` confirms all of the following:
+
+- One positive `READY_FOR_REVIEW` `run_completion` exists for the date.
+- The number of candidate directories equals `selection_count`.
+- Every candidate directory contains only `post-translation.png`.
+- Every final PNG matches the SHA-256 recorded in
+  `quality_verification.final_asset_sha256`.
+
+Configure the private paths through environment variables; do not place
+history, output, logs, or completion sentinels in the Skill repository:
+
+```bash
+export XIC_HISTORY_PATH="$HOME/Documents/x-insight-cards/history.jsonl"
+export XIC_OUTPUT_ROOT="$HOME/Documents/x-insight-cards"
+export XIC_AUTOMATION_ROOT="${CODEX_HOME:-$HOME/.codex}/automations/x-insight-cards"
+
+# Any scheduler that can wrap the curation command:
+scripts/daily_run_once.sh 2026-07-28 -- your-curation-command
+
+# Catch-up checker: wait until 12:20 Shanghai time, then use the wrapper.
+XIC_NOT_BEFORE_MINUTE_OF_DAY=740 \
+  scripts/daily_run_once.sh 2026-07-28 -- your-curation-command
+```
+
+For a prompt-driven Codex automation, use this lifecycle instead:
+
+```bash
+scripts/daily_run_guard.sh acquire 2026-07-28
+# Stop on BUSY or ALREADY_COMPLETE. On ACQUIRED, run the complete workflow.
+scripts/daily_run_guard.sh mark-complete 2026-07-28
+```
+
+On failure, call `daily_run_guard.sh release` without marking completion.
+The wrapper returns `BUSY` while another process owns the date lock and
+`ALREADY_COMPLETE` after a verified sentinel exists. A failed command or failed
+verification releases the lock without writing a sentinel, so a later checker
+can retry safely. Locks older than six hours are archived and recovered by
+default; set `XIC_STALE_LOCK_SECONDS` to change that threshold.
 
 ## Discovery ladder
 
