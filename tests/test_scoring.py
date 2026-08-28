@@ -30,6 +30,7 @@ def candidate(identifier: str, score: int, post: str | None = None) -> dict:
     return {
         "id": identifier,
         "url": f"https://x.com/example/status/{identifier}",
+        "avatar_url": "https://pbs.twimg.com/profile_images/1/example_200x200.jpg",
         "post": post or f"Synthetic post {identifier}",
         "score_detail": detail,
     }
@@ -60,6 +61,13 @@ class ScoringTests(unittest.TestCase):
         result = MODULE.rank_candidates([item], set(), set(), 75, 5)
         self.assertEqual(result["selection_count"], 0)
         self.assertIn("stock_tip", result["rejected"][0]["reasons"])
+
+    def test_rejects_missing_avatar(self) -> None:
+        item = candidate("a", 90)
+        item.pop("avatar_url")
+        result = MODULE.rank_candidates([item], set(), set(), 75, 5)
+        self.assertEqual(result["selection_count"], 0)
+        self.assertIn("missing_avatar", result["rejected"][0]["reasons"])
 
 
 if __name__ == "__main__":

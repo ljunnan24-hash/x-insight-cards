@@ -5,10 +5,13 @@ from __future__ import annotations
 
 import argparse
 import glob
+import io
 import json
 import os
 from pathlib import Path
 from typing import Iterable
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
@@ -157,33 +160,35 @@ def layout_text(
     return output
 
 
-def initials(name: str) -> str:
-    parts = [part for part in name.split() if part]
-    return "".join(part[0].upper() for part in parts[:2]) or "X"
-
-
 def avatar_image(
     avatar_path: str | None,
     name: str,
     size: int,
     bold_font: tuple[str, int],
+    avatar_url: str | None = None,
 ) -> Image.Image:
     mask = Image.new("L", (size, size), 0)
     ImageDraw.Draw(mask).ellipse((0, 0, size - 1, size - 1), fill=255)
     if avatar_path:
         source = Image.open(avatar_path).convert("RGB")
         source = ImageOps.fit(source, (size, size), method=Image.Resampling.LANCZOS)
+    elif avatar_url:
+        parsed = urlparse(str(avatar_url))
+        if parsed.scheme != "https" or parsed.hostname != "pbs.twimg.com":
+            raise ValueError(f"Untrusted avatar URL for {name}: {avatar_url}")
+        request = Request(
+            str(avatar_url),
+            headers={"User-Agent": "x-insight-cards/1.0"},
+        )
+        with urlopen(request, timeout=20) as response:
+            payload = response.read(5 * 1024 * 1024 + 1)
+        if len(payload) > 5 * 1024 * 1024:
+            raise ValueError(f"Avatar image is too large for {name}")
+        source = Image.open(io.BytesIO(payload)).convert("RGB")
+        source = ImageOps.fit(source, (size, size), method=Image.Resampling.LANCZOS)
     else:
-        source = Image.new("RGB", (size, size), "#1D9BF0")
-        draw = ImageDraw.Draw(source)
-        label_font = load_font(bold_font, max(22, size // 3))
-        label = initials(name)
-        box = draw.textbbox((0, 0), label, font=label_font)
-        draw.text(
-            ((size - (box[2] - box[0])) / 2, (size - (box[3] - box[1])) / 2 - box[1]),
-            label,
-            font=label_font,
-            fill="white",
+        raise ValueError(
+            f"Real author avatar is required for {name}; initials placeholders are not allowed"
         )
     output = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     output.paste(source, (0, 0), mask)
@@ -225,7 +230,13 @@ def render_card(data: dict, output_path: Path) -> dict:
     draw = ImageDraw.Draw(image)
     draw.rounded_rectangle((3, 3, width - 4, height - 4), radius=28, outline=BORDER, width=3)
 
-    avatar = avatar_image(data.get("avatar"), str(data["author"]), 84, latin_bold_spec)
+    avatar = avatar_image(
+        data.get("avatar"),
+        str(data["author"]),
+        84,
+        latin_bold_spec,
+        data.get("avatar_url"),
+    )
     image.paste(avatar, (58, 36), avatar)
     draw.text((166, 38), str(data["author"]), font=load_font(latin_bold_spec, 35), fill=INK)
     draw.text((166, 82), str(data["handle"]), font=load_font(latin_regular_spec, 27), fill=MUTED)

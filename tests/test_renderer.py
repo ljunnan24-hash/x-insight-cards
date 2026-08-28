@@ -21,6 +21,10 @@ class RendererTests(unittest.TestCase):
     def test_renders_demo_png(self) -> None:
         data = json.loads((ROOT / "examples" / "demo-post.json").read_text(encoding="utf-8"))
         with tempfile.TemporaryDirectory() as directory:
+            avatar = Path(directory) / "avatar.png"
+            Image.new("RGB", (200, 200), "#2463EB").save(avatar)
+            data["avatar"] = str(avatar)
+            data.pop("avatar_url", None)
             output = Path(directory) / "card.png"
             metadata = MODULE.render_card(data, output)
             self.assertTrue(output.exists())
@@ -33,6 +37,29 @@ class RendererTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaises(ValueError):
                 MODULE.render_card({"author": "A"}, Path(directory) / "card.png")
+
+    def test_rejects_missing_real_avatar(self) -> None:
+        data = {
+            "author": "Example Author",
+            "handle": "@example",
+            "post": "A useful idea.",
+            "translation": "一个有用的观点。",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "Real author avatar is required"):
+                MODULE.render_card(data, Path(directory) / "card.png")
+
+    def test_rejects_untrusted_avatar_url(self) -> None:
+        data = {
+            "author": "Example Author",
+            "handle": "@example",
+            "avatar_url": "https://example.com/avatar.jpg",
+            "post": "A useful idea.",
+            "translation": "一个有用的观点。",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaisesRegex(ValueError, "Untrusted avatar URL"):
+                MODULE.render_card(data, Path(directory) / "card.png")
 
 
 if __name__ == "__main__":

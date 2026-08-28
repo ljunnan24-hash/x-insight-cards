@@ -97,6 +97,10 @@ def rank_candidates(
             reasons.append("missing_url")
         if not post:
             reasons.append("missing_post")
+        if not str(candidate.get("avatar", "")).strip() and not str(
+            candidate.get("avatar_url", "")
+        ).strip():
+            reasons.append("missing_avatar")
         digest = text_hash(post) if post else ""
         if url in seen_urls:
             reasons.append("duplicate_url")

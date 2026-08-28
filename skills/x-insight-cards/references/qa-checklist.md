@@ -16,7 +16,8 @@
 
 ## Image
 
-- Card contains only avatar/initials, name, handle, English post, translation label, Chinese translation, date, and optional views.
+- Card contains the verified real author avatar, name, handle, English post, translation label, Chinese translation, date, and optional views.
+- Initials, generated portraits, generic placeholders, broken images, and an avatar belonging to a different account all fail review.
 - English is unchanged and Chinese matches its visual level.
 - Chinese punctuation uses native Simplified Chinese horizontal forms.
 - No punctuation fallback, manual corner forcing, clipping, stretching, or orphaned final characters.

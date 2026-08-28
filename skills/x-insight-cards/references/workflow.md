@@ -28,10 +28,13 @@ For every candidate, record:
 
 - Canonical post URL.
 - Author display name and handle.
+- Verified real author profile avatar URL from X or an equally authoritative public representation.
 - Exact English text and paragraph structure.
 - Published date/time and source timezone when available.
 - View count only when it affects ranking or is shown on the card.
 - Capture method: `native-screenshot` or `rearranged-render`.
+
+The avatar must be the author's real current profile image. Do not replace it with initials, generated art, or a generic placeholder. If the avatar cannot be verified or loaded, retry an authoritative public source or reject/fail the candidate instead of marking the card review-ready.
 
 Use the native X page when available. Public oEmbed or another public read-only representation is an acceptable fallback. Never present a reconstructed card as a native screenshot.
 

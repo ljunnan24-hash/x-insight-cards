@@ -10,6 +10,7 @@ Required fields:
   "url": "https://x.com/example/status/123",
   "author": "Example Author",
   "handle": "@example",
+  "avatar_url": "https://pbs.twimg.com/profile_images/.../avatar_200x200.jpg",
   "post": "Exact English text",
   "translation": "忠实的中文翻译",
   "score_detail": {
@@ -23,12 +24,17 @@ Required fields:
 }
 ```
 
+Avatar requirement:
+
+- `avatar_url`: Verified HTTPS X profile-image URL, normally hosted on `pbs.twimg.com`; required unless `avatar` supplies a verified local copy of the same real profile image.
+- `avatar`: Verified local author-avatar path. This is an alternative to `avatar_url`, not a placeholder mechanism.
+- Initials, generated portraits, generic icons, and silent avatar omission are invalid.
+
 Optional fields:
 
 - `published_at`: ISO 8601 timestamp.
 - `date_display`: Human-readable date for the card.
 - `views_display`: Human-readable view count.
-- `avatar`: Local image path supplied by the user.
 - `caption`: One or two Chinese sentences plus hashtags.
 - `flags`: Array of exclusion flags.
 - `render_method`: `native-screenshot` or `rearranged-render`.
