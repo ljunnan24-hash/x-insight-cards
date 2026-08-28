@@ -38,5 +38,9 @@ Optional fields:
 - `caption`: One or two Chinese sentences plus hashtags.
 - `flags`: Array of exclusion flags.
 - `render_method`: `native-screenshot` or `rearranged-render`.
+- `render_mode`: `auto` (default), `bilingual`, or `translation-only`. Daily runs must use `auto`; explicit modes are for controlled regeneration and tests.
+- `bilingual_max_height`: Positive pixel threshold for `auto`; defaults to `1200` on the fixed 1200 px-wide card.
+
+Renderer output metadata includes `content_mode`, `source_text_visible`, `bilingual_height_estimate`, and `bilingual_max_height`; persist these in private history.
 
 History is JSONL. The scorer reads `url` or `source_url` and `text_sha256` or `source_text_sha256` for deduplication.

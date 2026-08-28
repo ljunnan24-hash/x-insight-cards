@@ -4,6 +4,7 @@
 
 - Preserve the English post's existing font, size, weight, line height, and color. English is the fixed visual reference.
 - Match Chinese to the English text's perceived face size, stroke darkness, line height, and color. Never change English to accommodate Chinese.
+- When a long English post uses translation-only mode, retain the same Chinese face size, stroke darkness, and line height that its bilingual translation would use; do not shrink it to preserve the English body.
 - A shared nominal point size does not prove a visual match. Inspect rendered ink at 200%.
 - For regular X-style text on macOS, prefer PingFang SC Regular. Avoid a visibly lighter or heavier substitute.
 

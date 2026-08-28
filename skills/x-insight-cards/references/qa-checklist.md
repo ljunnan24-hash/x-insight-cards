@@ -16,9 +16,10 @@
 
 ## Image
 
-- Card contains the verified real author avatar, name, handle, English post, translation label, Chinese translation, date, and optional views.
+- Card contains the verified real author avatar, name, handle, date, optional views, and the display-mode-specific body: bilingual when the estimated bilingual height is at most 1200 px; `译自英文原帖` plus Chinese only when it exceeds 1200 px.
 - Initials, generated portraits, generic placeholders, broken images, and an avatar belonging to a different account all fail review.
-- English is unchanged and Chinese matches its visual level.
+- In bilingual mode, English is unchanged and Chinese matches its visual level. In translation-only mode, no English body remains and Chinese uses the same established X-style body metrics rather than smaller type.
+- `content_mode`, `bilingual_height_estimate`, and the 1200 px threshold are recorded and agree with the rendered card.
 - Chinese punctuation uses native Simplified Chinese horizontal forms.
 - No punctuation fallback, manual corner forcing, clipping, stretching, or orphaned final characters.
 - No poster background, title, rating, commentary, hashtags, or AI decoration inside the card.

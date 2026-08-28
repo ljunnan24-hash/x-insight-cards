@@ -57,6 +57,15 @@ Reject:
 - Keep author names and product names accurate.
 - Do not add interpretation inside the translation.
 
+## English-source display mode
+
+- Use deterministic layout, not AI image generation, for reconstructed cards.
+- At a fixed 1200 px card width, calculate the height the complete bilingual card would require before drawing it.
+- If the estimated bilingual height is at most 1200 px, render the verified English source followed by `翻译自英语` and the Chinese translation.
+- If the estimate exceeds 1200 px, omit the English body and render only `译自英文原帖` plus the faithful Chinese translation. Keep the real avatar, author, handle, date, and optional views.
+- Do not reduce the established body size, weight, or line height merely to stay under the threshold.
+- Record `content_mode`, `bilingual_height_estimate`, and `bilingual_max_height` in private history. The source URL, exact English text, and text hash remain auditable even when the English body is not displayed.
+
 ## Caption
 
 - Prefer one sentence; allow two only when needed.

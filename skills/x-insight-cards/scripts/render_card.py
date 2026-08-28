@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a clean bilingual X-style card from verified local JSON data."""
+"""Render an adaptive bilingual or Chinese-only X-style card from verified data."""
 
 from __future__ import annotations
 
@@ -218,11 +218,30 @@ def render_card(data: dict, output_path: Path) -> dict:
     line_height = int(data.get("line_height", 62))
     paragraph_gap = 26
     source_height = sum(paragraph_gap if line is None else line_height for line in source_lines)
-    label_y = body_y + source_height + 20
-    translation_y = label_y + 42
     translation_height = sum(
         paragraph_gap if line is None else line_height for line in translation_lines
     )
+    bilingual_label_y = body_y + source_height + 20
+    bilingual_translation_y = bilingual_label_y + 42
+    bilingual_footer_y = bilingual_translation_y + translation_height + 24
+    bilingual_height = bilingual_footer_y + 62
+    requested_mode = str(data.get("render_mode", "auto")).strip().casefold()
+    if requested_mode not in {"auto", "bilingual", "translation-only"}:
+        raise ValueError("render_mode must be auto, bilingual, or translation-only")
+    bilingual_max_height = int(data.get("bilingual_max_height", 1200))
+    if bilingual_max_height <= 0:
+        raise ValueError("bilingual_max_height must be a positive integer")
+    content_mode = requested_mode
+    if requested_mode == "auto":
+        content_mode = (
+            "translation-only" if bilingual_height > bilingual_max_height else "bilingual"
+        )
+    if content_mode == "bilingual":
+        label_y = bilingual_label_y
+        translation_y = bilingual_translation_y
+    else:
+        label_y = body_y
+        translation_y = label_y + 42
     footer_y = translation_y + translation_height + 24
     height = footer_y + 62
 
@@ -242,15 +261,17 @@ def render_card(data: dict, output_path: Path) -> dict:
     draw.text((166, 82), str(data["handle"]), font=load_font(latin_regular_spec, 27), fill=MUTED)
     draw.text((1080, 40), "X", font=load_font(latin_bold_spec, 40), fill=INK)
 
-    y = body_y
-    for line in source_lines:
-        if line is None:
-            y += paragraph_gap
-        else:
-            draw.text((margin_x, y), line, font=body_font, fill=INK)
-            y += line_height
+    if content_mode == "bilingual":
+        y = body_y
+        for line in source_lines:
+            if line is None:
+                y += paragraph_gap
+            else:
+                draw.text((margin_x, y), line, font=body_font, fill=INK)
+                y += line_height
 
-    draw.text((margin_x, label_y), "翻译自英语", font=load_font(cjk_spec, 22), fill=MUTED)
+    translation_label = "翻译自英语" if content_mode == "bilingual" else "译自英文原帖"
+    draw.text((margin_x, label_y), translation_label, font=load_font(cjk_spec, 22), fill=MUTED)
     y = translation_y
     for line in translation_lines:
         if line is None:
@@ -271,6 +292,10 @@ def render_card(data: dict, output_path: Path) -> dict:
         "width": width,
         "height": height,
         "render_method": "rearranged-render",
+        "content_mode": content_mode,
+        "source_text_visible": content_mode == "bilingual",
+        "bilingual_height_estimate": bilingual_height,
+        "bilingual_max_height": bilingual_max_height,
         "latin_font": latin_regular_spec[0],
         "cjk_font": cjk_spec[0],
     }

@@ -17,12 +17,14 @@ Automate the preparation of Douyin and Xiaohongshu content packs from public X p
 6. Reject politics, stock tips, medical advice, course sales, unattributed reposts, pure motivational filler, and unverifiable content.
 7. Score candidates using [references/scoring.md](references/scoring.md). Select no more than five, sorted by score. Never pad below 75/100.
 8. Translate faithfully. Preserve paragraphs, quotation marks, dashes, parentheses, and tone.
-9. Render one card per selected post with the verified real author avatar. Initials, generated portraits, and generic placeholders are not acceptable fallbacks. Prefer a real post screenshot when the environment can capture it cleanly. Otherwise use `scripts/render_card.py` and label the record `rearranged-render`.
+9. Render one card per selected post with the verified real author avatar. Initials, generated portraits, and generic placeholders are not acceptable fallbacks. For an English source, first estimate the full bilingual card at 1200 px width: keep both languages when the estimated height is at most 1200 px; when it exceeds 1200 px, omit the English body and show only the faithful Chinese translation with a small `译自英文原帖` label. Never shrink type to force a long post into bilingual mode. Use `scripts/render_card.py` for reconstructed cards and label the record `rearranged-render`.
 10. Write one concise Chinese caption per card: normally one sentence, at most two, followed by 3–5 relevant hashtags. Do not copy the translation.
 11. Run the checks in [references/qa-checklist.md](references/qa-checklist.md) and mark accepted items `READY_FOR_REVIEW`.
 12. When the user has configured private delivery, read [references/private-delivery.md](references/private-delivery.md). For a fresh macOS installation, use the one-time `setup` binding and `wechat_ilink_listener_service.sh` flow documented there. Prefer the pinned iLink robot helper for unattended delivery when configured: its headless listener accepts only the exact command `发今日素材` from the pinned user, replies with safe usage guidance for other nonempty text from that same user, derives the current review-ready manifest from private history, preflights the fresh context, then sends each PNG and matching caption with checkpointed, stable message IDs. Use the verified integrated-main-window helper only for a separately configured File Transfer Assistant destination. Never upload or publish to a content platform.
 
 ## Rendering
+
+The card renderer is deterministic Pillow layout code, not a generative-image model. Its default `render_mode` is `auto`: short English posts render bilingually, while long posts switch to translation-only according to the 1200 px estimated bilingual-height threshold.
 
 Install Pillow, then run:
 
